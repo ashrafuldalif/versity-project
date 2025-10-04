@@ -3,253 +3,290 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RPSU Social Welfare Club</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <title>All Clubs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    /* Navbar */
-    .navbar {
-      background: #002244; /* Classy deep blue */
-    }
-    body{
-        background-color: #62809d;
-    }
-    .navbar-brand {
-      color: #fff !important;
-      font-weight: 700;
+    /* Members Container */
+    .members-container {
       display: flex;
-      align-items: center;
-    }
-    .navbar-brand img {
-      height: 40px;
-      margin-right: 10px;
-    }
-    .navbar-nav .nav-link {
-      color: #fff !important;
-      font-weight: 500;
-    }
-    .navbar-nav .nav-link:hover {
-      color: #ffcc00 !important; /* Gold hover */
-    }
-
-    /* Offcanvas Sidebar */
-    .offcanvas-end {
-      width: 280px;
-      background: #f8f9fa;
-    }
-    .offcanvas-header {
-      border-bottom: 1px solid #ddd;
+      gap: 2rem;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      padding: 0 2rem; /* makes space on both sides */
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;     /* Firefox */
     }
 
-    /* Accordion styling */
-    .accordion-button {
-      font-weight: 500;
-      background: none;
-      padding: 10px 15px;
-    }
-    .accordion-button:not(.collapsed) {
-      color: #002244;
-      background-color: #e9ecef;
-    }
-    .accordion-button:focus {
-      box-shadow: none;
-    }
-    .accordion-body {
-      padding: 0;
-    }
-    .accordion-body a {
-      display: block;
-      padding: 8px 25px;
-      color: #333;
-      text-decoration: none;
-    }
-    .accordion-body a:hover {
-      color: #002244;
-      font-weight: 600;
-      background: #f1f1f1;
+    .members-container div {
+      flex: 0 0 auto;
     }
 
-    .navbar-toggler{   
-        box-shadow:none !important;
-        outline:none !important;
+    /* Arrow styling */
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 100%;
+      background: rgba(0,0,0,0.2);
+      border: none;
+      color: rgba(255, 255, 255, 0.753);
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s;
+      z-index: 10;
+      display: none; /* hidden by default */
+    }
+
+    .arrow-btn:hover {
+      color: white;
+    }
+
+    .left-arrow { left: 0px; }
+    .right-arrow { right: 0px; }
+
+    /* Mobile "see more" feature */
+    @media (max-width: 768px) {
+      .members-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0 1rem;
+      }
+      .members-container.collapsed > div:nth-of-type(n+10) {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top shadow">
-    <div class="container-fluid">
-      <!-- Logo + Title -->
-      <a class="navbar-brand" href="#">
-        <img src="logo.png" alt="Logo"> RPSU SWC
+
+<!-- Cricket Club Section -->
+<section class="club-section text-light" 
+         style="background: url('MDL.jpg') no-repeat center center/cover; min-height: 100vh; position: relative;">
+  <div class="container-fluid py-5">
+    <!-- Title -->
+    <h2 class="text-center mb-5" style="font-family: 'Poppins', sans-serif; font-weight:600;">CRICKET CLUB_</h2>
+
+    <div class="row align-items-stretch justify-content-center g-4">
+      <!-- Left side (Captain + Leader stacked) -->
+      <div class="col-md-4 d-flex flex-column justify-content-between">
+        <!-- Captain -->
+        <div class="px-3  ps-0  mb-3" style="background:#b68155; border-radius: 3rem; border-start-end-radius: 0; ">
+          <div class="d-flex align-items-center">
+            <img src="luffyProfile.jpg" class="rounded-circle me-3" width="90" height="90" alt="Captain">
+            <div class="text-start">
+              <h5 class="mb-1 fw-bold">Captain</h5>
+              <p class="mb-0 small">Monkey D Luffy</p>
+            </div>
+          </div>
+        </div>
+        <!-- Leader -->
+        <div class="px-3  ps-0  mb-3" style="background:#608e6a; border-radius: 3rem; border-start-end-radius: 0; ">
+            <div class="d-flex align-items-center">
+            <img src="zoroProfile.jpg" class="rounded-circle me-3" width="90" height="90" alt="Leader">
+            <div class="text-start">
+              <h5 class="mb-1 fw-bold">Leader</h5>
+              <p class="mb-0 small">Roronoa Zoro</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side (Logo takes combined height of Captain+Leader) -->
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <img src="mascot.png" class="img-fluid" alt="Club Mascot" 
+             style="max-height:100%; object-fit:contain;">
+      </div>
+    </div>
+
+    <!-- Members Section -->
+    <div class=" C-membersSec w-100vw p-lg-5 p-md-3 mt-5  position-relative"
+         style="background:rgba(87,58,32,0.85); width:100vw; margin-left:calc(-50vw + 50%); overflow:hidden;">
+
+      <h4 class="text-center mb-4">Members</h4>
+
+      <!-- Members Wrapper -->
+      <div class="members-container overflow-auto  ">
+        <!-- Example members -->
+        <div class="text-center">
+          <img src="luffyProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="luffy">
+          <p class="small mb-0">Monkey D Luffy</p>
+        </div>
+        <div class="text-center">
+          <img src="zoroProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="zoro">
+          <p class="small mb-0">Roronoa Zoro</p>
+        </div>
+        <div class="text-center">
+          <img src="namiProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="nami">
+          <p class="small mb-0">Nami</p>
+        </div>
+
+          <div class="text-center">
+          <img src="boaProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boa">
+          <p class="small mb-0">Boa Hancock</p>
+        </div>
+        <div class="text-center">
+          <img src="robinProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="robin">
+          <p class="small mb-0">Nico Robin</p>
+        </div>
+        <div class="text-center">
+          <img src="unProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="nezuko">
+          <p class="small mb-0">Nezuko Kamado</p>
+        </div>
+        <div class="text-center">
+          <img src="saboProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="vivi">
+          <p class="small mb-0">Vivi</p>
+        </div>
+        <div class="text-center">
+          <img src="aceProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
+          <p class="small mb-0">Boobies</p>
+        </div>
+        
+        <div class="text-center">
+          <img src="mikasaProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
+          <p class="small mb-0">Boobies</p>
+        </div>
+        <div class="text-center">
+          <img src="moneyProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
+          <p class="small mb-0">Boobies</p>
+        </div>
+        <div class="text-center">
+          <img src="choperProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
+          <p class="small mb-0">Boobies</p>
+        </div>
+           <div class="text-center">
+          <img src="luffyProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="luffy">
+          <p class="small mb-0">Monkey D Luffy</p>
+        </div>
+        <div class="text-center">
+          <img src="zoroProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="zoro">
+          <p class="small mb-0">Roronoa Zoro</p>
+        </div>
+        <div class="text-center">
+          <img src="namiProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="nami">
+          <p class="small mb-0">Nami</p>
+        </div>
+        <div class="text-center">
+          <img src="boaProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boa">
+          <p class="small mb-0">Boa Hancock</p>
+        </div>
+        <div class="text-center">
+          <img src="robinProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="robin">
+          <p class="small mb-0">Nico Robin</p>
+        </div>
+        <div class="text-center">
+          <img src="unProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="nezuko">
+          <p class="small mb-0">Nezuko Kamado</p>
+        </div>
+        <div class="text-center">
+          <img src="saboProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="vivi">
+          <p class="small mb-0">Vivi</p>
+        </div>
+        <div class="text-center">
+          <img src="aceProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
+          <p class="small mb-0">Boobies</p>
+        </div>
+        
+        <div class="text-center">
+          <img src="mikasaProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
+          <p class="small mb-0">Boobies</p>
+        </div>
+        <div class="text-center">
+          <img src="moneyProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
+          <p class="small mb-0">Boobies</p>
+        </div>
+        <div class="text-center">
+          <img src="choperProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
+          <p class="small mb-0">Boobies</p>
+        </div>
+        
+        <!-- repeat members as needed -->
+        
+      </div>
+
+        <!-- Arrows -->
+        <button class="arrow-btn left-arrow">&#10094;</button>
+        <button class="arrow-btn right-arrow">&#10095;</button>
+
+
+      <!-- See more button (mobile) -->
+      <div class="text-center mt-3 d-md-none">
+        <button id="seeMoreBtn" class="btn btn-link text-light">See more</button>
+      </div>
+    </div>
+
+    <!-- Join Us button -->
+    <div class="mt-5 text-center">
+      <a href="#join" class="btn btn-lg text-light fw-bold" 
+         style="background:#b68155; border-radius:15px;">
+        Join Us
       </a>
-      
-      <!-- Hamburger -->
-    <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" >
-      <span class="navbar-toggler-icon">
-        <i class="bi bi-list" style="font-size: 2rem;"></i>
-      </span>
-    </button>
-
-      <!-- Desktop Menu -->
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-
-          <!-- About Us -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">About Us</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Mission & Vision</a></li>
-              <li><a class="dropdown-item" href="#">Executive Committee</a></li>
-            </ul>
-          </li>
-
-          <!-- Membership -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Membership</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Join Us</a></li>
-              <li><a class="dropdown-item" href="#">Benefits & Rules</a></li>
-            </ul>
-          </li>
-
-          <!-- Activities -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Activities</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Projects</a></li>
-              <li><a class="dropdown-item" href="#">Events & Announcements</a></li>
-              <li><a class="dropdown-item" href="#">Media Gallery</a></li>
-            </ul>
-          </li>
-
-          <!-- Get Involved -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Get Involved</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Volunteer</a></li>
-              <li><a class="dropdown-item" href="#">Collaborate</a></li>
-              <li><a class="dropdown-item" href="#">Internships</a></li>
-            </ul>
-          </li>
-
-          <!-- Support Us -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Support Us</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Donations</a></li>
-              <li><a class="dropdown-item" href="#">Sponsorships</a></li>
-            </ul>
-          </li>
-
-          <!-- Blog -->
-          <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-
-          <!-- Contact -->
-          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Offcanvas Sidebar for Mobile -->
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title">Menu</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div class="accordion" id="mobileAccordion">
-
-        <!-- About Us -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="aboutHeading">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aboutCollapse">
-              About Us
-            </button>
-          </h2>
-          <div id="aboutCollapse" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-            <div class="accordion-body">
-              <a href="#">Mission & Vision</a>
-              <a href="#">Executive Committee</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Membership -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="membershipHeading">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#membershipCollapse">
-              Membership
-            </button>
-          </h2>
-          <div id="membershipCollapse" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-            <div class="accordion-body">
-              <a href="#">Join Us</a>
-              <a href="#">Benefits & Rules</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Activities -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="activitiesHeading">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#activitiesCollapse">
-              Activities
-            </button>
-          </h2>
-          <div id="activitiesCollapse" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-            <div class="accordion-body">
-              <a href="#">Projects</a>
-              <a href="#">Events & Announcements</a>
-              <a href="#">Media Gallery</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Get Involved -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="involvedHeading">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#involvedCollapse">
-              Get Involved
-            </button>
-          </h2>
-          <div id="involvedCollapse" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-            <div class="accordion-body">
-              <a href="#">Volunteer</a>
-              <a href="#">Collaborate</a>
-              <a href="#">Internships</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Support Us -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="supportHeading">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#supportCollapse">
-              Support Us
-            </button>
-          </h2>
-          <div id="supportCollapse" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-            <div class="accordion-body">
-              <a href="#">Donations</a>
-              <a href="#">Sponsorships</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Blog -->
-        <a class="nav-link py-2" href="#">Blog</a>
-
-        <!-- Contact -->
-        <a class="nav-link py-2" href="#">Contact</a>
-
-      </div>
     </div>
   </div>
+</section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const container = document.querySelector('.members-container');
+const leftArrow = document.querySelector('.left-arrow');
+const rightArrow = document.querySelector('.right-arrow');
+const membersSection = document.querySelector('.C-membersSec');
+
+let direction = 1; // 1 = right, -1 = left
+let scrollSpeed = 1; // pixels per frame
+let notHovered=true;
+// Auto-scroll function
+function autoScrollFunc() {
+  if(window.innerWidth > 768 && notHovered){ // desktop only
+    container.scrollLeft += scrollSpeed * direction;
+
+    // Reverse at edges
+    if(container.scrollLeft + container.clientWidth >= container.scrollWidth){
+      direction = -1;
+    } else if(container.scrollLeft <= 0){
+      direction = 1;
+    }
+  }
+  requestAnimationFrame(autoScrollFunc);
+}
+requestAnimationFrame(autoScrollFunc);
+
+// Show arrows on hover
+membersSection.addEventListener('mouseenter', () => {
+  leftArrow.style.display = 'block';
+  rightArrow.style.display = 'block';
+  notHovered=false;
+});
+membersSection.addEventListener('mouseleave', () => {
+  leftArrow.style.display = 'none';
+  rightArrow.style.display = 'none';
+  notHovered=true;
+});
+
+// Arrow clicks
+leftArrow.addEventListener('click', () => {
+  container.scrollBy({ left: -200, behavior: 'smooth' });
+});
+rightArrow.addEventListener('click', () => {
+  container.scrollBy({ left: 200, behavior: 'smooth' });
+});
+
+// See more toggle (mobile)
+const seeMoreBtn = document.getElementById('seeMoreBtn');
+if (seeMoreBtn) {
+  container.classList.add('collapsed');
+  seeMoreBtn.addEventListener('click', () => {
+    container.classList.toggle('collapsed');
+    seeMoreBtn.textContent =
+      container.classList.contains('collapsed') ? 'See more' : 'See less';
+  });
+}
+</script>
+
 </body>
 </html>
