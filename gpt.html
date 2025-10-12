@@ -39,7 +39,7 @@
       padding: 0.5rem 1rem;
       cursor: pointer;
       border-radius: 8px;
-      transition: all 0.3s;
+      transition: all 0.5s;
       z-index: 10;
       display: none; /* hidden by default */
     }
@@ -51,183 +51,191 @@
     .left-arrow { left: 0px; }
     .right-arrow { right: 0px; }
 
+    .members-photo{
+      height: 90px;
+      width: 90px;
+    }
     /* Mobile "see more" feature */
     @media (max-width: 768px) {
       .members-container {
         flex-wrap: wrap;
         justify-content: center;
-        padding: 0 1rem;
+        /* padding: 0 1rem; */
       }
       .members-container.collapsed > div:nth-of-type(n+10) {
         display: none;
       }
+      .arrow-btn{
+        z-index: -12;
+      }
+
+    
     }
   </style>
 </head>
 <body>
 
 <!-- Cricket Club Section -->
-<section class="club-section text-light" 
-         style="background: url('MDL.jpg') no-repeat center center/cover; min-height: 100vh; position: relative;">
+<section class="club-section text-light w-100" 
+     style="background: url('MDL.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh; width: 100vw; ">
   <div class="container-fluid py-5">
-    <!-- Title -->
-    <h2 class="text-center mb-5" style="font-family: 'Poppins', sans-serif; font-weight:600;">CRICKET CLUB_</h2>
+  <!-- Title -->
+  <h2 class="text-center mb-5" style="font-family: 'Poppins', sans-serif; font-weight:600;">CRICKET CLUB_</h2>
 
-    <div class="row align-items-stretch justify-content-center g-4">
-      <!-- Left side (Captain + Leader stacked) -->
-      <div class="col-md-4 d-flex flex-column justify-content-between">
-        <!-- Captain -->
-        <div class="px-3  ps-0  mb-3" style="background:#b68155; border-radius: 3rem; border-start-end-radius: 0; ">
-          <div class="d-flex align-items-center">
-            <img src="luffyProfile.jpg" class="rounded-circle me-3" width="90" height="90" alt="Captain">
-            <div class="text-start">
-              <h5 class="mb-1 fw-bold">Captain</h5>
-              <p class="mb-0 small">Monkey D Luffy</p>
-            </div>
-          </div>
-        </div>
-        <!-- Leader -->
-        <div class="px-3  ps-0  mb-3" style="background:#608e6a; border-radius: 3rem; border-start-end-radius: 0; ">
-            <div class="d-flex align-items-center">
-            <img src="zoroProfile.jpg" class="rounded-circle me-3" width="90" height="90" alt="Leader">
-            <div class="text-start">
-              <h5 class="mb-1 fw-bold">Leader</h5>
-              <p class="mb-0 small">Roronoa Zoro</p>
-            </div>
-          </div>
-        </div>
+  <div class="row d-flex align-items-center justify-content-center  g-4">
+    <!-- Left side (Captain + Leader stacked) -->
+    <div class="col-md-5 d-flex  flex-column ">
+    <!-- Captain -->
+    <div class="px-3  ps-0  mb-3" style="background:#b68155; border-radius: 3rem; border-start-end-radius: 0; max-width: 550px;">
+      <div class="d-flex align-items-center">
+      <img src="luffyProfile.jpg" class="rounded-circle me-3" width="90" height="90" alt="Captain">
+      <div class="text-start">
+        <h5 class="mb-1 fw-bold">Captain</h5>
+        <p class="mb-0 small">Monkey D Luffy</p>
       </div>
-
-      <!-- Right side (Logo takes combined height of Captain+Leader) -->
-      <div class="col-md-4 d-flex align-items-center justify-content-center">
-        <img src="mascot.png" class="img-fluid" alt="Club Mascot" 
-             style="max-height:100%; object-fit:contain;">
       </div>
     </div>
-
-    <!-- Members Section -->
-    <div class=" C-membersSec w-100vw p-lg-5 p-md-3 mt-5  position-relative"
-         style="background:rgba(87,58,32,0.85); width:100vw; margin-left:calc(-50vw + 50%); overflow:hidden;">
-
-      <h4 class="text-center mb-4">Members</h4>
-
-      <!-- Members Wrapper -->
-      <div class="members-container overflow-auto  ">
-        <!-- Example members -->
-        <div class="text-center">
-          <img src="luffyProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="luffy">
-          <p class="small mb-0">Monkey D Luffy</p>
-        </div>
-        <div class="text-center">
-          <img src="zoroProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="zoro">
-          <p class="small mb-0">Roronoa Zoro</p>
-        </div>
-        <div class="text-center">
-          <img src="namiProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="nami">
-          <p class="small mb-0">Nami</p>
-        </div>
-
-          <div class="text-center">
-          <img src="boaProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boa">
-          <p class="small mb-0">Boa Hancock</p>
-        </div>
-        <div class="text-center">
-          <img src="robinProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="robin">
-          <p class="small mb-0">Nico Robin</p>
-        </div>
-        <div class="text-center">
-          <img src="unProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="nezuko">
-          <p class="small mb-0">Nezuko Kamado</p>
-        </div>
-        <div class="text-center">
-          <img src="saboProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="vivi">
-          <p class="small mb-0">Vivi</p>
-        </div>
-        <div class="text-center">
-          <img src="aceProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
-          <p class="small mb-0">Boobies</p>
-        </div>
-        
-        <div class="text-center">
-          <img src="mikasaProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
-          <p class="small mb-0">Boobies</p>
-        </div>
-        <div class="text-center">
-          <img src="moneyProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
-          <p class="small mb-0">Boobies</p>
-        </div>
-        <div class="text-center">
-          <img src="choperProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
-          <p class="small mb-0">Boobies</p>
-        </div>
-           <div class="text-center">
-          <img src="luffyProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="luffy">
-          <p class="small mb-0">Monkey D Luffy</p>
-        </div>
-        <div class="text-center">
-          <img src="zoroProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="zoro">
-          <p class="small mb-0">Roronoa Zoro</p>
-        </div>
-        <div class="text-center">
-          <img src="namiProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="nami">
-          <p class="small mb-0">Nami</p>
-        </div>
-        <div class="text-center">
-          <img src="boaProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boa">
-          <p class="small mb-0">Boa Hancock</p>
-        </div>
-        <div class="text-center">
-          <img src="robinProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="robin">
-          <p class="small mb-0">Nico Robin</p>
-        </div>
-        <div class="text-center">
-          <img src="unProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="nezuko">
-          <p class="small mb-0">Nezuko Kamado</p>
-        </div>
-        <div class="text-center">
-          <img src="saboProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="vivi">
-          <p class="small mb-0">Vivi</p>
-        </div>
-        <div class="text-center">
-          <img src="aceProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
-          <p class="small mb-0">Boobies</p>
-        </div>
-        
-        <div class="text-center">
-          <img src="mikasaProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
-          <p class="small mb-0">Boobies</p>
-        </div>
-        <div class="text-center">
-          <img src="moneyProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
-          <p class="small mb-0">Boobies</p>
-        </div>
-        <div class="text-center">
-          <img src="choperProfile.jpg" class="rounded-circle mb-2" width="90" height="90" alt="boobies">
-          <p class="small mb-0">Boobies</p>
-        </div>
-        
-        <!-- repeat members as needed -->
-        
+    <!-- Leader -->
+    <div class="px-3  ps-0  mb-3" style="background:#608e6a; border-radius: 3rem; border-start-end-radius: 0; max-width: 550px; ">
+      <div class="d-flex align-items-center">
+      <img src="zoroProfile.jpg" class="rounded-circle me-3" width="90" height="90" alt="Leader">
+      <div class="text-start">
+        <h5 class="mb-1 fw-bold">Leader</h5>
+        <p class="mb-0 small">Roronoa Zoro</p>
       </div>
-
-        <!-- Arrows -->
-        <button class="arrow-btn left-arrow">&#10094;</button>
-        <button class="arrow-btn right-arrow">&#10095;</button>
-
-
-      <!-- See more button (mobile) -->
-      <div class="text-center mt-3 d-md-none">
-        <button id="seeMoreBtn" class="btn btn-link text-light">See more</button>
       </div>
     </div>
-
-    <!-- Join Us button -->
-    <div class="mt-5 text-center">
-      <a href="#join" class="btn btn-lg text-light fw-bold" 
-         style="background:#b68155; border-radius:15px;">
-        Join Us
-      </a>
     </div>
+
+    <!-- Right side (Logo takes combined height of Captain+Leader) -->
+    <div class="col-md-5 d-flex align-items-center justify-content-center justify-content-md-end">
+    <img src="mascot.png" alt="Club Mascot" 
+     style="max-height:350px; max-width:100%; object-fit:contain;">
+    </div>
+  </div>
+
+  <!-- Members Section -->
+  <div class=" C-membersSec w-100vw p-md-5 px-1 py-5 mt-5  position-relative"
+     style="background:rgba(87,58,32,0.85); width:100vw; margin-left:calc(-50vw + 50%); overflow:hidden;">
+
+    <h4 class="text-center  mb-4">Members</h4>
+
+    <!-- Members Wrapper -->
+    <div class="members-container overflow-auto  ">
+    <!-- Example members -->
+    <div class="text-center">
+      <img src="luffyProfile.jpg" class="rounded-circle mb-2 members-photo" alt="luffy">
+      <p class="small mb-0">Monkey D Luffy</p>
+    </div>
+    <div class="text-center">
+      <img src="zoroProfile.jpg" class="rounded-circle mb-2 members-photo" alt="zoro">
+      <p class="small mb-0">Roronoa Zoro</p>
+    </div>
+    <div class="text-center">
+      <img src="namiProfile.jpg" class="rounded-circle mb-2 members-photo" alt="nami">
+      <p class="small mb-0">Nami</p>
+    </div>
+
+      <div class="text-center">
+      <img src="boaProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boa">
+      <p class="small mb-0">Boa Hancock</p>
+    </div>
+    <div class="text-center">
+      <img src="robinProfile.jpg" class="rounded-circle mb-2 members-photo" alt="robin">
+      <p class="small mb-0">Nico Robin</p>
+    </div>
+    <div class="text-center">
+      <img src="unProfile.jpg" class="rounded-circle mb-2 members-photo" alt="nezuko">
+      <p class="small mb-0">Nezuko Kamado</p>
+    </div>
+    <div class="text-center">
+      <img src="saboProfile.jpg" class="rounded-circle mb-2 members-photo" alt="vivi">
+      <p class="small mb-0">Vivi</p>
+    </div>
+    <div class="text-center">
+      <img src="aceProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boobies">
+      <p class="small mb-0">Boobies</p>
+    </div>
+    
+    <div class="text-center">
+      <img src="mikasaProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boobies">
+      <p class="small mb-0">Boobies</p>
+    </div>
+    <div class="text-center">
+      <img src="moneyProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boobies">
+      <p class="small mb-0">Boobies</p>
+    </div>
+    <div class="text-center">
+      <img src="choperProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boobies">
+      <p class="small mb-0">Boobies</p>
+    </div>
+       <div class="text-center">
+      <img src="luffyProfile.jpg" class="rounded-circle mb-2 members-photo" alt="luffy">
+      <p class="small mb-0">Monkey D Luffy</p>
+    </div>
+    <div class="text-center">
+      <img src="zoroProfile.jpg" class="rounded-circle mb-2 members-photo" alt="zoro">
+      <p class="small mb-0">Roronoa Zoro</p>
+    </div>
+    <div class="text-center">
+      <img src="namiProfile.jpg" class="rounded-circle mb-2 members-photo" alt="nami">
+      <p class="small mb-0">Nami</p>
+    </div>
+    <div class="text-center">
+      <img src="boaProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boa">
+      <p class="small mb-0">Boa Hancock</p>
+    </div>
+    <div class="text-center">
+      <img src="robinProfile.jpg" class="rounded-circle mb-2 members-photo" alt="robin">
+      <p class="small mb-0">Nico Robin</p>
+    </div>
+    <div class="text-center">
+      <img src="unProfile.jpg" class="rounded-circle mb-2 members-photo" alt="nezuko">
+      <p class="small mb-0">Nezuko Kamado</p>
+    </div>
+    <div class="text-center">
+      <img src="saboProfile.jpg" class="rounded-circle mb-2 members-photo" alt="vivi">
+      <p class="small mb-0">Vivi</p>
+    </div>
+    <div class="text-center">
+      <img src="aceProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boobies">
+      <p class="small mb-0">Boobies</p>
+    </div>
+    
+    <div class="text-center">
+      <img src="mikasaProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boobies">
+      <p class="small mb-0">Boobies</p>
+    </div>
+    <div class="text-center">
+      <img src="moneyProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boobies">
+      <p class="small mb-0">Boobies</p>
+    </div>
+    <div class="text-center">
+      <img src="choperProfile.jpg" class="rounded-circle mb-2 members-photo" alt="boobies">
+      <p class="small mb-0">Boobies</p>
+    </div>
+    
+    <!-- repeat members as needed -->
+    
+    </div>
+
+    <!-- Arrows -->
+    <button class="arrow-btn left-arrow  ">&#10094;</button>
+    <button class="arrow-btn right-arrow">&#10095;</button>
+
+    <!-- See more button (mobile) -->
+    <div class="text-center mt-3 d-md-none">
+    <button id="seeMoreBtn" class="btn btn-link text-light">See more</button>
+    </div>
+  </div>
+
+  <!-- Join Us button -->
+  <div class="mt-5 text-center">
+    <a href="#join" class="btn btn-lg text-light fw-bold" 
+     style="background:#b68155; border-radius:15px;">
+    Join Us
+    </a>
+  </div>
   </div>
 </section>
 
