@@ -1,10 +1,24 @@
  /* Navbar */
+html, body {
+  height: 100%;
+  background-color: #ffdd00; /* your body background */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+html{
+  overflow: hidden;
+}
+
     .navbar {
       background: #002244; /* Classy deep blue */
     }
-    body{
-        background-color: #62809d;
-    }
+
     .navbar-brand {
       color: #fff !important;
       font-weight: 700;

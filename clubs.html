@@ -6,6 +6,17 @@
   <title>All Clubs</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+html, body {
+  height: 100%;
+  background-color: #ffdd00; /* your body background */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html{
+  overflow: hidden;
+}
     /* Members Container */
     .members-container {
       display: flex;
@@ -55,6 +66,52 @@
       height: 90px;
       width: 90px;
     }
+
+
+
+
+
+    /* Background of the popup */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  backdrop-filter: blur(3px);
+}
+
+/* Popup content box */
+.popup-content {
+  background: #010101;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  animation: popupFade 0.25s ease;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 1.8rem;
+  color: #333;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@keyframes popupFade {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
     /* Mobile "see more" feature */
     @media (max-width: 768px) {
       .members-container {
@@ -96,15 +153,30 @@
       </div>
     </div>
     <!-- Leader -->
-    <div class="px-3  ps-0  mb-3" style="background:#608e6a; border-radius: 3rem; border-start-end-radius: 0; max-width: 550px; ">
-      <div class="d-flex align-items-center">
-      <img src="zoroProfile.jpg" class="rounded-circle me-3" width="90" height="90" alt="Leader">
-      <div class="text-start">
-        <h5 class="mb-1 fw-bold">Leader</h5>
-        <p class="mb-0 small">Roronoa Zoro</p>
-      </div>
-      </div>
+<!-- Player Card -->
+<div class="px-3 ps-0 mb-3 player-card" 
+     style="background:#608e6a; border-radius:3rem; border-start-end-radius:0; max-width:550px; cursor:pointer;">
+  <div class="d-flex align-items-center">
+    <img src="zoroProfile.jpg" class="rounded-circle me-3" width="90" height="90" alt="Leader">
+    <div class="text-start text-light">
+      <h5 class="mb-1 fw-bold">Leader</h5>
+      <p class="mb-0 small">Roronoa Zoro</p>
     </div>
+  </div>
+</div>
+
+<!-- Popup Modal -->
+<div class="popup-overlay" id="playerPopup">
+  <div class="popup-content">
+    <span class="close-btn">&times;</span>
+    <img src="zoroProfile.jpg" width="120" height="120" class="rounded-circle mb-3" alt="Leader">
+    <h3 class="fw-bold mb-2">Roronoa Zoro</h3>
+    <p class="mb-0">Role: Leader</p>
+    <p class="small mt-2">Zoro is the swordsman of the Straw Hat Pirates, known for his incredible strength and loyalty. 
+      He aims to become the world’s greatest swordsman.</p>
+  </div>
+</div>
+
     </div>
 
     <!-- Right side (Logo takes combined height of Captain+Leader) -->
@@ -294,6 +366,31 @@ if (seeMoreBtn) {
       container.classList.contains('collapsed') ? 'See more' : 'See less';
   });
 }
+</script>
+
+
+
+<script>
+  const playerCard = document.querySelector('.player-card');
+  const popup = document.getElementById('playerPopup');
+  const closeBtn = document.querySelector('.close-btn');
+
+  // Open popup when card clicked
+  playerCard.addEventListener('click', () => {
+    popup.style.display = 'flex';
+  });
+
+  // Close when clicking the X
+  closeBtn.addEventListener('click', () => {
+    popup.style.display = 'none';
+  });
+
+  // Close when clicking outside the popup box
+  window.addEventListener('click', (e) => {
+    if (e.target === popup) {
+      popup.style.display = 'none';
+    }
+  });
 </script>
 
 </body>
