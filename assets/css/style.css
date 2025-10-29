@@ -1,0 +1,230 @@
+html,
+body {
+  height: 100%;
+  background-color: #ffdd00; /* your body background */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scroll-snap-type: mandatory;
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+html {
+  overflow: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: mandatory;
+}
+
+.navbar {
+  background: #002244; /* Classy deep blue */
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.navbar-brand img {
+  height: 40px;
+  margin-right: 10px;
+}
+.navbar-nav .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+}
+.navbar-nav .nav-link:hover {
+  color: #ffcc00 !important; /* Gold hover */
+}
+
+/* Offcanvas Sidebar */
+.offcanvas-end {
+  width: 280px;
+  background: #f8f9fa;
+}
+.offcanvas-header {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Accordion styling */
+.accordion-button {
+  font-weight: 500;
+  background: none;
+  padding: 10px 15px;
+}
+.accordion-button:not(.collapsed) {
+  color: #002244;
+  background-color: #e9ecef;
+}
+.accordion-button:focus {
+  box-shadow: none;
+}
+.accordion-body {
+  padding: 0;
+}
+.accordion-body a {
+  display: block;
+  padding: 8px 25px;
+  color: #333;
+  text-decoration: none;
+}
+.accordion-body a:hover {
+  color: #002244;
+  font-weight: 600;
+  background: #f1f1f1;
+}
+
+.navbar-toggler {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* HERO SECOTION _____________________________________ */
+
+/* Fullscreen Hero */
+.hero-carousel {
+  height: 95vh;
+}
+.hero-carousel .carousel-item {
+  height: 95vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* Overlay */
+.hero-carousel .carousel-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* Content inside */
+.carousel-caption {
+  bottom: 35%;
+  z-index: 2;
+}
+.carousel-caption h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  animation: fadeInLeft 1.5s ease;
+}
+.carousel-caption p {
+  font-size: 1.25rem;
+  animation: fadeInRight 1.5s ease;
+}
+.carousel-caption .btn {
+  margin-top: 15px;
+  animation: fadeInUp 1.5s ease;
+}
+
+/* Keyframe animations */
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SCLUB SECOTION _____________________________________ */
+
+/* Section background */
+/* section {
+  width: 100vw;
+  height: 100vh;
+} */
+.clubs-section {
+  width: 100vw;
+  min-height: 100vh;
+  background: url("../images/MDL.jpg") no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 40px 20px;
+}
+
+.clubs-section h1 {
+  font-family: "Georgia", serif;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    2px 2px 0 #000;
+}
+
+.club-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.club-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.5s ease;
+}
+
+.club-card:hover img {
+  transform: scale(1.1);
+}
+
+.club-overlay {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  transition: all 0.5s ease;
+}
+
+.club-card:hover .club-overlay {
+  bottom: 0;
+}
+
+.club-overlay h5 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.club-overlay p {
+  margin: 0;
+  font-size: 1rem;
+  color: #00bfff;
+}
