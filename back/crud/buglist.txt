@@ -1,0 +1,6 @@
+1. the suggestions is not sorted 
+
+2. adminHome isnt responsive 
+
+3. filter by club is using union(means : they dont find a person with both the clubs) i cant filter out the person who is joined both x & y clubs 
+
