@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 include 'funcs/connect.php';
 
@@ -26,11 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $club_id     = (int)$_POST['club'];
   $position_id = (int)$_POST['position'];
 
-  // Prepare the INSERT – 12 columns: 10 placeholders + 0,1 literals
-  $ins = $conn->prepare("INSERT INTO executives 
-        (id, name, position_id, email, phone, department, batch, blood_group, club_id, img, approved, active)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 1)");
-
   // Fix types: batch = integer, img = string (with fallback)
   $member_id_int   = (int)$member_id;
   $position_id_int = (int)$position_id;
@@ -38,27 +33,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $batch_int       = (int)$user['batch'] ?? 0;               // Safe int fallback
   $img             = $user['img'] ?: 'default.jpg';      // No NULL
 
-  // 10 variables → 10 type chars: i s i s s s i s i s
-  $ins->bind_param(
-    "isisssisis",         // 10 chars for 10 values
-    $member_id_int,       // i
-    $user['name'],        // s
-    $position_id_int,     // i
-    $user['mail'],        // s
-    $user['phone'],       // s
-    $user['department'],  // s
-    $batch_int,           // i
-    $user['bloodGroup'],  // s
-    $club_id_int,         // i
-    $img                  // s
-  );
+  // 1) Check whether this member already applied for the same club & position
+  $chk = $conn->prepare("SELECT 1 FROM executives WHERE id = ? AND position_id = ? AND club_id = ? LIMIT 1");
+  if ($chk) {
+    $chk->bind_param('iii', $member_id_int, $position_id_int, $club_id_int);
+    $chk->execute();
+    $res = $chk->get_result();
+    if ($res && $res->fetch_assoc()) {
+      $msg = "<div class='alert alert-warning text-center'>You have already applied for this club and position.</div>";
+      $chk->close();
+    } else {
+      $chk->close();
 
-  if ($ins->execute()) {
-    $msg = "<div class='alert alert-success text-center fw-bold'>Application Submitted Successfully!</div>";
+      // 2) Insert new application
+      $ins = $conn->prepare("INSERT INTO executives 
+        (id, name, position_id, email, phone, department, batch, blood_group, club_id, img, approved, active)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 1)");
+
+      if ($ins) {
+        $ins->bind_param(
+          "isisssisis",
+          $member_id_int,
+          $user['name'],
+          $position_id_int,
+          $user['mail'],
+          $user['phone'],
+          $user['department'],
+          $batch_int,
+          $user['bloodGroup'],
+          $club_id_int,
+          $img
+        );
+
+        if ($ins->execute()) {
+          // Redirect back to home page after successful application
+          header('Location: index.php?app=success');
+          exit;
+        } else {
+          // Insert failed (could be duplicate primary key or other DB error)
+          $msg = "<div class='alert alert-danger text-center'>An error occurred while submitting your application. If you already applied, contact support.</div>";
+        }
+        $ins->close();
+      } else {
+        $msg = "<div class='alert alert-danger text-center'>Server error preparing the application.</div>";
+      }
+    }
   } else {
-    $msg = "<div class='alert alert-danger text-center'>You have already applied for this position or an error occurred.</div>";
+    $msg = "<div class='alert alert-danger text-center'>Server error checking existing applications.</div>";
   }
-  $ins->close();
 }
 ?>
 

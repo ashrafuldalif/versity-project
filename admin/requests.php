@@ -9,6 +9,22 @@ include __DIR__ . '/../funcs/connect.php';
 if (isset($_GET['toggle_approve'])) {
     $id = (int)$_GET['toggle_approve'];
     $conn->query("UPDATE executives SET approved = NOT approved WHERE id = $id");
+    // After approving, send admin to the executives list so approved entries are visible there
+    header("Location: executives.php");
+    exit;
+}
+
+/* ------------------------------
+   DELETE REQUEST
+--------------------------------*/
+if (isset($_GET['delete_id'])) {
+    $did = (int)$_GET['delete_id'];
+    $del = $conn->prepare("DELETE FROM executives WHERE id = ?");
+    if ($del) {
+        $del->bind_param('i', $did);
+        $del->execute();
+        $del->close();
+    }
     header("Location: requests.php");
     exit;
 }
@@ -23,7 +39,8 @@ SELECT e.id, e.name, e.email, e.approved,
 FROM executives e
 LEFT JOIN clubs c ON e.club_id = c.id
 LEFT JOIN positions p ON e.position_id = p.id
-ORDER BY e.approved ASC, e.id DESC
+WHERE e.approved = 0
+ORDER BY e.id DESC
 ";
 
 $executives = $conn->query($sql);
@@ -62,13 +79,7 @@ $executives = $conn->query($sql);
     <div class="container mt-5">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Executive Members</h2>
-
-            <!-- TOGGLE BUTTON -->
-            <button id="toggleApproved" class="btn btn-outline-primary btn-lg shadow-sm">
-                <i class="bi bi-eye-slash" id="toggleIcon"></i>
-                <span id="toggleText">Show approved</span>
-            </button>
+            <h2>Executive Requests (Pending)</h2>
         </div>
 
         <div class="card shadow-sm">
@@ -99,10 +110,8 @@ $executives = $conn->query($sql);
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <a href="?toggle_approve=<?= $row['id'] ?>"
-                                        class="btn btn-sm <?= $row['approved'] ? 'btn-outline-danger' : 'btn-outline-success' ?>">
-                                        <?= $row['approved'] ? 'Unapprove' : 'Approve' ?>
-                                    </a>
+                                    <a href="?toggle_approve=<?= $row['id'] ?>" class="btn btn-sm btn-outline-success">Approve</a>
+                                    <a href="?delete_id=<?= $row['id'] ?>" class="btn btn-sm btn-danger ms-2" onclick="return confirm('Delete this request? This cannot be undone.');">Delete</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -117,29 +126,7 @@ $executives = $conn->query($sql);
 
     </div>
 
-    <!-- Toggle Script -->
-    <script>
-        document.getElementById('toggleApproved').addEventListener('click', function() {
-            const unAproved = document.querySelectorAll('.unAproved-row');
-            const icon = document.getElementById('toggleIcon');
-            const text = document.getElementById('toggleText');
-
-            unAproved.forEach(row => {
-                row.style.display = row.style.display === 'none' ? '' : 'none';
-            });
-
-            // Toggle button appearance
-            if (unAproved[0]?.style.display === 'none') {
-                icon.classList.replace('bi-eye-slash', 'bi-eye');
-                text.textContent = 'Show approved';
-                this.classList.replace('btn-outline-primary', 'btn-outline-secondary');
-            } else {
-                icon.classList.replace('bi-eye', 'bi-eye-slash');
-                text.textContent = 'Hide approved';
-                this.classList.replace('btn-outline-secondary', 'btn-outline-primary');
-            }
-        });
-    </script>
+    
 
 </body>
 

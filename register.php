@@ -28,7 +28,10 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
   // === VALIDATION ===
   if (!$mail) {
     $error = 'Invalid email address.';
-  } elseif (
+  }elseif ($email && !str_ends_with($mail, '@rpsu.edu.bd')) {
+    $error = "must use student email address.";
+  }
+  elseif (
     empty($inputs['name']) || $stdId <= 0 || $batch < 1 || $batch > 31 ||
     empty($inputs['department']) || empty($inputs['phone']) ||
     empty($inputs['bloodGroup']) || empty($inputs['password']) ||

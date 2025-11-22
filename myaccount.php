@@ -37,6 +37,37 @@ $mail       = $row['mail'];
 $phone      = $row['phone'];
 $bloodGroup = $row['bloodGroup'];
 $hashedPass = $row['pass'];   // stored hash
+
+// ---------- 4. CHECK IF USER IS AN EXECUTIVE AND FETCH EXTRA FIELDS ----------
+$isExecutive = false;
+$bio = '';
+$facebook = $instagram = $linkedin = $x = $youtube = '';
+$execStmt = $conn->prepare("SELECT bio FROM executives WHERE id = ? LIMIT 1");
+if ($execStmt) {
+  $execStmt->bind_param('s', $currentId);
+  $execStmt->execute();
+  $execRes = $execStmt->get_result();
+  if ($execRow = $execRes->fetch_assoc()) {
+    $isExecutive = true;
+    $bio = $execRow['bio'] ?? '';
+    // fetch socials if any
+    $soc = $conn->prepare("SELECT facebook, instagram, linkedin, x, youtube FROM executive_socials WHERE executive_id = ? LIMIT 1");
+    if ($soc) {
+      $soc->bind_param('s', $currentId);
+      $soc->execute();
+      $sres = $soc->get_result();
+      if ($srow = $sres->fetch_assoc()) {
+        $facebook = $srow['facebook'] ?? '';
+        $instagram = $srow['instagram'] ?? '';
+        $linkedin = $srow['linkedin'] ?? '';
+        $x = $srow['x'] ?? '';
+        $youtube = $srow['youtube'] ?? '';
+      }
+      $soc->close();
+    }
+  }
+  $execStmt->close();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -169,6 +200,33 @@ $hashedPass = $row['pass'];   // stored hash
         <input type="password" name="pass" class="form-control" placeholder="********" disabled>
         <p class="hints">Password is hidden for security.</p>
       </div>
+      <?php if ($isExecutive): ?>
+      <hr>
+      <div class="mb-3">
+        <label class="form-label">Bio</label>
+        <textarea name="bio" class="form-control" rows="4" disabled><?= htmlspecialchars($bio) ?></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Facebook</label>
+        <input type="url" name="facebook" class="form-control" value="<?= htmlspecialchars($facebook) ?>" disabled>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Instagram</label>
+        <input type="url" name="instagram" class="form-control" value="<?= htmlspecialchars($instagram) ?>" disabled>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">LinkedIn</label>
+        <input type="url" name="linkedin" class="form-control" value="<?= htmlspecialchars($linkedin) ?>" disabled>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">X / Twitter</label>
+        <input type="url" name="x" class="form-control" value="<?= htmlspecialchars($x) ?>" disabled>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">YouTube</label>
+        <input type="url" name="youtube" class="form-control" value="<?= htmlspecialchars($youtube) ?>" disabled>
+      </div>
+      <?php endif; ?>
     </div>
 
     <div class="d-flex gap-2 mt-3">
@@ -196,7 +254,7 @@ $hashedPass = $row['pass'];   // stored hash
     const verifyContainer = document.getElementById('verifyContainer');
     const verifyForm = document.getElementById('verifyForm');
     const cancelVerify = document.getElementById('cancelVerify');
-    const inputs = document.querySelectorAll('.profile-info input');
+    const inputs = document.querySelectorAll('.profile-info input, .profile-info textarea');
     const profilePhoto = document.getElementById('profilePhoto');
     const photoInput = document.getElementById('photoInput');
 
@@ -234,17 +292,22 @@ $hashedPass = $row['pass'];   // stored hash
       }
 
       if (isEditing && isVerified) {
-        const data = {
-          name: inputs[0].value,
-          batch: inputs[1].value,
-          mail: inputs[4].value,
-          phone: inputs[5].value,
-          blood: inputs[6].value,
-          pass: inputs[7].value // new password (empty = no change)
-        };
-
+        // Collect fields by name to avoid relying on input order
+        const getVal = name => document.querySelector(`[name="${name}"]`)?.value ?? '';
         const form = new URLSearchParams();
-        for (const k in data) form.append(k, data[k]);
+        form.append('name', getVal('name'));
+        form.append('batch', getVal('batch'));
+        form.append('mail', getVal('mail'));
+        form.append('phone', getVal('phone'));
+        form.append('blood', getVal('blood'));
+        form.append('pass', getVal('pass'));
+        // executive-only fields (server will ignore if not executive)
+        form.append('bio', getVal('bio'));
+        form.append('facebook', getVal('facebook'));
+        form.append('instagram', getVal('instagram'));
+        form.append('linkedin', getVal('linkedin'));
+        form.append('x', getVal('x'));
+        form.append('youtube', getVal('youtube'));
 
         try {
           const res = await fetch('funcs/update_profile.php', {
