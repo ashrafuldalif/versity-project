@@ -8,6 +8,8 @@ session_unset();
 session_destroy();
 
 // Optionally, redirect to login page
-header("Location: login.php");
+define('BASE_URL', '/versity-porject'); // Change to your actual folder name
+
+// Then use this anywhere in any file:
+header("Location: " . BASE_URL . "/index.php");
 exit;
-?>

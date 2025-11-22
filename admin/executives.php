@@ -255,7 +255,9 @@ if ($posStmt) {
             $sql = "SELECT e.id, e.name, e.batch, e.email, e.img, e.blood_group, e.department, e.phone, e.club_id, e.active, p.position_name 
                     FROM executives e 
                     LEFT JOIN positions p ON e.position_id = p.id 
-                    ORDER BY COALESCE(p.id, 999), e.name ASC";
+                    WHERE e.approved = 1
+                    ORDER BY COALESCE(p.id, 999), e.name ASC
+                    ";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -276,7 +278,7 @@ if ($posStmt) {
                 $position = $row['position_name'] ?? 'N/A';
                 $active = isset($row['active']) ? (int)$row['active'] : 0;
                 $club_id = $row['club_id'];
-                
+
                 // Fetch club name if club_id exists
                 $clubName = '';
                 if ($club_id) {

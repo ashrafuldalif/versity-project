@@ -16,9 +16,27 @@
   left: 0;
   right: 0;
   z-index: 1030;
+  height: 76px;
   box-shadow: 0 4px 15px rgba(68, 54, 39, 0.25);
 }
+main {
+  flex: 1;                  
+  margin: 5rem 0;
+  background: linear-gradient(90deg, rgb(229, 195, 132),rgb(255, 216, 216), rgb(0, 0, 0));
+}
 
+html{
+  height: 100%;
+  width: 100%;
+  background-image: url(../bg.jpg) ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center ;
+  background-attachment: fixed;
+}
+body{
+  background: transparent;
+}
 .navbar.scrolled {
   background: var(--overlay-dark) !important;
   backdrop-filter: blur(12px);

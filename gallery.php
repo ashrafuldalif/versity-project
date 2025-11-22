@@ -235,39 +235,44 @@ while ($row = $rowsResult->fetch_assoc()) {
 <body>
     <?php include 'components/navbar.php'; ?>
 
-    <div class="container-fluid py-4">
-        <?php if (!empty($galleryRows)): ?>
-            <?php foreach ($galleryRows as $section): ?>
-                <div class="slider-section">
-                    <h3><?php echo htmlspecialchars($section['row_header']); ?></h3>
-                    <?php if (!empty($section['sub_header'])): ?>
-                        <p style="margin-left: 2%; opacity: 0.8;"><?php echo htmlspecialchars($section['sub_header']); ?></p>
-                    <?php endif; ?>
-                    <button class="toggle-btn" onclick="toggleView(this)">Grid</button>
-                    <div class="slider img-cont">
-                        <button class="arrow left" onclick="slideLeft(this)">&#10094;</button>
-                        <button class="arrow right" onclick="slideRight(this)">&#10095;</button>
-                        <?php foreach ($section['images'] as $image): ?>
-                            <img src="assets/gellary/<?php echo htmlspecialchars($image['image_name']); ?>"
-                                class="slide-img gallery-img"
-                                alt="<?php echo htmlspecialchars($section['row_header']); ?>">
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <div class="text-center py-5">
-                <h3>No gallery images available</h3>
-                <p>Check back later for updates!</p>
-            </div>
-        <?php endif; ?>
-    </div>
+    <main>
 
-    <!-- Fullscreen Overlay -->
-    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen(event)">
-        <span class="close-btn" onclick="closeFullscreen(event)">&times;</span>
-        <img id="fullscreenImg" src="" alt="">
-    </div>
+        <div class="container-fluid py-4">
+            <?php if (!empty($galleryRows)): ?>
+                <?php foreach ($galleryRows as $section): ?>
+                    <div class="slider-section">
+                        <h3><?php echo htmlspecialchars($section['row_header']); ?></h3>
+                        <?php if (!empty($section['sub_header'])): ?>
+                            <p style="margin-left: 2%; opacity: 0.8;"><?php echo htmlspecialchars($section['sub_header']); ?></p>
+                        <?php endif; ?>
+                        <button class="toggle-btn" onclick="toggleView(this)">Grid</button>
+                        <div class="slider img-cont">
+                            <button class="arrow left" onclick="slideLeft(this)">&#10094;</button>
+                            <button class="arrow right" onclick="slideRight(this)">&#10095;</button>
+                            <?php foreach ($section['images'] as $image): ?>
+                                <img src="assets/gellary/<?php echo htmlspecialchars($image['image_name']); ?>"
+                                    class="slide-img gallery-img"
+                                    alt="<?php echo htmlspecialchars($section['row_header']); ?>">
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="text-center py-5">
+                    <h3>No gallery images available</h3>
+                    <p>Check back later for updates!</p>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <!-- Fullscreen Overlay -->
+        <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen(event)">
+            <span class="close-btn" onclick="closeFullscreen(event)">&times;</span>
+            <img id="fullscreenImg" src="" alt="">
+        </div>
+    </main>
+
+
     <?php include 'components/footer.php'; ?>
     <script>
         function slideLeft(btn) {

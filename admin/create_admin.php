@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Admin Account Creation Script
  * 
@@ -10,19 +11,6 @@
 
 include '../funcs/connect.php';
 
-// Check if admin table exists, if not create it
-$createTable = "
-CREATE TABLE IF NOT EXISTS admins (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(150) NOT NULL UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    last_login TIMESTAMP NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-";
-
-$conn->query($createTable);
 
 $message = "";
 $error = "";
@@ -31,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
     $email = trim($_POST['email'] ?? '');
-    
+
     if (empty($username) || empty($password) || empty($email)) {
         $error = "All fields are required.";
     } elseif (strlen($password) < 6) {
@@ -42,17 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $checkStmt->bind_param('ss', $username, $email);
         $checkStmt->execute();
         $result = $checkStmt->get_result();
-        
+
         if ($result->num_rows > 0) {
             $error = "Admin with this username or email already exists.";
         } else {
             // Hash password
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            
+
             // Insert admin
             $stmt = $conn->prepare("INSERT INTO admins (username, password, email) VALUES (?, ?, ?)");
             $stmt->bind_param('sss', $username, $hashedPassword, $email);
-            
+
             if ($stmt->execute()) {
                 $message = "Admin account created successfully! You can now <a href='login.php'>login here</a>.";
             } else {
@@ -66,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: center;
             justify-content: center;
         }
+
         .setup-card {
             background: linear-gradient(135deg, #ffffff43, #fff7f732);
             padding: 40px;
@@ -90,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             max-width: 450px;
             backdrop-filter: blur(330px);
         }
+
         .warning-box {
             background: rgba(255, 193, 7, 0.2);
             border: 1px solid rgba(255, 193, 7, 0.5);
@@ -99,46 +90,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
+
 <body>
     <div class="setup-card">
         <h3 class="text-center mb-4">Create Admin Account</h3>
-        
+
         <div class="warning-box">
             <strong>⚠️ Security Warning:</strong><br>
             Delete this file after creating your admin account!
         </div>
-        
+
         <?php if ($message): ?>
             <div class="alert alert-success"><?php echo $message; ?></div>
         <?php endif; ?>
-        
+
         <?php if ($error): ?>
             <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
-        
+
         <form method="POST" action="">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" name="username" id="username" class="form-control" 
-                       placeholder="Enter username" required autofocus>
+                <input type="text" name="username" id="username" class="form-control"
+                    placeholder="Enter username" required autofocus>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" id="email" class="form-control" 
-                       placeholder="Enter email" required>
+                <input type="email" name="email" id="email" class="form-control"
+                    placeholder="Enter email" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" id="password" class="form-control" 
-                       placeholder="Enter password (min 6 characters)" required minlength="6">
+                <input type="password" name="password" id="password" class="form-control"
+                    placeholder="Enter password (min 6 characters)" required minlength="6">
             </div>
             <button type="submit" class="btn btn-primary w-100">Create Admin Account</button>
         </form>
-        
+
         <div class="text-center mt-3">
             <a href="login.php" class="text-white">Already have an account? Login</a>
         </div>
     </div>
 </body>
-</html>
 
+</html>

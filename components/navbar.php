@@ -3,6 +3,11 @@
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
+if (!isset($_SESSION['id'])) {
+  $_SESSION['id'] = null;
+} else {
+  $_SESSION['id'] = $_SESSION['id'];
+}
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <!-- 1. Variables first -->
@@ -21,7 +26,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <div class="container-fluid">
     <!-- Logo + Title -->
     <a class="navbar-brand" href="index.php">
-      <img src="./assets/images/logo.png" alt="Logo" /> RPSU SWC
+      <img src="./assets/images/logo.png" alt="Logo" /> RPSU CLUB
     </a>
 
     <!-- Hamburger -->
@@ -59,7 +64,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             href="#"
             data-bs-toggle="dropdown">Membership</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="executivi.php">Join Us</a></li>
+            <li><a class="dropdown-item" href="executive_applications.php">Request Executive Membership</a></li>
             <li><a class="dropdown-item" href="rules.php">Benefits & Rules</a></li>
           </ul>
         </li>
@@ -173,7 +178,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
           class="accordion-collapse collapse"
           data-bs-parent="#mobileAccordion">
           <div class="accordion-body">
-            <a href="signup.php">Join Us</a>
+            <a href="executive_applications.php">Request Executive Membership</a>
             <a href="rules.php">Benefits & Rules</a>
           </div>
         </div>

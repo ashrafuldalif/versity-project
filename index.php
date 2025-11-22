@@ -32,7 +32,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RPSU SWC - Social Welfare Club</title>
+  <title>RPSU CLUB - Social Welfare Club</title>
 
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -234,9 +234,9 @@ while ($row = $upcomingsResult->fetch_assoc()) {
 
         <!-- Slide 1 -->
         <div class="swiper-slide hero-slide">
-          <img src="assets/images/aceProfile.jpg" alt="RPSU SWC Event">
+          <img src="assets/images/aceProfile.jpg" alt="RPSU CLUB Event">
           <div class="hero-content">
-            <h1>Welcome to RPSU SWC</h1>
+            <h1>Welcome to RPSU CLUB</h1>
             <p>Empowering students, transforming communities through welfare and unity</p>
             <a href="clubs.php" class="btn-hero">Explore Our Clubs</a>
           </div>
