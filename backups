@@ -1,0 +1,21 @@
+      <div class="row g-4 justify-content-center">
+          <?php if (!empty($clubs)): ?>
+              <?php foreach ($clubs as $club): ?>
+                  <div class="col-md-4 col-sm-6">
+                      <div class="club-card">
+                          <a href="clubs.php?club=<?php echo $club['id']; ?>">
+                              <img src="./assets/images/rpsubg.jpeg" alt="<?php echo htmlspecialchars($club['name']); ?>" />
+                              <div class="club-overlay">
+                                  <h5><?php echo htmlspecialchars($club['name']); ?></h5>
+                                  <p><?php echo $club['member_count']; ?> Members</p>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+              <?php endforeach; ?>
+          <?php else: ?>
+              <div class="col-12 text-center">
+                  <p class="text-muted">No clubs available at the moment.</p>
+              </div>
+          <?php endif; ?>
+      </div>

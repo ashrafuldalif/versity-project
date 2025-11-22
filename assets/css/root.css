@@ -1,0 +1,53 @@
+/* ==================== ROOT COLOR VARIABLES ==================== */
+/* assets/css/root.css – make sure these exist */
+/* ================================================= */
+/* assets/css/root.css – PROFESSIONAL LIGHT THEME   */
+/* ================================================= */
+/* ===================================================== */
+/* assets/css/root.css – PREMIUM LIGHT THEME (2025)     */
+/* #e2e2e2 and #D98324 are LOCKED – everything else tuned */
+/* ===================================================== */
+:root {
+  /* LOCKED COLORS – never change */
+  --color-primary-base:   #e2e2e2;   /* Elegant light gray – navbar, footer */
+  --color-orange:         #D98324;   /* Your signature orange – accent */
+
+  /* Supporting refined palette */
+  --color-white:          #ffffff;
+  --color-off-white:      #fafafa;
+  --color-soft-gray:      #f5f5f5;
+  --color-warm-gray:      #f8f5f0;   /* Very subtle warm tint */
+  --color-deep-gray:      #333333;   /* For body text */
+
+  /* Semantic Colors – used in all components */
+  --primary-color:        var(--color-primary-base);     /* #e2e2e2 – navbar, footer */
+  --accent-color:         var(--color-orange);           /* #D98324 – buttons, links */
+  --background-light:     var(--color-warm-gray);         /* Page background – soft warmth */
+  --background-card:      var(--color-white);             /* Cards, dropdowns, modals */
+  --text-dark:            var(--color-deep-gray);         /* Main text – excellent readability */
+  --text-light:           #ffffff;
+  --text-on-primary:      #222222;                        /* Dark text on light gray navbar */
+  --text-on-accent:       #ffffff;                        /* White text on orange */
+
+  /* Interaction States */
+  --primary-hover:        #d1d1d1;         /* Slightly darker gray on hover */
+  --accent-hover:         #e69538;         /* Brighter orange on hover */
+  --accent-active:        #c5721f;         /* Pressed state */
+
+  /* Overlays */
+  --overlay-dark:         rgba(0, 0, 0, 0.55);     /* Hero overlay */
+  --overlay-light:        rgba(255, 255, 255, 0.92);
+
+  /* Layout & Effects – premium feel */
+  --border-radius:        18px;
+  --border-radius-sm:     12px;
+  --shadow-sm:            0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-md:            0 12px 40px rgba(0, 0, 0, 0.12);
+  --shadow-lg:            0 25px 70px rgba(0, 0, 0, 0.18);
+  --transition:           all 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast:      all 0.2s ease;
+}
+main {
+  flex: 1;                  
+  margin-bottom: 2rem;
+}

@@ -1,0 +1,48 @@
+/* assets/css/footer.css */
+footer {
+    margin-top: 2rem;
+  background: var(--primary-color);
+  color: var(--text-on-dark);
+  /* flex-shrink: 0;                    Works with flex body layout */
+}
+
+footer a {
+  color: var(--text-on-dark) !important;
+  transition: var(--transition);
+}
+
+footer a:hover {
+  color: var(--accent-color) !important;
+  opacity: 0.9;
+}
+
+footer .nav-link {
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--border-radius);
+}
+
+footer .nav-link:hover {
+  background: rgba(217, 131, 36, 0.15);  /* subtle orange glow */
+  color: var(--accent-color) !important;
+}
+
+footer .social-icons a {
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+footer .social-icons a:hover {
+  background: var(--accent-color);
+  color: var(--primary-color) !important;
+  transform: translateY(-3px);
+}
+
+footer .border-top {
+  border-color: rgba(239, 220, 171, 0.3) !important;  /* cream tint */
+}
+
+footer .small {
+  opacity: 0.8;
+}
