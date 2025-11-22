@@ -3,10 +3,10 @@ session_start();
 include 'funcs/connect.php';
 
 // Fetch clubs with member counts
-$clubsQuery = "SELECT c.id, c.name, COUNT(mc.member_id) as member_count 
+$clubsQuery = "SELECT c.id, c.name, c.bgimg, COUNT(mc.member_id) as member_count 
                FROM clubs c 
                LEFT JOIN member_clubs mc ON c.id = mc.club_id 
-               GROUP BY c.id, c.name 
+               GROUP BY c.id, c.name, c.bgimg   
                ORDER BY member_count DESC, c.name ASC";
 $clubsResult = $conn->query($clubsQuery);
 $clubs = [];
@@ -45,9 +45,6 @@ while ($row = $upcomingsResult->fetch_assoc()) {
   <link rel="stylesheet" href="assets/css/clubsec.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* ========================================= */
-    /* HERO SLIDER – 100% USING :root VARIABLES  */
-    /* ========================================= */
     @import url('root.css');
     /* If you keep variables in separate file */
 
@@ -286,9 +283,11 @@ while ($row = $upcomingsResult->fetch_assoc()) {
                 <a href="clubs.php?club=<?php echo $club['id']; ?>" class="club-card-link">
                   <div class="club-card">
                     <div class="club-card-img">
-                      <img src="./assets/images/rpsubg.jpeg"
+                      <?php $temp = './assets/clubs/' . $club['bgimg'] ?>
+                      <img src="<?php echo htmlspecialchars($temp); ?>"
                         alt="<?php echo htmlspecialchars($club['name']); ?>"
                         class="img-fluid">
+
                     </div>
                     <div class="club-card-overlay">
                       <div class="overlay-content">

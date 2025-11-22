@@ -9,7 +9,7 @@ $executives = [];
 $members = [];
 if ($clubId) {
   // Fetch specific club details
-  $clubStmt = $conn->prepare("SELECT id, name FROM clubs WHERE id = ?");
+  $clubStmt = $conn->prepare("SELECT id, name, bgimg FROM clubs WHERE id = ?");
   $clubStmt->bind_param('i', $clubId);
   $clubStmt->execute();
   $clubResult = $clubStmt->get_result();
@@ -187,7 +187,7 @@ if ($clubId) {
 
   <?php if ($club != null): ?>
     <!-- Specific Club Section -->
-    <section class="club-section text-light w-100" style="background: url('./assets/images/MDL.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh; width: 100%; margin-top: 76px; position: relative; overflow-x: hidden;">
+    <section class="club-section text-light w-100" style="background: url('./assets/clubs/<?php echo htmlspecialchars($club['bgimg']); ?>') no-repeat center center fixed; background-size: cover; min-height: 100vh; width: 100%; margin-top: 76px; position: relative; overflow-x: hidden;">
       <div class="container-fluid py-5">
         <h2 class="text-center mb-5" style="font-family: 'Poppins', sans-serif; font-weight:600;"><?php echo htmlspecialchars(strtoupper($club['name'])); ?>_</h2>
 

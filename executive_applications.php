@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $position_id_int = (int)$position_id;
   $club_id_int     = (int)$club_id;
   $batch_int       = (int)$user['batch'] ?? 0;               // Safe int fallback
-  $img             = $user['img'] ?: 'defaultUser.jpg';      // No NULL
+  $img             = $user['img'] ?: 'default.jpg';      // No NULL
 
   // 10 variables → 10 type chars: i s i s s s i s i s
   $ins->bind_param(
