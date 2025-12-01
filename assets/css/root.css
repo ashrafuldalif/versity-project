@@ -1,12 +1,3 @@
-/* ==================== ROOT COLOR VARIABLES ==================== */
-/* assets/css/root.css – make sure these exist */
-/* ================================================= */
-/* assets/css/root.css – PROFESSIONAL LIGHT THEME   */
-/* ================================================= */
-/* ===================================================== */
-/* assets/css/root.css – PREMIUM LIGHT THEME (2025)     */
-/* #e2e2e2 and #D98324 are LOCKED – everything else tuned */
-/* ===================================================== */
 :root {
   /* LOCKED COLORS – never change */
   --color-primary-base:   #e2e2e2;   /* Elegant light gray – navbar, footer */

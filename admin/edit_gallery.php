@@ -464,14 +464,13 @@ $conn->close();
 
         //     container.appendChild(newrow);
 
-        //     // // Enable drag-to-reorder for the new images container
-        //     // new Sortable(document.getElementById(`images-${rowId}`), {
-        //     //     animation: 200,
-        //     //     ghostClass: 'sortable-ghost',
-        //     //     chosenClass: 'sortable-chosen'
-        //     // });
+        // Enable drag-to-reorder for the new images container
+        // new Sortable(document.getElementById(`images-${rowId}`), {
+        //     animation: 200,
+        //     ghostClass: 'sortable-ghost',
+        //     chosenClass: 'sortable-chosen'
+        // });
         // }
-
 
         let hirowId = parseInt(<?php echo (int) json_decode($histRowId) ?>);
 

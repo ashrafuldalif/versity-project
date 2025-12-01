@@ -230,6 +230,8 @@ while ($row = $rowsResult->fetch_assoc()) {
             }
         }
     </style>
+    <link rel="stylesheet" href="assets/css/nav.css">
+
 </head>
 
 <body>

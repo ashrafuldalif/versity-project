@@ -14,8 +14,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <link rel="stylesheet" href="assets/css/root.css">
 
 <!-- 2. Component styles -->
-<link rel="stylesheet" href="assets/css/footer.css">
-<link rel="stylesheet" href="assets/css/nav.css">
+<!-- <link rel="stylesheet" href="assets/css/nav.css"> -->
 <!-- add more component CSS here -->
 
 <!-- 3. Bootstrap last -->
@@ -123,6 +122,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
         <?php else: ?>
           <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="register.php">Register</a>
+          </li>
         <?php endif; ?>
       </ul>
     </div>
@@ -242,6 +244,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <a class="nav-link py-2" href="funcs/logout.php">Logout</a>
       <?php else: ?>
         <a class="nav-link py-2" href="login.php">Login</a>
+        <a class="nav-link py-2" href="register.php">Register</a>
       <?php endif; ?>
     </div>
   </div>

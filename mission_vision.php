@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +20,7 @@ session_start();
       margin-top: 76px;
       position: relative;
     }
+
     .section-title {
       text-align: center;
       margin: 50px 0 30px;
@@ -28,6 +30,7 @@ session_start();
       text-transform: uppercase;
       letter-spacing: 1px;
     }
+
     .image-container {
       width: 100%;
       border-radius: 20px;
@@ -35,16 +38,20 @@ session_start();
       margin-bottom: 40px;
       box-shadow: 0 4px 20px rgba(68, 54, 39, 0.2);
     }
+
     .image-container img {
       width: 100%;
       height: 380px;
       object-fit: cover;
     }
-    .mission, .vision {
+
+    .mission,
+    .vision {
       display: flex;
       align-items: flex-start;
       margin: 30px 0;
     }
+
     .label {
       background: var(--accent-color);
       color: var(--text-dark);
@@ -55,6 +62,7 @@ session_start();
       text-transform: capitalize;
       box-shadow: 0 2px 8px rgba(68, 54, 39, 0.2);
     }
+
     .text {
       flex: 1;
       background: var(--background-light);
@@ -63,10 +71,12 @@ session_start();
       box-shadow: 0 2px 6px rgba(68, 54, 39, 0.1);
       color: var(--text-dark);
     }
+
     .social-links {
       text-align: center;
       margin-top: 50px;
     }
+
     .social-links a {
       display: inline-flex;
       justify-content: center;
@@ -80,18 +90,20 @@ session_start();
       margin: 0 10px;
       transition: all 0.3s ease;
     }
+
     .social-links a:hover {
       background: var(--secondary-hover);
       transform: translateY(-4px);
     }
   </style>
 </head>
+
 <body>
   <?php include 'components/navbar.php'; ?>
   <div class="container py-5">
     <h2 class="section-title">Mission & Vision</h2>
     <div class="image-container">
-      <img src="./assets/images/boaProfile.jpg" alt="Mission & Vision">
+      <img src="./assets/images/bgimg2.jpeg" alt="Mission & Vision">
     </div>
     <div class="mission">
       <div class="label">Mission</div>
@@ -120,5 +132,5 @@ session_start();
   <?php include 'components/footer.php'; ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
+</html>

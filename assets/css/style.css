@@ -1,158 +1,213 @@
-/* Import root variables
 @import url('root.css');
-
-/* HERO SECTION _____________________________________ */
-
-/* Fullscreen Hero */
-.hero-section {
-  width: 100%;
-  margin-bottom: 76px; /* Adjust for fixed navbar height */
-}
-.hero-carousel {
-  height: 90vh;
-  overflow: hidden;
-}
-.hero-carousel .carousel-item {
-  height: 90vh;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-/* Overlay */
-.hero-carousel .carousel-item::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--overlay-dark);
-  z-index: 1;
-}
-
-/* Content inside */
-.carousel-caption {
-  bottom: 35%;
-  z-index: 2;
-  position: relative;
-}
-.carousel-caption h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  color: var(--text-on-dark);
-  animation: fadeInLeft 1.5s ease;
-}
-.carousel-caption p {
-  font-size: 1.25rem;
-  color: var(--text-on-dark);
-  animation: fadeInRight 1.5s ease;
-}
-.carousel-caption .btn {
-  margin-top: 15px;
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
-  color: var(--text-dark);
-  font-weight: 600;
-  animation: fadeInUp 1.5s ease;
-}
-.carousel-caption .btn:hover {
-  background-color: var(--secondary-hover);
-  border-color: var(--secondary-hover);
-}
-
-/* Keyframe animations */
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* CLUB SECTION _____________________________________ */
-.clubs-section{
-  height: 200vh;
-
-}
-
-.clubs-section h1 {
-  font-family: "Georgia", serif;
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-  color: var(--text-on-dark);
-  text-shadow: 2px 2px 4px var(--primary-color);
-  margin-bottom: 2rem;
-}
-
-.club-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 15px;
-  cursor: pointer;
-  box-shadow: 0 8px 15px rgba(68, 54, 39, 0.4);
-  margin-bottom: 1rem;
-}
-
-.club-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 15px;
-  transition: transform 0.5s ease;
-  display: block;
-}
-
-.club-card:hover img {
-  transform: scale(1.1);
-}
-
-.club-overlay {
-  position: absolute;
-  bottom: -100%;
-  left: 0;
-  right: 0;
-  background: var(--overlay-dark);
-  color: var(--text-on-dark);
-  text-align: center;
-  padding: 20px;
-  transition: all 0.5s ease;
-  z-index: 10;
-}
-
-.club-card:hover .club-overlay {
-  bottom: 0;
-}
-
-.club-overlay h5 {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-  color: var(--text-on-dark);
-}
-
-.club-overlay p {
+/* If you keep variables in separate file */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-size: 1rem;
-  color: var(--accent-color);
-} 
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html {
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto; /* Changed from scroll to auto */
+  min-height: 100vh; /* Minimum height of viewport */
+  height: auto;     /* Allow body to grow with content but not exceed it */
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide scrollbar */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure the main content container doesn't cause overflow */
+main {
+  min-height: 100vh; /* Ensures content fills at least the viewport */
+  scroll-snap-type: y mandatory;
+}
+
+/* Ensure sections don't create unwanted space */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  height: fit-content;
+  
+  /* height: 100vh; or whatever height you want for each section */
+}
+
+.void-bg{
+  height: 20rem;
+  
+}
+
+
+
+    main {
+      flex: 1;
+    }
+
+    /* Hero Container */
+    .hero-slider {
+      margin-top: 4rem;
+      height: calc(100vh - 4rem);
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Each Slide */
+    .hero-slide {
+      position: relative;
+    }
+
+    .hero-slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--overlay-dark);
+      z-index: 1;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Text Content */
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      color: var(--text-on-dark);
+      width: 90%;
+      max-width: 1000px;
+      padding: 2rem;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 900;
+      color: var(--accent-color);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .hero-content p {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      margin-bottom: 2rem;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      color: #fff;
+      opacity: 0.95;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 700s;
+    }
+
+    /* CTA Button – fully using root vars */
+    .btn-hero {
+      background: var(--accent-color);
+      color: var(--text-dark);
+      padding: 1.1rem 3rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-radius: 50px;
+      border: none;
+      transition: var(--transition, all 0.4s ease);
+      box-shadow: 0 10px 30px rgba(217, 131, 36, 0.4);
+      /* fallback if no variable */
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .btn-hero:hover {
+      background: var(--secondary-hover, #e69538);
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(217, 131, 36, 0.6);
+      color: var(--text-dark);
+    }
+
+    /* Swiper Navigation Arrows – 100% root variables */
+    .swiper-button-next,
+    .swiper-button-prev {
+      width: 60px !important;
+      height: 60px !important;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      backdrop-filter: blur(12px);
+      color: var(--accent-color) !important;
+      z-index: 20 !important;
+      transition: var(--transition, all 0.4s ease);
+      margin-top: -30px !important;
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+      background: var(--accent-color);
+      color: white !important;
+      transform: scale(1.15);
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      font-size: 2rem !important;
+      font-weight: bold !important;
+    }
+
+    /* Pagination Bullets */
+    .swiper-pagination {
+      bottom: 30px !important;
+      z-index: 15 !important;
+    }
+
+    .swiper-pagination-bullet {
+      width: 14px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.6);
+      opacity: 1;
+      transition: all 0.3s;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--accent-color);
+      transform: scale(1.4);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .btn-hero {
+        padding: 0.9rem 2.2rem;
+        font-size: 1.1rem;
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        width: 50px !important;
+        height: 50px !important;
+      }
+
+      .swiper-button-next::after,
+      .swiper-button-prev::after {
+        font-size: 1.6rem !important;
+      }
+    }

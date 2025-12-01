@@ -57,15 +57,6 @@ if ($clubId) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/root.css">
   <style>
-    html,
-    body {
-      height: 100%;
-      background-color: var(--background-light);
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-
     .members-container {
       display: flex;
       gap: 2rem;
@@ -180,6 +171,13 @@ if ($clubId) {
       }
     }
   </style>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/clubsec.css">
+
+
+
 </head>
 
 <body>
@@ -187,7 +185,7 @@ if ($clubId) {
 
   <?php if ($club != null): ?>
     <!-- Specific Club Section -->
-    <section class="club-section text-light w-100" style="background: url('./assets/clubs/<?php echo htmlspecialchars($club['bgimg']); ?>') no-repeat center center fixed; background-size: cover; min-height: 100vh; width: 100%; margin-top: 76px; position: relative; overflow-x: hidden;">
+    <section class="club-section text-light w-100 mt-5" style="background: url('./assets/clubs/<?php echo htmlspecialchars($club['bgimg']); ?>') no-repeat center center fixed; background-size: cover; min-height: 100vh; width: 100%; margin-top: 76px; position: relative; overflow-x: hidden;">
       <div class="container-fluid py-5">
         <h2 class="text-center mb-5" style="font-family: 'Poppins', sans-serif; font-weight:600;"><?php echo htmlspecialchars(strtoupper($club['name'])); ?>_</h2>
 
@@ -257,30 +255,59 @@ if ($clubId) {
     </div>
   <?php else: ?>
     <!-- All Clubs List -->
-    <div class="container py-5" style="margin-top: 76px;">
-      <h1 class="text-center mb-5">All Clubs</h1>
-      <div class="row g-4">
-        <?php
-        $allClubsQuery = "SELECT c.id, c.name, COUNT(mc.member_id) as member_count 
-                         FROM clubs c 
-                         LEFT JOIN member_clubs mc ON c.id = mc.club_id 
-                         GROUP BY c.id, c.name 
-                         ORDER BY member_count DESC, c.name ASC";
-        $allClubsResult = $conn->query($allClubsQuery);
-        while ($clubRow = $allClubsResult->fetch_assoc()):
-        ?>
-          <div class="col-md-4 col-sm-6">
-            <div class="card" style="background:var(--background-light); border-color:var(--accent-color);">
-              <div class="card-body text-center">
-                <h5 class="card-title" style="color:var(--primary-color);"><?php echo htmlspecialchars($clubRow['name']); ?></h5>
-                <p class="card-text" style="color:var(--text-dark);"><?php echo $clubRow['member_count']; ?> Members</p>
-                <a href="clubs.php?club=<?php echo $clubRow['id']; ?>" class="btn" style="background:var(--accent-color); color:var(--text-dark); border:none;">View Club</a>
+    <?php
+    $clubsQuery = "SELECT c.id, c.name, c.bgimg, COUNT(mc.member_id) as member_count 
+               FROM clubs c 
+               LEFT JOIN member_clubs mc ON c.id = mc.club_id 
+               GROUP BY c.id, c.name, c.bgimg   
+               ORDER BY member_count DESC, c.name ASC";
+    $clubsResult = $conn->query($clubsQuery);
+    $clubs = [];
+    while ($row = $clubsResult->fetch_assoc()) {
+      $clubs[] = $row;
+    }
+
+    ?>
+    <section class="clubs-section py-5 mt-5">
+      <div class="container">
+        <h1 class="section-title">Our Clubs</h1>
+        <p class="text-center text-muted my-5 lead ">Discover communities that inspire growth, passion, and impact</p>
+
+        <div class="row g-4 g-xl-5 justify-content-center">
+          <?php if (!empty($clubs)): ?>
+            <?php foreach ($clubs as $club): ?>
+              <div class="col-lg-4 col-md-6 col-sm-8">
+                <a href="clubs.php?club=<?php echo $club['id']; ?>" class="club-card-link">
+                  <div class="club-card">
+                    <div class="club-card-img">
+                      <?php $temp = './assets/clubs/' . $club['bgimg'] ?>
+                      <img src="<?php echo htmlspecialchars($temp); ?>"
+                        alt="<?php echo htmlspecialchars($club['name']); ?>"
+                        class="img-fluid">
+
+                    </div>
+                    <div class="club-card-overlay">
+                      <div class="overlay-content">
+                        <h3 class="club-name"><?php echo htmlspecialchars($club['name']); ?></h3>
+                        <p class="club-members">
+                          <i class="bi bi-people-fill me-2"></i>
+                          <?php echo $club['member_count']; ?> Members
+                        </p>
+                        <span class="view-club">View Club →</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
               </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <div class="col-12 text-center py-5">
+              <p class="text-muted fs-4">No clubs available at the moment.</p>
             </div>
-          </div>
-        <?php endwhile; ?>
+          <?php endif; ?>
+        </div>
       </div>
-    </div>
+    </section>
   <?php endif; ?>
 
   <?php include 'components/footer.php'; ?>
