@@ -1,0 +1,28 @@
+.cards {
+      width: 250px;
+      height: 490px;
+    }
+
+  .cards  .swiper-slide {
+      border-radius: 22px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%; /* or a fixed height like 200px */
+}
+/* Phone screens */
+@media (max-width: 576px) {
+
+  /* RIGHT DIV — takes 80% width */
+  .mobile-80 {
+    width: 80% !important;
+    margin: 0 auto !important; /* centers it */
+  }
+
+  /* LEFT DIV — full width with 20% margin equally */
+  .mobile-full {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

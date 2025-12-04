@@ -50,7 +50,8 @@ while ($row = $upcomingsResult->fetch_assoc()) {
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/clubsec.css">
   <link rel="stylesheet" href="assets/css/nav.css?v=<?php echo time(); ?>">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/execuSec.css?v=<?php echo time(); ?>">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet"> -->
 
 </head>
 
@@ -151,7 +152,41 @@ while ($row = $upcomingsResult->fetch_assoc()) {
       </div>
     </section>
 
+    <div class="void-bg" style="background-image: url(./assets/images/saboProfile.jpg);">
 
+    </div>
+    <section class="py-5 container-fluid">
+      <h1 class="section-title">Executives</h1>
+      <p class="text-center text-muted mb-5 lead">chomu people doint shiti things </p>
+      <div class="imgCont ">
+        <div class="mx-5 row g-4 flex-column-reverse flex-lg-row">
+
+          <!-- LEFT (comes bottom on phone) -->
+          <div class="col-12 col-lg-7 bg-danger mobile-full">
+          </div>
+
+          <!-- RIGHT (comes top on phone) -->
+          <div class="cards col-12 col-lg-4 ms-lg-auto mobile-80">
+            <div class="swiper-wrapper">
+
+              <div class="swiper-slide" style="background-image: url('./assets/images/luffyProfile.jpg');"></div>
+              <div class="swiper-slide" style="background-image: url('./assets/images/saboProfile.jpg');"></div>
+              <div class="swiper-slide" style="background-image: url('./assets/images/aceProfile.jpg');"></div>
+              <div class="swiper-slide" style="background-image: url('./assets/images/namiProfile.jpg');"></div>
+              <div class="swiper-slide" style="background-image: url('./assets/images/boaProfile.jpg');"></div>
+              <div class="swiper-slide" style="background-image: url('./assets/images/moneyProfile.jpg');"></div>
+              <div class="swiper-slide" style="background-image: url('./assets/images/MDL.jpg');"></div>
+              <div class="swiper-slide" style="background-image: url('./assets/images/mikasaProfile.jpg');"></div>
+              <div class="swiper-slide" style="background-image: url('./assets/images/MIKASA.jpg');"></div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
   </main>
 
   <?php include 'components/footer.php'; ?>
@@ -163,7 +198,43 @@ while ($row = $upcomingsResult->fetch_assoc()) {
   <!-- Swiper.js JS -->
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".cards", {
+      effect: "cards",
+      grabCursor: true,
+      // Add autoplay
+      autoplay: {
+        delay: 4500, // 2.5 seconds between slides
+        disableOnInteraction: false, // Keep autoplay running after manual interaction
+      },
+      loop: true, // Enable infinite loop
+    });
 
+    // Pause on mouse enter, resume on mouse leave
+    const swiperContainer = document.querySelector('.cards');
+
+    swiperContainer.addEventListener('mouseenter', () => {
+      swiper.autoplay.stop();
+    });
+
+    swiperContainer.addEventListener('mouseleave', () => {
+      swiper.autoplay.start();
+    });
+
+    // Also pause on touch/drag (mobile)
+    swiper.on('touchStart', () => {
+      swiper.autoplay.stop();
+    });
+
+    swiper.on('touchEnd', () => {
+      // Resume after 3 seconds of no interaction
+      setTimeout(() => {
+        swiper.autoplay.start();
+
+      }, 3000);
+    });
+  </script>
   <script>
     // Initialize Swiper AFTER everything loads
     document.addEventListener('DOMContentLoaded', function() {

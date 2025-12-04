@@ -39,7 +39,7 @@ main {
   
 }
 .void-bg{
-  
+  height: 18rem;
 background-position:   center;           /* or center center */
 background-size:       cover;
 background-repeat:     no-repeat;

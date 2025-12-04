@@ -1,0 +1,239 @@
+body {
+  overflow-x: hidden;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  padding: clamp(10px, 2vw, 20px);
+}
+
+.form-container {
+  background: var(--background-light);
+  border-radius: clamp(15px, 3vw, 20px);
+  box-shadow: 0 8px 25px rgba(68, 54, 39, 0.3);
+  width: 100%;
+  max-width: clamp(320px, 95vw, 600px);
+  max-height: 95vh;
+  padding: clamp(15px, 3vw, 40px) clamp(12px, 2.5vw, 35px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow-y: auto;
+  margin: auto;
+}
+
+.form-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(68, 54, 39, 0.4);
+}
+
+.form-container h2 {
+  text-align: center;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: clamp(15px, 3vw, 25px);
+  font-size: clamp(1.1rem, 3.5vw, 1.75rem);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--text-dark);
+  font-size: clamp(0.75rem, 1.8vw, 1rem);
+  margin-bottom: clamp(4px, 1vw, 8px);
+}
+
+.form-control,
+.form-select {
+  border-radius: clamp(8px, 2vw, 12px);
+  padding: clamp(6px, 1.5vw, 12px) clamp(8px, 1.5vw, 14px);
+  border: 1.5px solid var(--accent-color);
+  transition: all 0.3s ease;
+  font-size: clamp(0.75rem, 1.8vw, 1rem);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 5px rgba(217, 131, 36, 0.5);
+}
+
+.btn-custom {
+  background: var(--accent-color);
+  color: var(--text-dark);
+  font-weight: 600;
+  border: none;
+  border-radius: clamp(8px, 2vw, 12px);
+  padding: clamp(8px, 2vw, 12px) clamp(10px, 2vw, 15px);
+  width: 100%;
+  transition: all 0.3s ease;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  margin-top: clamp(10px, 2vw, 15px);
+}
+
+.btn-custom:hover {
+  background: var(--secondary-hover);
+  transform: scale(1.03);
+}
+
+.form-text {
+  text-align: center;
+  color: var(--text-dark);
+  font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+  margin-top: clamp(8px, 2vw, 10px);
+}
+
+.alert {
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  padding: clamp(8px, 2vw, 12px);
+  margin-bottom: clamp(12px, 2.5vw, 20px);
+  border-radius: clamp(8px, 2vw, 10px);
+}
+
+.chips {
+  background-color: var(--accent-color);
+  font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+  padding: clamp(5px, 1.2vw, 8px) clamp(8px, 1.8vw, 12px) !important;
+}
+
+.club-checkbox {
+  accent-color: green;
+  width: clamp(14px, 2.5vw, 20px);
+  height: clamp(14px, 2.5vw, 20px);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.dropdown-menu {
+  max-height: clamp(200px, 40vh, 300px) !important;
+  overflow-y: auto;
+  border-radius: clamp(8px, 2vw, 12px);
+  font-size: clamp(0.75rem, 1.8vw, 1rem);
+}
+
+.dropdown-menu li:nth-child(even) .form-check {
+  background-color: rgb(252, 255, 239);
+}
+
+.form-check {
+  padding: clamp(6px, 1.5vw, 12px) clamp(8px, 1.8vw, 16px);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-check:hover {
+  background-color: rgba(217, 131, 36, 0.1);
+}
+
+.form-check-label {
+  font-size: clamp(0.75rem, 1.8vw, 1rem);
+  cursor: pointer;
+}
+
+.btn-close {
+  font-size: clamp(0.55em, 1.2vw, 0.7em) !important;
+}
+
+/* Row spacing adjustments */
+.row.mb-3 {
+  margin-bottom: clamp(10px, 2vw, 16px) !important;
+}
+
+.mb-3 {
+  margin-bottom: clamp(10px, 2vw, 16px) !important;
+}
+
+/* IMPORTANT: Keep 2-column layout on ALL screens */
+.row > .col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding-right: clamp(4px, 1vw, 12px);
+  padding-left: clamp(4px, 1vw, 12px);
+}
+
+/* Adjust column gap for very small screens */
+@media (max-width: 400px) {
+  .row > .col-md-6 {
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+  
+  .row {
+    margin-right: -4px;
+    margin-left: -4px;
+  }
+}
+
+/* Scrollbar styling for form container */
+.form-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.form-container::-webkit-scrollbar-track {
+  background: rgba(217, 131, 36, 0.1);
+  border-radius: 10px;
+}
+
+.form-container::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 10px;
+}
+
+.form-container::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-hover);
+}
+
+/* Mobile-specific adjustments - KEEP 2 COLUMNS */
+@media (max-width: 576px) {
+  body {
+    padding: 8px;
+    align-items: flex-start;
+    padding-top: 15px;
+  }
+
+  .form-container {
+    max-height: none;
+    min-height: auto;
+    padding: clamp(12px, 3vw, 20px) clamp(10px, 2.5vw, 15px);
+  }
+  
+  /* Ensure rows stay as 2 columns */
+  .row > .col-md-6 {
+    margin-bottom: 8px;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 360px) {
+  .form-container h2 {
+    font-size: 1rem;
+  }
+  
+  .form-label {
+    font-size: 0.7rem;
+  }
+  
+  .form-control,
+  .form-select {
+    font-size: 0.7rem;
+    padding: 5px 7px;
+  }
+}
+
+/* Tablet adjustments - KEEP 2 COLUMNS */
+@media (min-width: 577px) and (max-width: 768px) {
+  .form-container {
+    max-width: 85vw;
+  }
+}
+
+/* Desktop adjustments */
+@media (min-width: 769px) {
+  .form-container {
+    max-width: 600px;
+  }
+  
+  .row > .col-md-6 {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+}

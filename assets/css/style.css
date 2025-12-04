@@ -6,26 +6,21 @@
   padding: 0;
 }
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+  position: relative;
+  overscroll-behavior: none;
+  overscroll-behavior-inline: none;
+  overflow: hidden;
+  scroll-margin: 0;
   overflow-x: hidden;
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
 }
-
-html {
-  scroll-snap-type: y mandatory;
-}
-
-body {
+body{
   scroll-snap-type: y mandatory;
   overflow-y: auto; /* Changed from scroll to auto */
   min-height: 100vh; /* Minimum height of viewport */
   height: auto;     /* Allow body to grow with content but not exceed it */
-  margin: 0;
-  padding: 0;
 }
 
 /* Hide scrollbar */
@@ -35,7 +30,8 @@ body::-webkit-scrollbar {
 
 /* Ensure the main content container doesn't cause overflow */
 main {
-  min-height: 100vh; /* Ensures content fills at least the viewport */
+  background: blue;
+
   scroll-snap-type: y mandatory;
 }
 
@@ -47,18 +43,21 @@ section {
   
   /* height: 100vh; or whatever height you want for each section */
 }
-
-.void-bg{
-  height: 20rem;
+ .sub-section {
   
+  padding: 6rem 0;
+  background: linear-gradient(to bottom, var(--background-light), #fdfcf9);
 }
 
-
-
-    main {
-      flex: 1;
-    }
-
+.section-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  text-align: center;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  position: relative;
+}
     /* Hero Container */
     .hero-slider {
       margin-top: 4rem;

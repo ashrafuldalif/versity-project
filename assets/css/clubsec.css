@@ -3,21 +3,7 @@
 /* Uses only :root variables                 */
 /* ========================================= */
 
- .clubs-section {
-  
-  padding: 6rem 0;
-  background: linear-gradient(to bottom, var(--background-light), #fdfcf9);
-}
 
-.section-title {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 800;
-  text-align: center;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
-  position: relative;
-}
 
 .section-title::after {
   content: '';

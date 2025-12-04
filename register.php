@@ -28,10 +28,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
   // === VALIDATION ===
   if (!$mail) {
     $error = 'Invalid email address.';
-  }elseif ($email && !str_ends_with($mail, '@rpsu.edu.bd')) {
+  } elseif ($email && !str_ends_with($mail, '@rpsu.edu.bd')) {
     $error = "must use student email address.";
-  }
-  elseif (
+  } elseif (
     empty($inputs['name']) || $stdId <= 0 || $batch < 1 || $batch > 31 ||
     empty($inputs['department']) || empty($inputs['phone']) ||
     empty($inputs['bloodGroup']) || empty($inputs['password']) ||
@@ -85,7 +84,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     }
     $check->close();
   }
-  } else {
+} else {
   // Default empty values when page first loads
   $inputs = [
     'name' => '',
@@ -117,89 +116,8 @@ while ($row = $clubsResult->fetch_assoc()) {
   <title>Student Registration</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/root.css">
-  <style>
-    body {
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Poppins', sans-serif;
-    }
+  <link rel="stylesheet" href="assets/css/register.css">
 
-    .form-container {
-      background: var(--background-light);
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(68, 54, 39, 0.3);
-      width: 100%;
-      max-width: 600px;
-      padding: 35px 40px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .form-container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 35px rgba(68, 54, 39, 0.4);
-    }
-
-    .form-container h2 {
-      text-align: center;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 25px;
-    }
-
-    .form-label {
-      font-weight: 500;
-      color: var(--text-dark);
-    }
-
-    .form-control,
-    .form-select {
-      border-radius: 12px;
-      padding: 10px 14px;
-      border: 1.5px solid var(--accent-color);
-      transition: all 0.3s ease;
-    }
-
-    .form-control:focus,
-    .form-select:focus {
-      border-color: var(--accent-color);
-      box-shadow: 0 0 5px rgba(217, 131, 36, 0.5);
-    }
-
-    .btn-custom {
-      background: var(--accent-color);
-      color: var(--text-dark);
-      font-weight: 600;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 15px;
-      width: 100%;
-      transition: all 0.3s ease;
-    }
-
-    .btn-custom:hover {
-      background: var(--secondary-hover);
-      transform: scale(1.03);
-    }
-
-    .form-text {
-      text-align: center;
-      color: var(--text-dark);
-      font-size: 0.9rem;
-      margin-top: 10px;
-    }
-
-    .text-danger {
-      font-size: 0.875rem;
-      text-align: center;
-      margin-top: 10px;
-    }
-  </style>
 </head>
 
 <body>
@@ -298,27 +216,56 @@ while ($row = $clubsResult->fetch_assoc()) {
         </div>
       </div>
 
-   <!-- Clubs Selection (Multiple) -->
-   <div class="mb-3">
+      <!-- Clubs Selection (Multiple) -->
+      <!-- 1. Replace your entire select block with this clean version -->
+      <div class="mb-3">
         <label class="form-label">Select Clubs (You can choose multiple)</label>
-        <div class="row">
-          <?php foreach ($clubs as $club): ?>
-            
-            <div class="col-md-6 mb-2">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="clubs[]" value="<?php echo $club['id']; ?>" 
-                       id="club_<?php echo $club['id']; ?>"
-                       <?php echo in_array($club['id'], $inputs['clubs']) ? 'checked' : ''; ?>>
-                <label class="form-check-label" for="club_<?php echo $club['id']; ?>">
-                  <?php echo htmlspecialchars($club['name']); ?>
-                </label>
-              </div>
-            </div>
+
+        <!-- This is the fake select that looks exactly like form-select -->
+        <div class="dropdown">
+          <button class="form-select text-start d-flex justify-content-between align-items-center"
+            type="button"
+            data-bs-toggle="dropdown"
+            data-bs-auto-close="outside"
+            aria-expanded="false"
+            id="clubsDropdownBtn">
+            <span id="clubsText" class="text-muted">Click to select clubs...</span>
+            <span class="ms-3"></span>
+          </button>
+
+          <!-- Dropdown list with checkboxes -->
+          <ul class="dropdown-menu w-100 px-2" style="max-height: 300px; overflow-y: auto;">
+            <?php foreach ($clubs as $club): ?>
+              <li>
+                <div class="form-check d-flex align-items-center gap-3 px-4 border-bottom h-auto justify-content-start ">
+                  <input class=" club-checkbox"
+                    type="checkbox"
+                    value="<?= $club['id'] ?>"
+                    id="club_<?= $club['id'] ?>"
+                    <?= in_array($club['id'], $inputs['clubs'] ?? []) ? 'checked' : '' ?>
+                    onchange="updateClubsDisplay()">
+                  <label class="form-check-label w-100 py-2" for="club_<?= $club['id'] ?>">
+                    <?= htmlspecialchars($club['name']) ?>
+                  </label>
+                </div>
+              </li>
+            <?php endforeach; ?>
+
+            <?php if (empty($clubs)): ?>
+              <li class="dropdown-item text-muted small">No clubs available</li>
+            <?php endif; ?>
+          </ul>
+        </div>
+
+        <!-- Selected chips (shown below) -->
+        <div id="selected-clubs-display" class="mt-3"></div>
+
+        <!-- Hidden inputs so form submits correctly -->
+        <div id="hidden-clubs-inputs" class="d-none">
+          <?php foreach ($inputs['clubs'] ?? [] as $id): ?>
+            <input type="hidden" name="clubs[]" value="<?= $id ?>">
           <?php endforeach; ?>
         </div>
-        <?php if (empty($clubs)): ?>
-          <p class="text-muted small">No clubs available. Please contact administrator.</p>
-        <?php endif; ?>
       </div>
       <!-- Password + Confirm Password -->
       <div class="row mb-3">
@@ -332,14 +279,85 @@ while ($row = $clubsResult->fetch_assoc()) {
         </div>
       </div>
 
-   
+
 
       <button type="submit" name="submit" class="btn btn-custom">Register Now</button>
       <p class="form-text">Already have an account? <a href="login.php" style="color:var(--accent-color); text-decoration:none; font-weight:600;">Login here</a></p>
     </form>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- 2. Add this tiny script at the bottom (before </body>) -->
+  <script>
+    function updateClubsDisplay() {
+      const checkedBoxes = document.querySelectorAll('.club-checkbox:checked');
+      const display = document.getElementById('selected-clubs-display');
+      const hiddenContainer = document.getElementById('hidden-clubs-inputs');
+      const btnText = document.getElementById('clubsText');
 
-  <script src="http://localhost:35729/livereload.js"></script>
+      // Update button text
+      if (checkedBoxes.length === 0) {
+        btnText.textContent = 'Click to select clubs...';
+        btnText.classList.add('text-muted');
+      } else {
+        btnText.textContent = `${checkedBoxes.length} club${checkedBoxes.length > 1 ? 's' : ''} selected`;
+        btnText.classList.remove('text-muted');
+      }
+
+      // Rebuild chips + hidden inputs
+      display.innerHTML = '';
+      hiddenContainer.innerHTML = '';
+
+      checkedBoxes.forEach(cb => {
+        const id = cb.value;
+        const name = cb.nextElementSibling.textContent.trim();
+
+        const badge = document.createElement('span');
+        badge.className = 'badge chips rounded-pill me-2 mb-2 py-2 px-3';
+        badge.innerHTML = `
+        ${name}
+        <button type="button" class="btn-close btn-close-white ms-2" style="font-size:0.7em;"
+                onclick="unselectClub(${id})"></button>
+      `;
+        display.appendChild(badge);
+
+        hiddenContainer.innerHTML += `<input type="hidden" name="clubs[]" value="${id}">`;
+      });
+    }
+
+    function unselectClub(id) {
+      const cb = document.getElementById('club_' + id);
+      if (cb) {
+        cb.checked = false;
+        updateClubsDisplay();
+      }
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      updateClubsDisplay();
+
+      // Make sure Bootstrap is loaded
+      if (typeof bootstrap === 'undefined') {
+        console.error('Bootstrap is not loaded!');
+        return;
+      }
+
+      const dropdownBtn = document.getElementById('clubsDropdownBtn');
+
+      // Initialize dropdown manually if needed
+      if (dropdownBtn && !bootstrap.Dropdown.getInstance(dropdownBtn)) {
+        new bootstrap.Dropdown(dropdownBtn);
+      }
+
+      // Prevent dropdown from closing when clicking inside
+      const dropdownMenu = dropdownBtn.nextElementSibling;
+      if (dropdownMenu) {
+        dropdownMenu.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
