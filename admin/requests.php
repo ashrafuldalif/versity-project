@@ -2,48 +2,31 @@
 // Security check - must be logged in as admin
 require_once __DIR__ . '/../funcs/check_admin.php';
 include __DIR__ . '/../funcs/connect.php';
+require_once __DIR__ . '/../funcs/admin_functions.php';
+
+session_start();
 
 /* ------------------------------
    APPROVE / UNAPPROVE TOGGLE
 --------------------------------*/
 if (isset($_GET['toggle_approve'])) {
-    $id = (int)$_GET['toggle_approve'];
-    $conn->query("UPDATE executives SET approved = NOT approved WHERE id = $id");
-    // After approving, send admin to the executives list so approved entries are visible there
-    header("Location: executives.php");
-    exit;
+    toggleExecutiveApproval($conn, $_GET['toggle_approve']);
+    redirectWithMessage('executives.php', 'Executive approval status updated!');
 }
 
 /* ------------------------------
    DELETE REQUEST
 --------------------------------*/
 if (isset($_GET['delete_id'])) {
-    $did = (int)$_GET['delete_id'];
-    $del = $conn->prepare("DELETE FROM executives WHERE id = ?");
-    if ($del) {
-        $del->bind_param('i', $did);
-        $del->execute();
-        $del->close();
-    }
-    header("Location: requests.php");
-    exit;
+    deleteExecutive($conn, $_GET['delete_id']);
+    redirectWithMessage('requests.php', 'Executive request deleted successfully!');
 }
 
 /* ------------------------------
-   FETCH EXECUTIVES
+   FETCH PENDING EXECUTIVES
 --------------------------------*/
-$sql = "
-SELECT e.id, e.name, e.email, e.approved,
-       c.name AS club_name,
-       p.position_name
-FROM executives e
-LEFT JOIN clubs c ON e.club_id = c.id
-LEFT JOIN positions p ON e.position_id = p.id
-WHERE e.approved = 0
-ORDER BY e.id DESC
-";
-
-$executives = $conn->query($sql);
+$executives_result = getPendingExecutives($conn);
+$executives = new ArrayIterator($executives_result);
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +79,7 @@ $executives = $conn->query($sql);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($row = $executives->fetch_assoc()): ?>
+                        <?php foreach ($executives_result as $row): ?>
                             <tr class="<?= !$row['approved'] ? '' : 'unAproved-row  table-warning' ?>">
                                 <td><?= $row['id'] ?></td>
                                 <td><?= htmlspecialchars($row['name']) ?></td>
@@ -114,14 +97,14 @@ $executives = $conn->query($sql);
                                     <a href="?delete_id=<?= $row['id'] ?>" class="btn btn-sm btn-danger ms-2" onclick="return confirm('Delete this request? This cannot be undone.');">Delete</a>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <?php if ($executives->num_rows == 0): ?>
-            <div class="alert alert-info mt-4">No executives found.</div>
+        <?php if (empty($executives_result)): ?>
+            <div class="alert alert-info mt-4">No pending executive requests found.</div>
         <?php endif; ?>
 
     </div>

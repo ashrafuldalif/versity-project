@@ -54,7 +54,7 @@ session_start();
 
     .label {
       background: var(--accent-color);
-      color: var(--text-dark);
+      color: var(--text-primary);
       padding: 10px 25px;
       border-radius: 20px;
       margin-right: 20px;
@@ -69,7 +69,7 @@ session_start();
       padding: 15px 20px;
       border-radius: 15px;
       box-shadow: 0 2px 6px rgba(68, 54, 39, 0.1);
-      color: var(--text-dark);
+      color: var(--text-primary);
     }
 
     .social-links {
@@ -85,7 +85,7 @@ session_start();
       height: 45px;
       border-radius: 50%;
       background: var(--accent-color);
-      color: var(--text-dark);
+      color: var(--text-primary);
       font-size: 1.2rem;
       margin: 0 10px;
       transition: all 0.3s ease;

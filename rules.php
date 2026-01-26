@@ -4,6 +4,7 @@ include 'components/navbar.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,9 @@ include 'components/navbar.php';
       background-color: var(--background-light);
       overflow-x: hidden;
       position: relative;
+      color: var(--text-primary);
     }
+
     .header-image {
       background: linear-gradient(to right, var(--primary-color), var(--accent-color));
       height: 240px;
@@ -29,22 +32,59 @@ include 'components/navbar.php';
       margin-top: 76px;
       position: relative;
     }
+
     .card-custom {
       border: none;
       border-radius: 12px;
       transition: all 0.3s ease;
       box-shadow: 0 2px 8px rgba(68, 54, 39, 0.1);
-      background-color: var(--background-light);
+      background-color: var(--background-card);
     }
+
     .card-custom:hover {
       transform: translateY(-5px);
       box-shadow: 0 6px 16px rgba(68, 54, 39, 0.2);
     }
+
     .card-custom i {
       color: var(--accent-color);
     }
+
+    .card-custom .card-body {
+      color: var(--text-primary);
+    }
+
+    .card-custom .card-title {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .card-custom .card-text {
+      color: var(--text-secondary);
+    }
+
+    .text-muted {
+      color: var(--text-muted) !important;
+    }
+
+    h2,
+    h5 {
+      color: var(--text-primary);
+    }
+
+    .card.shadow-sm {
+      background-color: var(--background-card);
+      color: var(--text-primary);
+    }
+
+    .list-group-item {
+      background-color: transparent;
+      color: var(--text-secondary);
+      border-color: var(--glass-border);
+    }
   </style>
 </head>
+
 <body>
   <header class="header-image">
     <div>
@@ -166,5 +206,5 @@ include 'components/navbar.php';
   <?php include 'components/footer.php'; ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
+</html>

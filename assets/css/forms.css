@@ -1,0 +1,213 @@
+/* ============================================= */
+/*     CONSOLIDATED FORM STYLES                  */
+/*  Standard form elements across the app        */
+/* ============================================= */
+@import url('root.css');
+
+/* Form Container */
+.form-container-standard {
+  background: var(--background-card);
+  border-radius: var(--border-radius-2xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-2xl);
+  transition: var(--transition-normal);
+  border: var(--card-border);
+}
+
+.form-container-standard:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-4px);
+}
+
+/* Form Labels */
+.form-label-standard {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+/* Form Inputs */
+.form-control-standard,
+.form-select-standard,
+textarea.form-control-standard {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  background: var(--background-light);
+  color: var(--text-primary);
+  transition: var(--transition-normal);
+}
+
+.form-control-standard:focus,
+.form-select-standard:focus,
+textarea.form-control-standard:focus {
+  border-color: var(--form-border-focus);
+  box-shadow: var(--form-shadow-focus);
+  outline: none;
+  background: var(--background-card);
+}
+
+.form-control-standard::placeholder {
+  color: var(--text-muted);
+}
+
+/* Form Group */
+.form-group-standard {
+  margin-bottom: var(--space-lg);
+}
+
+.form-group-standard:last-child {
+  margin-bottom: 0;
+}
+
+/* Form Buttons */
+.btn-form-submit,
+.btn-form-secondary {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  border: none;
+  border-radius: var(--border-radius-lg);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-primary);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  margin-top: var(--space-lg);
+}
+
+.btn-form-submit {
+  background: var(--accent-color);
+  color: var(--text-on-accent);
+}
+
+.btn-form-submit:hover {
+  background: var(--accent-hover);
+  transform: scale(1.02);
+}
+
+.btn-form-secondary {
+  background: var(--background-section);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+}
+
+.btn-form-secondary:hover {
+  background: var(--background-light);
+  border-color: var(--accent-color);
+}
+
+/* Form Text Help */
+.form-text-standard {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-sm);
+  display: block;
+}
+
+/* Form Alert */
+.form-alert {
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-size-base);
+  border-left: 4px solid var(--accent-color);
+}
+
+.form-alert.alert-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+  border-left-color: var(--color-success);
+}
+
+.form-alert.alert-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--color-warning);
+  border-left-color: var(--color-warning);
+}
+
+.form-alert.alert-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+  border-left-color: var(--color-danger);
+}
+
+.form-alert.alert-info {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-info);
+  border-left-color: var(--color-info);
+}
+
+/* Form Chips (for multi-select tags) */
+.form-chips {
+  background: var(--accent-color);
+  color: var(--text-on-accent);
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  margin: var(--space-xs);
+}
+
+.form-chips .close {
+  margin-left: var(--space-xs);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Form Checkbox & Radio */
+.form-checkbox,
+.form-radio {
+  accent-color: var(--accent-color);
+  margin-right: var(--space-md);
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.form-check label {
+  margin: 0;
+  margin-left: var(--space-md);
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+/* Responsive Forms */
+@media (max-width: 768px) {
+  .form-container-standard {
+    padding: var(--space-lg);
+  }
+
+  .form-control-standard,
+  .form-select-standard {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+@media (max-width: 576px) {
+  .form-container-standard {
+    padding: var(--space-md);
+  }
+
+  .form-label-standard {
+    font-size: var(--font-size-sm);
+  }
+
+  .form-control-standard,
+  .form-select-standard,
+  .btn-form-submit,
+  .btn-form-secondary {
+    padding: var(--space-md);
+    font-size: var(--font-size-sm);
+  }
+}

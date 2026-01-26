@@ -1,9 +1,11 @@
+@import url('root.css');
 
 h3 {
 margin-left: 2%;
 margin-top: 1rem;
 font-weight: 600;
 color: var(--primary-color);
+font-family: var(--font-family-primary);
 }
 
 .slider-section {

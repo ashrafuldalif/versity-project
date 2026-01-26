@@ -9,10 +9,14 @@ $clubsQuery = "SELECT c.id, c.name, c.bgimg, COUNT(mc.member_id) as member_count
                GROUP BY c.id, c.name, c.bgimg   
                ORDER BY member_count DESC, c.name ASC
                LIMIT 3";
-$clubsResult = $conn->query($clubsQuery);
 $clubs = [];
-while ($row = $clubsResult->fetch_assoc()) {
-  $clubs[] = $row;
+if ($conn) {
+  $clubsResult = $conn->query($clubsQuery);
+  if ($clubsResult) {
+    while ($row = $clubsResult->fetch_assoc()) {
+      $clubs[] = $row;
+    }
+  }
 }
 
 // Fetch active upcoming events for carousel
@@ -21,10 +25,14 @@ $upcomingsQuery = "SELECT heading, content, image, image_side
                    WHERE is_active = 1 
                    ORDER BY id DESC 
                    LIMIT 3";
-$upcomingsResult = $conn->query($upcomingsQuery);
 $carouselItems = [];
-while ($row = $upcomingsResult->fetch_assoc()) {
-  $carouselItems[] = $row;
+if ($conn) {
+  $upcomingsResult = $conn->query($upcomingsQuery);
+  if ($upcomingsResult) {
+    while ($row = $upcomingsResult->fetch_assoc()) {
+      $carouselItems[] = $row;
+    }
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -63,11 +71,8 @@ while ($row = $upcomingsResult->fetch_assoc()) {
 
   <main>
     <section style="margin: 0; padding: 0;">
-
-      <!-- HERO SLIDER - FULLY WORKING -->
       <div class="hero-slider swiper">
         <div class="swiper-wrapper">
-
           <!-- Slide 1 -->
           <div class="swiper-slide hero-slide">
             <img src="assets/images/herobg.jpeg" alt="RPSU CLUB Event">
@@ -97,7 +102,6 @@ while ($row = $upcomingsResult->fetch_assoc()) {
               <a href="gallery.php" class="btn-hero">View Gallery</a>
             </div>
           </div>
-
         </div>
 
         <!-- Navigation Arrows -->
@@ -107,9 +111,8 @@ while ($row = $upcomingsResult->fetch_assoc()) {
         <!-- Pagination Dots -->
         <div class="swiper-pagination"></div>
       </div>
-
     </section>
-    
+
     <!-- Clubs Section -->
     <section class="clubs-section" style="margin: 0; padding: 3rem 0;">
       <div class="container">
@@ -159,7 +162,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
         <div class="mx-5 row g-4 flex-column-reverse flex-lg-row">
 
           <!-- LEFT (comes bottom on phone) -->
-          <div class="col-12 col-lg-7 bg-danger mobile-full">
+          <div class="col-12 col-lg-7 bg-danger mobile-full text-white">
             <div id="executive-content">
               <div class="executive-info active" data-slide="0">
                 <h3>Monkey D. Luffy</h3>
@@ -173,7 +176,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
                   <span class="badge bg-info">Student Advocate</span>
                 </div>
               </div>
-              
+
               <div class="executive-info" data-slide="1">
                 <h3>Sabo</h3>
                 <p class="position">Vice President</p>
@@ -186,7 +189,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
                   <span class="badge bg-secondary">Innovator</span>
                 </div>
               </div>
-              
+
               <div class="executive-info" data-slide="2">
                 <h3>Portgas D. Ace</h3>
                 <p class="position">General Secretary</p>
@@ -199,7 +202,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
                   <span class="badge bg-success">Protector</span>
                 </div>
               </div>
-              
+
               <div class="executive-info" data-slide="3">
                 <h3>Nami</h3>
                 <p class="position">Treasurer</p>
@@ -212,7 +215,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
                   <span class="badge bg-warning">Analyst</span>
                 </div>
               </div>
-              
+
               <div class="executive-info" data-slide="4">
                 <h3>Boa Hancock</h3>
                 <p class="position">Cultural Secretary</p>
@@ -225,7 +228,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
                   <span class="badge bg-info">Event Coordinator</span>
                 </div>
               </div>
-              
+
               <div class="executive-info" data-slide="5">
                 <h3>Tony Tony Chopper</h3>
                 <p class="position">Health & Welfare Secretary</p>
@@ -238,7 +241,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
                   <span class="badge bg-warning">Safety Expert</span>
                 </div>
               </div>
-              
+
               <div class="executive-info" data-slide="6">
                 <h3>Mikasa Ackerman</h3>
                 <p class="position">Security & Discipline</p>
@@ -251,7 +254,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
                   <span class="badge bg-primary">Guardian</span>
                 </div>
               </div>
-              
+
               <div class="executive-info" data-slide="7">
                 <h3>Mikasa (Alt)</h3>
                 <p class="position">Assistant Secretary</p>
@@ -264,7 +267,7 @@ while ($row = $upcomingsResult->fetch_assoc()) {
                   <span class="badge bg-warning">Adaptable</span>
                 </div>
               </div>
-              
+
               <div class="executive-info" data-slide="8">
                 <h3>Survey Corps Leader</h3>
                 <p class="position">Research & Development</p>
@@ -325,15 +328,15 @@ while ($row = $upcomingsResult->fetch_assoc()) {
       },
       loop: true, // Enable infinite loop
       on: {
-        slideChange: function () {
+        slideChange: function() {
           // Get the real index (accounting for loop)
           const realIndex = this.realIndex;
-          
+
           // Hide all executive info divs
           document.querySelectorAll('.executive-info').forEach(info => {
             info.classList.remove('active');
           });
-          
+
           // Show the corresponding executive info
           const activeInfo = document.querySelector(`[data-slide="${realIndex}"]`);
           if (activeInfo) {

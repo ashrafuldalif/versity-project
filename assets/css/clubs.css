@@ -2,6 +2,7 @@
 /*                clubs.css                      */
 /*  All styles from clubs.php (clean & organized) */
 /* ============================================= */
+@import url('root.css');
 
 /* Club Hero Section (with parallax background) */
 .club-section {

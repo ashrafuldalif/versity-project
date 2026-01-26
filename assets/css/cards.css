@@ -1,0 +1,158 @@
+/* ============================================= */
+/*        CONSOLIDATED CARD STYLES               */
+/*  Common styling for cards across the app      */
+/* ============================================= */
+@import url('root.css');
+
+/* Base Card Styling */
+.card-base {
+  background: var(--background-card);
+  border-radius: var(--border-radius-2xl);
+  overflow: hidden;
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-normal);
+  position: relative;
+}
+
+.card-base:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Card Image Container */
+.card-image {
+  overflow: hidden;
+  height: 320px;
+  position: relative;
+}
+
+.card-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(15, 23, 42, 0.1) 100%);
+  z-index: 1;
+  transition: var(--transition-normal);
+}
+
+.card-base:hover .card-image::before {
+  background: linear-gradient(135deg, transparent 0%, rgba(15, 23, 42, 0.3) 100%);
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card-base:hover .card-image img {
+  transform: scale(1.1);
+}
+
+/* Card Content */
+.card-content {
+  padding: var(--space-2xl);
+  position: relative;
+}
+
+.card-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.card-subtitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.card-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Card Button */
+.card-button {
+  background: var(--accent-color);
+  color: var(--text-on-accent);
+  border: none;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--border-radius-lg);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+}
+
+.card-button:hover {
+  background: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+/* Premium Card (Executive/President) */
+.card-premium {
+  background: var(--primary-color);
+  position: relative;
+}
+
+.card-premium.president {
+  background: var(--accent-color);
+}
+
+.card-premium .card-content {
+  color: var(--text-on-dark);
+}
+
+.card-premium .card-title {
+  color: var(--text-on-dark);
+}
+
+.card-premium .card-subtitle {
+  color: var(--text-secondary);
+}
+
+/* Responsive Card */
+@media (max-width: 768px) {
+  .card-base {
+    margin-bottom: var(--space-lg);
+  }
+
+  .card-image {
+    height: 250px;
+  }
+
+  .card-content {
+    padding: var(--space-lg);
+  }
+
+  .card-title {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (max-width: 576px) {
+  .card-image {
+    height: 180px;
+  }
+
+  .card-content {
+    padding: var(--space-md);
+  }
+
+  .card-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .card-button {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-sm);
+  }
+}

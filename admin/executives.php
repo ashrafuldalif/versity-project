@@ -2,20 +2,14 @@
 // Security check - must be logged in as admin
 require_once '../funcs/check_admin.php';
 include "../funcs/connect.php";
+require_once "../funcs/admin_functions.php";
+
+session_start();
 
 ?>
 <?php
 // Fetch positions for position filter dropdown
-$positions = [];
-$posStmt = $conn->prepare("SELECT id, position_name FROM positions ORDER BY id ASC");
-if ($posStmt) {
-    $posStmt->execute();
-    $posRes = $posStmt->get_result();
-    while ($pr = $posRes->fetch_assoc()) {
-        $positions[] = $pr;
-    }
-    $posStmt->close();
-}
+$positions = getPositions($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">

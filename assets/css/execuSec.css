@@ -1,6 +1,7 @@
 /* ============================================= */
 /*              PREMIUM EXECUTIVE SECTION        */
 /* ============================================= */
+@import url('root.css');
 
 .cards {
   width: 280px;
@@ -73,8 +74,8 @@
 }
 
 .executive-info h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  color: var(--accent-color);
+  font-family: var(--font-family-display);
+  color: white;
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--space-sm);
@@ -83,7 +84,7 @@
 }
 
 .executive-info .position {
-  color: var(--text-secondary);
+  color: white;
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   margin-bottom: var(--space-lg);
@@ -106,7 +107,7 @@
 }
 
 .executive-info .description {
-  color: var(--text-primary);
+  color: white;
   font-size: var(--font-size-base);
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--space-xl);

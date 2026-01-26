@@ -12,12 +12,13 @@ ini_set('display_errors', '0');
 error_reporting(0);
 header('Content-Type: application/json');
 
-// This endpoint handles file uploads and inserts DB records for each uploaded file.
+// This endpoint handles file uploads and associates files with rows when provided.
 // It expects:
 // - files[] file inputs (multipart)
 // - optional 'meta' POST field (JSON) mapping original filenames to row_id (array of { original, row_id, id })
 
 include __DIR__ . '/connect.php';
+require_once __DIR__ . '/admin_functions.php';
 
 $uploadDir = __DIR__ . '/../assets/gellary/';
 if (!is_dir($uploadDir)) {
@@ -77,49 +78,30 @@ try {
         $savedName = time() . '_' . bin2hex(random_bytes(6)) . '.' . $safeExt;
         $destPath = $uploadDir . $savedName;
 
-        // If meta provides a row_id, insert DB record first, then move file. If move fails, remove DB record.
+        // Move uploaded file first
+        if (!move_uploaded_file($tmpPath, $destPath)) {
+            $errors[] = "Failed to move file: $originalName";
+            continue;
+        }
+
+        // If meta provides a row_id, insert DB record now via admin function
         $rowId = null;
         if (isset($metaMap[$originalName]) && !empty($metaMap[$originalName]['row_id'])) {
             $rowId = (int)$metaMap[$originalName]['row_id'];
-        }
-
-        // Insert DB record (if rowId present) or insert with row_id = 0 (will be updated later by save step)
-        $insertId = null;
-        if ($rowId !== null) {
-            $stmt = $conn->prepare("INSERT INTO gallery_photos (row_id, image_name, display_order) VALUES (?, ?, 0)");
-            if ($stmt) {
-                $stmt->bind_param('is', $rowId, $savedName);
-                if ($stmt->execute()) {
-                    $insertId = $stmt->insert_id;
-                } else {
-                    $errors[] = "DB insert failed for $originalName: " . $stmt->error;
-                    $stmt->close();
-                    continue;
-                }
-                $stmt->close();
-            } else {
-                $errors[] = "DB prepare failed: " . $conn->error;
+            $insertId = addGalleryPhoto($conn, $rowId, $savedName, 0);
+            if ($insertId === false) {
+                $errors[] = "DB insert failed for $originalName";
+                // remove file since DB failed
+                if (file_exists($destPath)) unlink($destPath);
                 continue;
             }
+        } else {
+            $insertId = null; // will be handled in save step
         }
 
-        // Move uploaded file
-        if (move_uploaded_file($tmpPath, $destPath)) {
-            $uploadedFiles[$originalName] = $savedName;
-            $successes[] = "Uploaded: $originalName -> $savedName";
-            $inserted[] = ['original' => $originalName, 'saved' => $savedName, 'insert_id' => $insertId, 'row_id' => $rowId];
-        } else {
-            $errors[] = "Failed to move file: $originalName";
-            // rollback DB insert if any
-            if ($insertId) {
-                $stmt = $conn->prepare("DELETE FROM gallery_photos WHERE id = ?");
-                if ($stmt) {
-                    $stmt->bind_param('i', $insertId);
-                    $stmt->execute();
-                    $stmt->close();
-                }
-            }
-        }
+        $uploadedFiles[$originalName] = $savedName;
+        $successes[] = "Uploaded: $originalName -> $savedName";
+        $inserted[] = ['original' => $originalName, 'saved' => $savedName, 'insert_id' => $insertId, 'row_id' => $rowId];
     }
 
     echo json_encode([

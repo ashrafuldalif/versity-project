@@ -12,6 +12,7 @@ ini_set('display_errors', '0');
 error_reporting(0);
 header('Content-Type: application/json');
 include __DIR__ . '/connect.php';
+require_once __DIR__ . '/admin_functions.php';
 
 // This endpoint ONLY handles database updates
 // Files are already in assets/gellary/ (uploaded by upload_gallery_images.php)
@@ -53,18 +54,12 @@ try {
                 continue;
             }
 
-            $stmt = $conn->prepare("INSERT INTO gallery_rows (row_header, sub_header, order_num) VALUES (?, ?, ?)");
-            if (!$stmt) {
-                $errors[] = "Prepare failed for row creation: " . $conn->error;
-                continue;
-            }
-            $stmt->bind_param('ssi', $header, $sub_header, $order_num);
-            if (!$stmt->execute()) {
-                $errors[] = "Failed to create row '$header': " . $stmt->error;
+            $newId = createGalleryRow($conn, $header, $sub_header, $order_num);
+            if ($newId === false) {
+                $errors[] = "Failed to create row '$header'";
             } else {
-                $successes[] = "✓ Created row: $header";
+                $successes[] = "✓ Created row: $header (ID: $newId)";
             }
-            $stmt->close();
         }
     }
 
@@ -76,15 +71,10 @@ try {
 
             if (!$rowId || !$value) continue;
 
-            $stmt = $conn->prepare("UPDATE gallery_rows SET row_header = ? WHERE id = ?");
-            if ($stmt) {
-                $stmt->bind_param('si', $value, $rowId);
-                if ($stmt->execute()) {
-                    $successes[] = "✓ Updated row $rowId header";
-                } else {
-                    $errors[] = "Failed to update row $rowId header: " . $stmt->error;
-                }
-                $stmt->close();
+            if (updateGalleryRow($conn, $rowId, $value, getGalleryRowById($conn, $rowId)['sub_header'] ?? '', 0)) {
+                $successes[] = "✓ Updated row $rowId header";
+            } else {
+                $errors[] = "Failed to update row $rowId header";
             }
         }
     }
@@ -97,15 +87,13 @@ try {
 
             if (!$rowId) continue;
 
-            $stmt = $conn->prepare("UPDATE gallery_rows SET sub_header = ? WHERE id = ?");
-            if ($stmt) {
-                $stmt->bind_param('si', $value, $rowId);
-                if ($stmt->execute()) {
-                    $successes[] = "✓ Updated row $rowId sub-header";
-                } else {
-                    $errors[] = "Failed to update row $rowId sub-header: " . $stmt->error;
-                }
-                $stmt->close();
+            $current = getGalleryRowById($conn, $rowId) ?: [];
+            $headerVal = $current['row_header'] ?? '';
+
+            if (updateGalleryRow($conn, $rowId, $headerVal, $value, 0)) {
+                $successes[] = "✓ Updated row $rowId sub-header";
+            } else {
+                $errors[] = "Failed to update row $rowId sub-header";
             }
         }
     }
@@ -113,41 +101,11 @@ try {
     // 4. Delete rows (cascade deletes images)
     if (!empty($changes['rows']['deleted'])) {
         foreach ($changes['rows']['deleted'] as $rowId) {
-            // Delete associated images from disk first
-            $stmt = $conn->prepare("SELECT image_name FROM gallery_photos WHERE row_id = ?");
-            if ($stmt) {
-                $stmt->bind_param('i', $rowId);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                while ($row = $result->fetch_assoc()) {
-                    $filepath = $uploadDir . $row['image_name'];
-                    if (file_exists($filepath)) {
-                        unlink($filepath);
-                    }
-                }
-                $stmt->close();
-            }
-
-            // Delete from database
-            $stmt = $conn->prepare("DELETE FROM gallery_photos WHERE row_id = ?");
-            if ($stmt) {
-                $stmt->bind_param('i', $rowId);
-                $stmt->execute();
-                $stmt->close();
-            }
-
-            $stmt = $conn->prepare("DELETE FROM gallery_rows WHERE id = ?");
-            if (!$stmt) {
-                $errors[] = "Prepare failed for row deletion: " . $conn->error;
-                continue;
-            }
-            $stmt->bind_param('i', $rowId);
-            if (!$stmt->execute()) {
-                $errors[] = "Failed to delete row $rowId: " . $stmt->error;
-            } else {
+            if (deleteGalleryRow($conn, $rowId)) {
                 $successes[] = "✓ Deleted row $rowId";
+            } else {
+                $errors[] = "Failed to delete row $rowId";
             }
-            $stmt->close();
         }
     }
 
@@ -157,7 +115,6 @@ try {
     if (!empty($changes['images']['uploaded'])) {
         foreach ($changes['images']['uploaded'] as $img) {
             $rowId = $img['row_id'] ?? null;
-            $imgId = $img['id'] ?? null;
             $name = $img['name'] ?? '';
 
             if (!$rowId || !$name) {
@@ -165,66 +122,22 @@ try {
                 continue;
             }
 
-            // If imgId is provided, use it; otherwise let DB auto-increment
-            if ($imgId) {
-                $stmt = $conn->prepare("INSERT INTO gallery_photos (id, row_id, image_name, display_order) VALUES (?, ?, ?, ?)");
-                if (!$stmt) {
-                    $errors[] = "Prepare failed for image: " . $conn->error;
-                    continue;
-                }
-                $displayOrder = 0;
-                $stmt->bind_param('iisi', $imgId, $rowId, $name, $displayOrder);
-            } else {
-                $stmt = $conn->prepare("INSERT INTO gallery_photos (row_id, image_name, display_order) VALUES (?, ?, ?)");
-                if (!$stmt) {
-                    $errors[] = "Prepare failed for image: " . $conn->error;
-                    continue;
-                }
-                $displayOrder = 0;
-                $stmt->bind_param('isi', $rowId, $name, $displayOrder);
-            }
-
-            if (!$stmt->execute()) {
-                $errors[] = "Failed to insert image '$name': " . $stmt->error;
+            $photoId = addGalleryPhoto($conn, $rowId, $name, 0);
+            if ($photoId === false) {
+                $errors[] = "Failed to add image '$name' to row $rowId";
             } else {
                 $successes[] = "✓ Added image: $name to row $rowId";
             }
-            $stmt->close();
         }
     }
 
     // 2. Delete images (from database and disk)
     if (!empty($changes['images']['deleted'])) {
         foreach ($changes['images']['deleted'] as $imgId) {
-            $stmt = $conn->prepare("SELECT image_name FROM gallery_photos WHERE id = ?");
-            if ($stmt) {
-                $stmt->bind_param('i', $imgId);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                if ($row = $result->fetch_assoc()) {
-                    $filename = $row['image_name'];
-                    $filepath = $uploadDir . $filename;
-
-                    // Delete from disk
-                    if (file_exists($filepath)) {
-                        if (unlink($filepath)) {
-                            $successes[] = "✓ Deleted file: $filename";
-                        }
-                    }
-                }
-                $stmt->close();
-            }
-
-            // Delete from database
-            $stmt = $conn->prepare("DELETE FROM gallery_photos WHERE id = ?");
-            if ($stmt) {
-                $stmt->bind_param('i', $imgId);
-                if ($stmt->execute()) {
-                    $successes[] = "✓ Removed image record ID $imgId";
-                } else {
-                    $errors[] = "Failed to delete image ID $imgId: " . $stmt->error;
-                }
-                $stmt->close();
+            if (deleteGalleryPhoto($conn, $imgId, $uploadDir)) {
+                $successes[] = "✓ Removed image ID $imgId";
+            } else {
+                $errors[] = "Failed to delete image ID $imgId";
             }
         }
     }
