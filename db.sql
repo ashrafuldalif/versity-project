@@ -1,5 +1,5 @@
 CREATE TABLE club_members (
-    id INT  PRIMARY KEY,       
+    id INT AUTO_INCREMENT PRIMARY KEY,       
     img VARCHAR(255),          
     name VARCHAR(100) NOT NULL,
     department VARCHAR(50),    
@@ -7,7 +7,9 @@ CREATE TABLE club_members (
     mail VARCHAR(100) NOT NULL UNIQUE,      
     phone VARCHAR(20),                      
     pass VARCHAR(255) NOT NULL,             
-    bloodGroup VARCHAR(5)                   
+    bloodGroup VARCHAR(5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP                   
 );
 
 
@@ -111,8 +113,32 @@ CREATE TABLE upcomings (
     id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     heading     VARCHAR(255) NOT NULL,
     content     LONGTEXT NOT NULL,
-    image       VARCHAR(512) ,
+    image       VARCHAR(512),
     image_side  ENUM('left', 'right') DEFAULT 'left',
     is_active   TINYINT(1) NOT NULL DEFAULT 0,
-   
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- Add indexes for better performance
+CREATE INDEX idx_club_members_department ON club_members(department);
+CREATE INDEX idx_club_members_batch ON club_members(batch);
+CREATE INDEX idx_club_members_blood ON club_members(bloodGroup);
+CREATE INDEX idx_gallery_images_row_id ON gallery_images(row_id);
+CREATE INDEX idx_executives_club_id ON executives(club_id);
+CREATE INDEX idx_executives_position_id ON executives(position_id);
+CREATE INDEX idx_upcomings_active ON upcomings(is_active);
+
+-- Add some basic clubs data
+INSERT INTO clubs (name) VALUES 
+('Music'),
+('Sports'), 
+('Cultural'),
+('Art'),
+('Drama'),
+('Photography'),
+('Programming'),
+('Robotics'),
+('Debate'),
+('Volunteer')
+ON DUPLICATE KEY UPDATE name = VALUES(name);

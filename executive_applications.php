@@ -95,11 +95,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="assets/css/root.css">
   <style>
     body {
-      overflow: hidden;
+      overflow-x: hidden; /* Only hide horizontal overflow */
+      overflow-y: auto;   /* Allow vertical scrolling */
       background: linear-gradient(125deg, #ffc98fff, white, orange);
       min-height: 100vh;
       display: flex;
       align-items: center;
+      padding: 1rem 0;    /* Add padding for mobile */
     }
 
     .card {

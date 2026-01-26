@@ -1,212 +1,390 @@
 @import url('root.css');
-/* If you keep variables in separate file */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+/* ============================================= */
+/*              PREMIUM BASE STYLES              */
+/* ============================================= */
+
+/* Reset and base styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-html, body {
+
+html,
+body {
   position: relative;
-  overscroll-behavior: none;
-  overscroll-behavior-inline: none;
-  overflow: hidden;
-  scroll-margin: 0;
-  overflow-x: hidden;
   scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-body{
-  scroll-snap-type: y mandatory;
-  overflow-y: auto; /* Changed from scroll to auto */
-  min-height: 100vh; /* Minimum height of viewport */
-  height: auto;     /* Allow body to grow with content but not exceed it */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
 }
 
-/* Hide scrollbar */
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+  height: auto;
+  background: var(--background-light);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Premium scrollbar styling */
 body::-webkit-scrollbar {
-  display: none;
+  width: 8px;
 }
 
-/* Ensure the main content container doesn't cause overflow */
+body::-webkit-scrollbar-track {
+  background: var(--background-light);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--gradient-accent);
+  border-radius: var(--border-radius-full);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+/* Main content container */
 main {
-  background: blue;
-
-  scroll-snap-type: y mandatory;
+  flex: 1;
+  background: transparent;
 }
 
-/* Ensure sections don't create unwanted space */
-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  height: fit-content;
-  
-  /* height: 100vh; or whatever height you want for each section */
+/* ============================================= */
+/*              HERO SECTION - PREMIUM           */
+/* ============================================= */
+
+.hero-slider {
+  height: 100vh;
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
 }
- .sub-section {
-  
-  padding: 6rem 0;
-  background: linear-gradient(to bottom, var(--background-light), #fdfcf9);
+
+@media (max-width: 768px) {
+  .hero-slider {
+    min-height: 500px;
+  }
 }
+
+@media (max-width: 480px) {
+  .hero-slider {
+    min-height: 400px;
+  }
+}
+
+.hero-slide {
+  position: relative;
+  height: 100%;
+}
+
+.hero-slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-hero);
+  z-index: 1;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Hero content with premium typography */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  color: var(--text-on-dark);
+  width: 90%;
+  max-width: 1000px;
+  padding: var(--space-2xl);
+}
+
+.hero-content h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: var(--font-weight-black);
+  color: var(--accent-color);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  margin-bottom: var(--space-lg);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.02em;
+}
+
+.hero-content p {
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-2xl);
+  padding: var(--space-lg) var(--space-xl);
+  border-radius: var(--border-radius-lg);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+  color: var(--text-light);
+  opacity: 0.95;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Premium CTA Button */
+.btn-hero {
+  background: var(--gradient-accent);
+  color: var(--text-on-accent);
+  padding: var(--space-lg) var(--space-2xl);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--border-radius-full);
+  border: none;
+  transition: var(--transition-normal);
+  box-shadow: var(--shadow-xl);
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.025em;
+}
+
+.btn-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition-slow);
+}
+
+.btn-hero:hover::before {
+  left: 100%;
+}
+
+.btn-hero:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2xl);
+  background: var(--accent-hover);
+}
+
+/* Premium Swiper Navigation */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 60px !important;
+  height: 60px !important;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-full);
+  color: var(--accent-color) !important;
+  z-index: var(--z-fixed) !important;
+  transition: var(--transition-normal);
+  margin-top: -30px !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: var(--accent-color);
+  color: var(--text-on-accent) !important;
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1.5rem !important;
+  font-weight: var(--font-weight-bold) !important;
+}
+
+/* Premium Pagination */
+.swiper-pagination {
+  bottom: 30px !important;
+  z-index: 15 !important;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  transition: var(--transition-normal);
+  border-radius: var(--border-radius-full);
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--accent-color);
+  transform: scale(1.5);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================= */
+/*              SECTIONS - PREMIUM               */
+/* ============================================= */
 
 .section-title {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 800;
+  font-weight: var(--font-weight-bold);
   text-align: center;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+  position: relative;
+  letter-spacing: -0.02em;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--gradient-accent);
+  border-radius: var(--border-radius-full);
+}
+
+.sub-section {
+  padding: var(--space-3xl) 0;
+  background: var(--background-section);
   position: relative;
 }
-    /* Hero Container */
-    .hero-slider {
-      margin-top: 4rem;
-      height: calc(100vh - 4rem);
-      min-height: 500px;
-      position: relative;
-      overflow: hidden;
-    }
 
-    /* Each Slide */
-    .hero-slide {
-      position: relative;
-    }
+.sub-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-accent);
+}
 
-    .hero-slide::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--overlay-dark);
-      z-index: 1;
-    }
+/* ============================================= */
+/*              RESPONSIVE DESIGN                */
+/* ============================================= */
 
-    .hero-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+@media (max-width: 768px) {
+  .btn-hero {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--font-size-base);
+  }
 
-    /* Text Content */
-    .hero-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      text-align: center;
-      color: var(--text-on-dark);
-      width: 90%;
-      max-width: 1000px;
-      padding: 2rem;
-    }
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 50px !important;
+    height: 50px !important;
+  }
 
-    .hero-content h1 {
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      font-weight: 900;
-      color: var(--accent-color);
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
-      margin-bottom: 1.5rem;
-      line-height: 1.1;
-    }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 1.2rem !important;
+  }
+}
 
-    .hero-content p {
-      font-size: clamp(1rem, 3vw, 1.4rem);
-      margin-bottom: 2rem;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      color: #fff;
-      opacity: 0.95;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      font-weight: 700s;
-    }
+@media (max-width: 576px) {
+  .hero-content {
+    width: 95%;
+    padding: var(--space-lg);
+  }
 
-    /* CTA Button – fully using root vars */
-    .btn-hero {
-      background: var(--accent-color);
-      color: var(--text-dark);
-      padding: 1.1rem 3rem;
-      font-size: 1.3rem;
-      font-weight: 700;
-      border-radius: 50px;
-      border: none;
-      transition: var(--transition, all 0.4s ease);
-      box-shadow: 0 10px 30px rgba(217, 131, 36, 0.4);
-      /* fallback if no variable */
-      text-decoration: none;
-      display: inline-block;
-      cursor: pointer;
-    }
+  .hero-content h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+    margin-bottom: var(--space-md);
+  }
 
-    .btn-hero:hover {
-      background: var(--secondary-hover, #e69538);
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(217, 131, 36, 0.6);
-      color: var(--text-dark);
-    }
+  .hero-content p {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
 
-    /* Swiper Navigation Arrows – 100% root variables */
-    .swiper-button-next,
-    .swiper-button-prev {
-      width: 60px !important;
-      height: 60px !important;
-      background: rgba(255, 255, 255, 0.25);
-      border-radius: 50%;
-      backdrop-filter: blur(12px);
-      color: var(--accent-color) !important;
-      z-index: 20 !important;
-      transition: var(--transition, all 0.4s ease);
-      margin-top: -30px !important;
-    }
+  .btn-hero {
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--font-size-sm);
+  }
 
-    .swiper-button-next:hover,
-    .swiper-button-prev:hover {
-      background: var(--accent-color);
-      color: white !important;
-      transform: scale(1.15);
-    }
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 40px !important;
+    height: 40px !important;
+    margin-top: -20px !important;
+  }
 
-    .swiper-button-next::after,
-    .swiper-button-prev::after {
-      font-size: 2rem !important;
-      font-weight: bold !important;
-    }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 1rem !important;
+  }
 
-    /* Pagination Bullets */
-    .swiper-pagination {
-      bottom: 30px !important;
-      z-index: 15 !important;
-    }
+  .swiper-pagination {
+    bottom: 20px !important;
+  }
 
-    .swiper-pagination-bullet {
-      width: 14px;
-      height: 14px;
-      background: rgba(255, 255, 255, 0.6);
-      opacity: 1;
-      transition: all 0.3s;
-    }
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+  }
 
-    .swiper-pagination-bullet-active {
-      background: var(--accent-color);
-      transform: scale(1.4);
-    }
+  .sub-section {
+    padding: var(--space-2xl) 0;
+  }
+}
 
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .btn-hero {
-        padding: 0.9rem 2.2rem;
-        font-size: 1.1rem;
-      }
+@media (max-width: 480px) {
+  .section-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+}
 
-      .swiper-button-next,
-      .swiper-button-prev {
-        width: 50px !important;
-        height: 50px !important;
-      }
+/* ============================================= */
+/*              UTILITY CLASSES                  */
+/* ============================================= */
 
-      .swiper-button-next::after,
-      .swiper-button-prev::after {
-        font-size: 1.6rem !important;
-      }
-    }
+.container-fluid {
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 576px) {
+  .container-fluid {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+}
+
+.glass-effect {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+}
+
+.premium-shadow {
+  box-shadow: var(--shadow-xl);
+}
+
+.premium-gradient {
+  background: var(--gradient-accent);
+}
+
+.text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

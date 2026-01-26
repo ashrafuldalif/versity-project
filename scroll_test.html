@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Test - RPSU Club</title>
+    <link rel="stylesheet" href="assets/css/root.css">
+    <link rel="stylesheet" href="assets/css/scroll-fix.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--background-light);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4rem;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1030;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content {
+            margin-top: 4rem;
+            padding: 2rem;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .section:nth-child(1) {
+            background: #ff6b6b;
+        }
+
+        .section:nth-child(2) {
+            background: #4ecdc4;
+        }
+
+        .section:nth-child(3) {
+            background: #45b7d1;
+        }
+
+        .section:nth-child(4) {
+            background: #96ceb4;
+        }
+
+        .section:nth-child(5) {
+            background: #feca57;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 14px;
+            z-index: 1040;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                font-size: 1.5rem;
+                min-height: 80vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <h2>🔧 RPSU Club - Scroll Test</h2>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <div>
+                <h2>Section 1</h2>
+                <p style="font-size: 1rem; text-align: center; margin-top: 1rem;">
+                    If you can scroll down, the fix is working! 🎉
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div>
+                <h2>Section 2</h2>
+                <p style="font-size: 1rem; text-align: center; margin-top: 1rem;">
+                    Great! Scrolling is working properly ✅
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div>
+                <h2>Section 3</h2>
+                <p style="font-size: 1rem; text-align: center; margin-top: 1rem;">
+                    Mobile scrolling should also work 📱
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div>
+                <h2>Section 4</h2>
+                <p style="font-size: 1rem; text-align: center; margin-top: 1rem;">
+                    Smooth scrolling enabled 🚀
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div>
+                <h2>Section 5</h2>
+                <p style="font-size: 1rem; text-align: center; margin-top: 1rem;">
+                    All scroll issues fixed! 🎯<br>
+                    <a href="index.php" style="color: white; text-decoration: underline; font-size: 0.9rem;">
+                        ← Back to Home
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator" id="scrollIndicator">
+        Scroll: 0%
+    </div>
+
+    <script>
+        // Show scroll percentage
+        window.addEventListener('scroll', function () {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+
+            document.getElementById('scrollIndicator').textContent = `Scroll: ${scrollPercent}%`;
+        });
+
+        // Test smooth scrolling
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowDown') {
+                window.scrollBy({ top: 100, behavior: 'smooth' });
+            } else if (e.key === 'ArrowUp') {
+                window.scrollBy({ top: -100, behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+
+</html>

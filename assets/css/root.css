@@ -1,40 +1,252 @@
 :root {
-  /* LOCKED COLORS – never change */
-  --color-primary-base:   #e2e2e2;   /* Elegant light gray – navbar, footer */
-  --color-orange:         #D98324;   /* Your signature orange – accent */
+  /* ============================================= */
+  /*              CUSTOM COLOR PALETTE             */
+  /*     Based on: rgb(48,54,79), rgb(172,186,196) */
+  /*     rgb(225,217,188), rgb(240,240,219)         */
+  /* ============================================= */
 
-  /* Supporting refined palette */
-  --color-white:          #ffffff;
-  --color-off-white:      #fafafa;
-  --color-soft-gray:      #f5f5f5;
-  --color-warm-gray:      #f8f5f0;   /* Very subtle warm tint */
-  --color-deep-gray:      #333333;   /* For body text */
+  /* Primary Colors - Deep Blue-Gray Tones */
+  --color-primary-dark: rgb(48, 54, 79);
+  /* Deep blue-gray */
+  --color-primary-base: rgb(65, 73, 101);
+  /* Medium blue-gray */
+  --color-primary-light: rgb(82, 92, 123);
+  /* Light blue-gray */
 
-  /* Semantic Colors – used in all components */
-  --primary-color:        var(--color-primary-base);     /* #e2e2e2 – navbar, footer */
-  --accent-color:         var(--color-orange);           /* #D98324 – buttons, links */
-  --background-light:     var(--color-warm-gray);         /* Page background – soft warmth */
-  --background-card:      var(--color-white);             /* Cards, dropdowns, modals */
-  --text-dark:            var(--color-deep-gray);         /* Main text – excellent readability */
-  --text-light:           #ffffff;
-  --text-on-primary:      #222222;                        /* Dark text on light gray navbar */
-  --text-on-accent:       #ffffff;                        /* White text on orange */
+  /* Secondary Colors - Cool Gray Tones */
+  --color-secondary-dark: rgb(140, 155, 171);
+  /* Darker cool gray */
+  --color-secondary-base: rgb(172, 186, 196);
+  /* Cool gray */
+  --color-secondary-light: rgb(200, 210, 218);
+  /* Light cool gray */
 
-  /* Interaction States */
-  --primary-hover:        #d1d1d1;         /* Slightly darker gray on hover */
-  --accent-hover:         #e69538;         /* Brighter orange on hover */
-  --accent-active:        #c5721f;         /* Pressed state */
+  /* Accent Colors - Warm Cream Tones */
+  --color-accent-dark: rgb(200, 190, 160);
+  /* Darker cream */
+  --color-accent-base: rgb(225, 217, 188);
+  /* Warm cream */
+  --color-accent-light: rgb(240, 240, 219);
+  /* Light cream */
+
+  /* Neutral Colors */
+  --color-white: rgb(250, 250, 250);
+  /* Soft white */
+  --color-off-white: rgb(245, 245, 245);
+  /* Off white */
+  --color-light-gray: rgb(235, 235, 235);
+  /* Light gray */
+  --color-medium-gray: rgb(120, 120, 120);
+  /* Medium gray */
+  --color-dark-gray: rgb(60, 60, 60);
+  /* Dark gray */
+  --color-charcoal: rgb(40, 40, 40);
+  /* Charcoal */
+
+  /* Gradient Colors */
+  --gradient-primary: linear-gradient(135deg, rgb(48, 54, 79) 0%, rgb(65, 73, 101) 50%, rgb(82, 92, 123) 100%);
+  --gradient-secondary: linear-gradient(135deg, rgb(172, 186, 196) 0%, rgb(200, 210, 218) 100%);
+  --gradient-accent: linear-gradient(135deg, rgb(225, 217, 188) 0%, rgb(240, 240, 219) 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(48, 54, 79, 0.9) 0%, rgba(65, 73, 101, 0.8) 100%);
+
+  /* Semantic Colors */
+  --primary-color: var(--color-primary-base);
+  --accent-color: var(--color-accent-base);
+  --secondary-color: var(--color-secondary-base);
+
+  /* Background Colors */
+  --background-primary: var(--color-primary-dark);
+  --background-secondary: var(--color-primary-base);
+  --background-light: var(--color-off-white);
+  --background-card: var(--color-white);
+  --background-section: var(--color-light-gray);
+
+  /* Text Colors */
+  --text-primary: var(--color-charcoal);
+  --text-secondary: var(--color-dark-gray);
+  --text-muted: var(--color-medium-gray);
+  --text-light: var(--color-white);
+  --text-on-dark: var(--color-white);
+  --text-on-accent: var(--color-primary-dark);
+
+  /* Interactive States */
+  --primary-hover: rgb(82, 92, 123);
+  --accent-hover: rgb(200, 190, 160);
+  --secondary-hover: rgb(140, 155, 171);
+  --accent-active: rgb(180, 170, 140);
+
+  /* Shadows & Effects */
+  --shadow-sm: 0 1px 2px 0 rgba(48, 54, 79, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(48, 54, 79, 0.1), 0 2px 4px -1px rgba(48, 54, 79, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(48, 54, 79, 0.1), 0 4px 6px -2px rgba(48, 54, 79, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(48, 54, 79, 0.1), 0 10px 10px -5px rgba(48, 54, 79, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(48, 54, 79, 0.25);
+
+  /* Glass Effect */
+  --glass-bg: rgba(240, 240, 219, 0.1);
+  --glass-border: rgba(225, 217, 188, 0.2);
+  --glass-backdrop: blur(10px);
 
   /* Overlays */
-  --overlay-dark:         rgba(0, 0, 0, 0.55);     /* Hero overlay */
-  --overlay-light:        rgba(255, 255, 255, 0.92);
+  --overlay-dark: rgba(48, 54, 79, 0.8);
+  --overlay-light: rgba(240, 240, 219, 0.9);
+  --overlay-accent: rgba(225, 217, 188, 0.9);
 
-  /* Layout & Effects – premium feel */
-  --border-radius:        18px;
-  --border-radius-sm:     12px;
-  --shadow-sm:            0 4px 20px rgba(0, 0, 0, 0.08);
-  --shadow-md:            0 12px 40px rgba(0, 0, 0, 0.12);
-  --shadow-lg:            0 25px 70px rgba(0, 0, 0, 0.18);
-  --transition:           all 0.38s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-fast:      all 0.2s ease;
+  /* Borders & Radius */
+  --border-radius-sm: 0.375rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1rem;
+  --border-radius-2xl: 1.5rem;
+  --border-radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: all 0.15s ease;
+  --transition-normal: all 0.3s ease;
+  --transition-slow: all 0.5s ease;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Typography Scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+}
+
+/* ============================================= */
+/*                 DARK MODE                     */
+/* ============================================= */
+
+[data-theme="dark"] {
+  /* Dark mode color overrides */
+  --background-primary: rgb(30, 35, 50);
+  /* Darker primary */
+  --background-secondary: rgb(48, 54, 79);
+  /* Original primary as secondary */
+  --background-light: rgb(40, 45, 60);
+  /* Dark background */
+  --background-card: rgb(55, 62, 85);
+  /* Dark card background */
+  --background-section: rgb(45, 50, 70);
+  /* Dark section background */
+
+  /* Dark mode text colors */
+  --text-primary: var(--color-white);
+  --text-secondary: var(--color-off-white);
+  --text-muted: var(--color-secondary-light);
+  --text-on-dark: var(--color-white);
+  --text-on-accent: var(--color-primary-dark);
+
+  /* Dark mode shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+
+  /* Dark mode glass effects */
+  --glass-bg: rgba(48, 54, 79, 0.3);
+  --glass-border: rgba(172, 186, 196, 0.2);
+
+  /* Dark mode overlays */
+  --overlay-dark: rgba(30, 35, 50, 0.9);
+  --overlay-light: rgba(55, 62, 85, 0.9);
+}
+
+/* Auto dark mode based on system preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-primary: rgb(30, 35, 50);
+    --background-secondary: rgb(48, 54, 79);
+    --background-light: rgb(40, 45, 60);
+    --background-card: rgb(55, 62, 85);
+    --background-section: rgb(45, 50, 70);
+
+    --text-primary: var(--color-white);
+    --text-secondary: var(--color-off-white);
+    --text-muted: var(--color-secondary-light);
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+
+    --glass-bg: rgba(48, 54, 79, 0.3);
+    --glass-border: rgba(172, 186, 196, 0.2);
+
+    --overlay-dark: rgba(30, 35, 50, 0.9);
+    --overlay-light: rgba(55, 62, 85, 0.9);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: none;
+    --transition-normal: none;
+    --transition-slow: none;
+  }
+}
+
+/* Dark mode toggle utility */
+.dark-mode-toggle {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-full);
+  padding: var(--space-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition-normal);
+}
+
+.dark-mode-toggle:hover {
+  background: var(--accent-color);
+  color: var(--text-on-accent);
 }

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Test - RPSU Club</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/root.css">
+    <link rel="stylesheet" href="assets/css/scroll-fix.css">
+    <link rel="stylesheet" href="assets/css/layout-fix.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="assets/css/execuSec.css">
+    <style>
+        .test-section {
+            padding: 3rem 2rem;
+            margin: 0;
+            text-align: center;
+        }
+
+        .test-section:nth-child(odd) {
+            background: var(--background-light);
+        }
+
+        .test-section:nth-child(even) {
+            background: var(--background-section);
+        }
+
+        .color-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .color-card {
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            color: var(--text-on-dark);
+            font-weight: var(--font-weight-semibold);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+            text-align: center;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .primary-dark {
+            background: var(--color-primary-dark);
+        }
+
+        .primary-base {
+            background: var(--color-primary-base);
+        }
+
+        .secondary-base {
+            background: var(--color-secondary-base);
+            color: var(--text-primary);
+        }
+
+        .accent-base {
+            background: var(--color-accent-base);
+            color: var(--text-primary);
+        }
+
+        .executive-demo {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .demo-card {
+            width: 200px;
+            height: 300px;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius-2xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-on-dark);
+            font-weight: var(--font-weight-bold);
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition-normal);
+        }
+
+        .demo-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .demo-info {
+            background: var(--background-card);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .demo-info h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--background-card);
+            padding: 2rem;
+            border-radius: var(--border-radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-normal);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-test {
+            background: var(--gradient-accent);
+            color: var(--text-on-accent);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-normal);
+            cursor: pointer;
+            margin: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-test:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .dark-mode-demo {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-backdrop);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-full);
+            padding: var(--space-md);
+            z-index: var(--z-fixed);
+        }
+
+        .mobile-test {
+            display: none;
+        }
+
+        @media (max-width: 576px) {
+            .mobile-test {
+                display: block;
+                background: var(--accent-color);
+                color: var(--text-on-accent);
+                padding: 1rem;
+                text-align: center;
+                font-weight: var(--font-weight-bold);
+            }
+
+            .executive-demo {
+                flex-direction: column;
+            }
+
+            .demo-card {
+                width: 150px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Test Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="assets/images/logo.png" alt="Logo">
+            RPSU CLUB
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <span style="color: var(--text-on-dark); font-weight: var(--font-weight-medium);">
+                Complete Test
+            </span>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+                <i class="bi bi-moon-fill" id="darkModeIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Mobile Test Indicator -->
+        <div class="mobile-test">
+            📱 Mobile View Active - Executive Info Should Be Visible!
+        </div>
+
+        <!-- Hero Test Section -->
+        <div class="test-section"
+            style="background: var(--gradient-hero); color: var(--text-on-dark); min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; padding-top: 4rem;">
+            <div>
+                <h1
+                    style="font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: var(--font-weight-black); color: var(--accent-color); margin-bottom: 2rem;">
+                    All Fixed! ✨
+                </h1>
+                <p style="font-size: var(--font-size-xl); margin-bottom: 2rem; opacity: 0.9;">
+                    Custom Colors • Dark Mode • Mobile Executive Info • CRUD Functions
+                </p>
+                <a href="index.php" class="btn-test">Test Live Site</a>
+            </div>
+        </div>
+
+        <!-- Color Palette Test -->
+        <div class="test-section">
+            <h2 class="section-title">Custom Color Palette</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                Based on: rgb(48,54,79) • rgb(172,186,196) • rgb(225,217,188) • rgb(240,240,219)
+            </p>
+            <div class="color-showcase">
+                <div class="color-card primary-dark">
+                    <h3>Primary Dark</h3>
+                    <p>rgb(48, 54, 79)</p>
+                </div>
+                <div class="color-card primary-base">
+                    <h3>Primary Base</h3>
+                    <p>rgb(65, 73, 101)</p>
+                </div>
+                <div class="color-card secondary-base">
+                    <h3>Secondary Base</h3>
+                    <p>rgb(172, 186, 196)</p>
+                </div>
+                <div class="color-card accent-base">
+                    <h3>Accent Base</h3>
+                    <p>rgb(225, 217, 188)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Executive Info Test -->
+        <div class="test-section">
+            <h2 class="section-title">Executive Info Mobile Fix</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                Executive information now visible on all screen sizes
+            </p>
+            <div class="executive-demo">
+                <div class="demo-card">
+                    Executive Card
+                </div>
+                <div class="demo-info">
+                    <h3>Executive Name</h3>
+                    <p class="position"
+                        style="color: var(--text-secondary); font-weight: var(--font-weight-semibold); margin-bottom: 1rem;">
+                        PRESIDENT</p>
+                    <p style="color: var(--text-primary); margin-bottom: 1rem;">
+                        This information is now properly visible on mobile devices with static positioning and proper
+                        display properties.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span
+                            style="background: var(--accent-color); color: var(--text-on-accent); padding: 0.25rem 0.75rem; border-radius: var(--border-radius-full); font-size: 0.75rem;">Leader</span>
+                        <span
+                            style="background: var(--secondary-color); color: var(--text-on-dark); padding: 0.25rem 0.75rem; border-radius: var(--border-radius-full); font-size: 0.75rem;">Organizer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Test -->
+        <div class="test-section">
+            <h2 class="section-title">New Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: var(--accent-color);">📱</div>
+                    <h3>Mobile Executive Fix</h3>
+                    <p>Executive info now visible on small screens with static positioning</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: var(--accent-color);">🎨</div>
+                    <h3>Custom Colors</h3>
+                    <p>Beautiful color palette based on your specifications</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: var(--accent-color);">🌙</div>
+                    <h3>Dark Mode</h3>
+                    <p>Automatic dark mode with manual toggle support</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: var(--accent-color);">🔧</div>
+                    <h3>CRUD Functions</h3>
+                    <p>Organized user and admin functions in separate files</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Links -->
+        <div class="test-section">
+            <h2 class="section-title">Test All Pages</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                <a href="index.php" class="btn-test">🏠 Home</a>
+                <a href="login.php" class="btn-test">🔐 Login</a>
+                <a href="register.php" class="btn-test">📝 Register</a>
+                <a href="clubs.php" class="btn-test">🎭 Clubs</a>
+                <a href="executives.php" class="btn-test">👥 Executives</a>
+                <a href="gallery.php" class="btn-test">📸 Gallery</a>
+                <a href="admin/index.php" class="btn-test">👨‍💼 Admin</a>
+            </div>
+        </div>
+
+        <!-- CRUD Functions Info -->
+        <div class="test-section">
+            <h2 class="section-title">CRUD Functions Created</h2>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div
+                    style="background: var(--background-card); padding: 2rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md);">
+                    <h3 style="color: var(--accent-color); margin-bottom: 1rem;">📁 funcs/user_functions.php</h3>
+                    <ul style="text-align: left; color: var(--text-primary);">
+                        <li>User Authentication</li>
+                        <li>Profile Management</li>
+                        <li>Club Operations</li>
+                        <li>Gallery Access</li>
+                        <li>Password Management</li>
+                    </ul>
+                </div>
+                <div
+                    style="background: var(--background-card); padding: 2rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md);">
+                    <h3 style="color: var(--accent-color); margin-bottom: 1rem;">📁 funcs/admin_functions.php</h3>
+                    <ul style="text-align: left; color: var(--text-primary);">
+                        <li>Admin Authentication</li>
+                        <li>Member Management</li>
+                        <li>Club Administration</li>
+                        <li>Gallery Management</li>
+                        <li>Statistics Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: var(--gradient-primary); color: var(--text-on-dark); padding: 2rem 0; margin: 0;">
+        <div style="text-align: center;">
+            <h3 style="margin-bottom: 1rem;">✅ All Issues Fixed!</h3>
+            <p style="opacity: 0.8;">Custom Colors • Dark Mode • Mobile Fix • CRUD Functions • No Gaps</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle Functionality
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.getElementById('darkModeIcon');
+
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.className = 'bi bi-moon-fill';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.className = 'bi bi-sun-fill';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const icon = document.getElementById('darkModeIcon');
+
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.body.setAttribute('data-theme', 'dark');
+                if (icon) icon.className = 'bi bi-sun-fill';
+            } else {
+                document.body.removeAttribute('data-theme');
+                if (icon) icon.className = 'bi bi-moon-fill';
+            }
+        });
+
+        // Test viewport info
+        function updateViewport() {
+            const width = window.innerWidth;
+            let device = 'Desktop';
+            if (width <= 576) device = 'Mobile';
+            else if (width <= 768) device = 'Tablet';
+
+            console.log(`Current device: ${device} (${width}px)`);
+        }
+
+        updateViewport();
+        window.addEventListener('resize', updateViewport);
+    </script>
+</body>
+
+</html>

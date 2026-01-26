@@ -12,10 +12,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <!-- 1. Variables first -->
 <link rel="stylesheet" href="assets/css/root.css">
+<link rel="stylesheet" href="assets/css/scroll-fix.css">
 
 <!-- 2. Component styles -->
-<!-- <link rel="stylesheet" href="assets/css/nav.css"> -->
-<!-- add more component CSS here -->
+<link rel="stylesheet" href="assets/css/nav.css">
 
 <!-- 3. Bootstrap last -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -126,6 +126,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a class="nav-link" href="register.php">Register</a>
           </li>
         <?php endif; ?>
+        
+        <!-- Dark Mode Toggle -->
+        <li class="nav-item">
+          <button class="dark-mode-toggle nav-link border-0 bg-transparent" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+            <i class="bi bi-moon-fill" id="darkModeIcon"></i>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -249,3 +256,50 @@ $current_page = basename($_SERVER['PHP_SELF']);
     </div>
   </div>
 </div>
+
+<script>
+// Dark Mode Toggle Functionality
+function toggleDarkMode() {
+    const body = document.body;
+    const icon = document.getElementById('darkModeIcon');
+    
+    if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        icon.className = 'bi bi-moon-fill';
+        localStorage.setItem('theme', 'light');
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        icon.className = 'bi bi-sun-fill';
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+// Initialize theme on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const icon = document.getElementById('darkModeIcon');
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        document.body.setAttribute('data-theme', 'dark');
+        if (icon) icon.className = 'bi bi-sun-fill';
+    } else {
+        document.body.removeAttribute('data-theme');
+        if (icon) icon.className = 'bi bi-moon-fill';
+    }
+});
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    if (!localStorage.getItem('theme')) {
+        const icon = document.getElementById('darkModeIcon');
+        if (e.matches) {
+            document.body.setAttribute('data-theme', 'dark');
+            if (icon) icon.className = 'bi bi-sun-fill';
+        } else {
+            document.body.removeAttribute('data-theme');
+            if (icon) icon.className = 'bi bi-moon-fill';
+        }
+    }
+});
+</script>

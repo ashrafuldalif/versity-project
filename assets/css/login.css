@@ -1,10 +1,15 @@
     body {
       background: linear-gradient(135deg, var(--primary-color), var(--primary-hover), var(--accent-color));
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow-x: hidden;
+      /* Only hide horizontal overflow */
+      overflow-y: auto;
+      /* Allow vertical scrolling */
+      padding: 1rem 0;
+      /* Add some padding for mobile */
     }
 
     .login-card {
@@ -85,4 +90,3 @@
       box-shadow: none;
       border-color: transparent;
     }
-  

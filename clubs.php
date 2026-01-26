@@ -60,7 +60,7 @@ if ($clubId) {
     .members-container {
       display: flex;
       gap: 2rem;
-      overflow-x: hidden;
+      overflow-x: auto; /* Allow horizontal scrolling */
       scroll-behavior: smooth;
       padding: 0 2rem;
 

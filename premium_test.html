@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Design Test - RPSU Club</title>
+    <link rel="stylesheet" href="assets/css/root.css">
+    <link rel="stylesheet" href="assets/css/scroll-fix.css">
+    <link rel="stylesheet" href="assets/css/layout-fix.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <style>
+        .test-section {
+            padding: 3rem 2rem;
+            margin: 0;
+            text-align: center;
+        }
+
+        .test-section:nth-child(odd) {
+            background: var(--background-light);
+        }
+
+        .test-section:nth-child(even) {
+            background: var(--background-section);
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .color-card {
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            color: white;
+            font-weight: var(--font-weight-semibold);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .primary-dark {
+            background: var(--color-primary-dark);
+        }
+
+        .primary-base {
+            background: var(--color-primary-base);
+        }
+
+        .accent-gold {
+            background: var(--color-accent-gold);
+        }
+
+        .accent-copper {
+            background: var(--color-accent-copper);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--background-card);
+            padding: 2rem;
+            border-radius: var(--border-radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-normal);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .btn-premium {
+            background: var(--gradient-accent);
+            color: var(--text-on-accent);
+            padding: var(--space-md) var(--space-xl);
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-normal);
+            cursor: pointer;
+            margin: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--gradient-primary);
+            color: var(--text-on-dark);
+            padding: 1rem;
+            text-align: center;
+            font-weight: var(--font-weight-semibold);
+            z-index: var(--z-fixed);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Premium Navbar Test -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="assets/images/logo.png" alt="Logo">
+            RPSU CLUB
+        </div>
+        <div style="color: var(--text-on-dark); font-weight: var(--font-weight-medium);">
+            Premium Design Test
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Test Section -->
+        <div class="test-section"
+            style="background: var(--gradient-hero); color: var(--text-on-dark); min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; padding-top: 4rem;">
+            <div>
+                <h1
+                    style="font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: var(--font-weight-black); color: var(--accent-color); margin-bottom: 2rem;">
+                    Premium Design
+                </h1>
+                <p style="font-size: var(--font-size-xl); margin-bottom: 2rem; opacity: 0.9;">
+                    Modern, Professional & Responsive
+                </p>
+                <a href="index.php" class="btn-premium">View Live Site</a>
+            </div>
+        </div>
+
+        <!-- Color Palette Test -->
+        <div class="test-section">
+            <h2 class="section-title">Premium Color Palette</h2>
+            <div class="color-palette">
+                <div class="color-card primary-dark">
+                    <h3>Primary Dark</h3>
+                    <p>#0f172a</p>
+                </div>
+                <div class="color-card primary-base">
+                    <h3>Primary Base</h3>
+                    <p>#1e293b</p>
+                </div>
+                <div class="color-card accent-gold">
+                    <h3>Accent Gold</h3>
+                    <p>#f59e0b</p>
+                </div>
+                <div class="color-card accent-copper">
+                    <h3>Accent Copper</h3>
+                    <p>#ea580c</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Test -->
+        <div class="test-section">
+            <h2 class="section-title">Premium Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Modern Design</h3>
+                    <p>Clean, professional aesthetics with premium color scheme</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Fully Responsive</h3>
+                    <p>Perfect on all devices from mobile to desktop</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Smooth Animations</h3>
+                    <p>Buttery smooth transitions and hover effects</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>No Layout Gaps</h3>
+                    <p>Perfect spacing with no unwanted white gaps</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Links -->
+        <div class="test-section">
+            <h2 class="section-title">Test All Pages</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                <a href="index.php" class="btn-premium">🏠 Home</a>
+                <a href="login.php" class="btn-premium">🔐 Login</a>
+                <a href="register.php" class="btn-premium">📝 Register</a>
+                <a href="clubs.php" class="btn-premium">🎭 Clubs</a>
+                <a href="executives.php" class="btn-premium">👥 Executives</a>
+                <a href="gallery.php" class="btn-premium">📸 Gallery</a>
+                <a href="admin/index.php" class="btn-premium">👨‍💼 Admin</a>
+            </div>
+        </div>
+
+        <!-- Responsive Test -->
+        <div class="test-section">
+            <h2 class="section-title">Responsive Test</h2>
+            <p style="margin-bottom: 2rem; color: var(--text-secondary);">
+                Resize your browser window or test on different devices
+            </p>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: left;">
+                <div
+                    style="padding: 1rem; background: var(--background-card); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md);">
+                    <strong>Mobile (≤576px)</strong><br>
+                    <small>Single column, compact spacing</small>
+                </div>
+                <div
+                    style="padding: 1rem; background: var(--background-card); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md);">
+                    <strong>Tablet (577-768px)</strong><br>
+                    <small>Two columns, medium spacing</small>
+                </div>
+                <div
+                    style="padding: 1rem; background: var(--background-card); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md);">
+                    <strong>Desktop (≥769px)</strong><br>
+                    <small>Multi-column, full spacing</small>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Premium Footer Test -->
+    <footer style="background: var(--gradient-primary); color: var(--text-on-dark); padding: 2rem 0; margin: 0;">
+        <div style="text-align: center;">
+            <h3 style="margin-bottom: 1rem;">Premium Footer</h3>
+            <p style="opacity: 0.8;">No gaps, perfect spacing, premium design ✨</p>
+        </div>
+    </footer>
+
+    <div class="status-bar">
+        ✅ Premium Design Applied | 🎨 Modern Colors | 📱 Fully Responsive | ⚡ Smooth Animations
+    </div>
+
+    <script>
+        // Test viewport info
+        function updateViewport() {
+            const width = window.innerWidth;
+            let device = 'Desktop';
+            if (width <= 576) device = 'Mobile';
+            else if (width <= 768) device = 'Tablet';
+
+            document.querySelector('.status-bar').innerHTML =
+                `✅ Premium Design | 📱 ${device} (${width}px) | 🎨 Modern Colors | ⚡ Smooth Animations`;
+        }
+
+        updateViewport();
+        window.addEventListener('resize', updateViewport);
+    </script>
+</body>
+
+</html>

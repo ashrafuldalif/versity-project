@@ -13,6 +13,8 @@ include '../funcs/connect.php';
     <title>Document</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/root.css" rel="stylesheet">
+    <link href="../assets/css/scroll-fix.css" rel="stylesheet">
     <link href="../assets/css/admidMembers.css" rel="stylesheet">
 
 </head>
@@ -227,22 +229,23 @@ include '../funcs/connect.php';
     </div>
 
 
-    <table class="table table-bordered mt-4">
-        <thead class="table-dark">
-            <tr>
-                <th>no</th>
-                <th>image</th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Batch</th>
-                <th>department</th>
-                <th>Clubs</th>
-                <th>Email</th>
-                <th>phone</th>
-                <th>Blood</th>
-            </tr>
-        </thead>
-        <tbody id="outputdata">
+    <div class="table-responsive">
+        <table class="table table-bordered mt-4">
+            <thead class="table-dark">
+                <tr>
+                    <th>no</th>
+                    <th>image</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Batch</th>
+                    <th>department</th>
+                    <th>Clubs</th>
+                    <th>Email</th>
+                    <th>phone</th>
+                    <th>Blood</th>
+                </tr>
+            </thead>
+            <tbody id="outputdata">
 
 
             <?php
@@ -294,16 +297,16 @@ include '../funcs/connect.php';
 
                 echo "
                               <tr>            
-                              <td>$i</td>
-                        <td class=\"d-flex justify-content-center\"><img src=\"${imgl}\" class=\"img-thumbnail \" width=\"60px\"></td>
-                        <td>$id</td>
-                        <td>$name</td>
-                        <td>$batch</td>
-                        <td>$department</td>
-                        <td>$joinClbs</td>
-                        <td>$mail</td>
-                        <td>$phone</td>
-                        <td>$bgroup</td>
+                              <td data-label='No'>$i</td>
+                        <td data-label='Image' class=\"d-flex justify-content-center\"><img src=\"${imgl}\" class=\"img-thumbnail cprofile\"></td>
+                        <td data-label='ID'>$id</td>
+                        <td data-label='Name'>$name</td>
+                        <td data-label='Batch'>$batch</td>
+                        <td data-label='Department'>$department</td>
+                        <td data-label='Clubs'>$joinClbs</td>
+                        <td data-label='Email'>$mail</td>
+                        <td data-label='Phone'>$phone</td>
+                        <td data-label='Blood'>$bgroup</td>
                     </tr>
                         ";
                 $i++;
@@ -316,10 +319,9 @@ include '../funcs/connect.php';
 
             ?>
 
-            <!-- Add more rows as needed -->
-        </tbody>
-
-    </table>
+            </tbody>
+        </table>
+    </div>
 
     <script src="http://localhost:35729/livereload.js"></script>
     <!-- Bootstrap JS Bundle with Popper -->
@@ -584,20 +586,20 @@ include '../funcs/connect.php';
                     joinClbs = e.clubs.join(', ');
                 }
                 tr.innerHTML = `
-            <td>${i}</td>
+            <td data-label='No'>${i}</td>
             
-            <td class="d-flex justify-content-center">
+            <td data-label='Image' class="d-flex justify-content-center">
                
-                <img src="${e.img || 'default.png'}" class="img-thumbnail" width="60px">
+                <img src="${e.img || 'default.png'}" class="img-thumbnail cprofile">
                 </td>
-            <td >${e.id}</td>
-            <td>${e.name}</td>
-            <td>${e.batch}</td>
-            <td>${e.department}</td>
-            <td>${joinClbs}</td>
-            <td>${e.mail}</td>
-            <td>${e.phone}</td>
-            <td>${e.bloodGroup}</td>
+            <td data-label='ID'>${e.id}</td>
+            <td data-label='Name'>${e.name}</td>
+            <td data-label='Batch'>${e.batch}</td>
+            <td data-label='Department'>${e.department}</td>
+            <td data-label='Clubs'>${joinClbs}</td>
+            <td data-label='Email'>${e.mail}</td>
+            <td data-label='Phone'>${e.phone}</td>
+            <td data-label='Blood'>${e.bloodGroup}</td>
         `;
 
                 container.appendChild(tr);
@@ -610,12 +612,15 @@ include '../funcs/connect.php';
             filteredData = allData.filter(row => {
                 row.batch = parseInt(row.batch);
                 data.batch = parseInt(data.batch);
-                // console.log(row.batch);
-                // console.log(data.batch);
+                
+                // Check if all selected clubs are present (AND logic instead of OR)
+                const clubsMatch = data.clubs.length === 0 || 
+                    data.clubs.every(selectedClub => row.clubs.includes(selectedClub));
+                
                 return (!data.department || row.department === data.department) &&
                     (!data.batch || row.batch === data.batch) &&
                     (!data.bloodG || row.bloodGroup === data.bloodG) &&
-                    (data.clubs.length === 0 || data.clubs.some(c => row.clubs.includes(c)));
+                    clubsMatch;
             });
             renderData();
         }
@@ -652,6 +657,13 @@ include '../funcs/connect.php';
             });
 
             if (matches.length === 0) return;
+
+            // Sort matches alphabetically by the search field
+            matches.sort((a, b) => {
+                const aValue = String(a[searchField] ?? '').toLowerCase();
+                const bValue = String(b[searchField] ?? '').toLowerCase();
+                return aValue.localeCompare(bValue);
+            });
 
             // limit to 8 suggestions (feel free to change)
             matches.slice(0, 8).forEach(row => {

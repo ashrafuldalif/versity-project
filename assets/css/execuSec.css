@@ -1,28 +1,382 @@
-.cards {
-      width: 250px;
-      height: 490px;
-    }
+/* ============================================= */
+/*              PREMIUM EXECUTIVE SECTION        */
+/* ============================================= */
 
-  .cards  .swiper-slide {
-      border-radius: 22px;
+.cards {
+  width: 280px;
+  height: 520px;
+  border-radius: var(--border-radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-2xl);
+}
+
+.cards .swiper-slide {
+  border-radius: var(--border-radius-2xl);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 100%; /* or a fixed height like 200px */
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
-/* Phone screens */
-@media (max-width: 576px) {
 
-  /* RIGHT DIV — takes 80% width */
-  .mobile-80 {
-    width: 80% !important;
-    margin: 0 auto !important; /* centers it */
+.cards .swiper-slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(15, 23, 42, 0.3) 100%);
+  z-index: 1;
+}
+
+/* Premium Executive Info Styling */
+#executive-content {
+  position: relative;
+  height: 100%;
+  padding: var(--space-2xl);
+  background: var(--background-card);
+  border-radius: var(--border-radius-2xl);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+}
+
+#executive-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-accent);
+}
+
+.executive-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-2xl);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition-slow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--background-card);
+}
+
+.executive-info.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.executive-info h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--accent-color);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.02em;
+  line-height: var(--line-height-tight);
+}
+
+.executive-info .position {
+  color: var(--text-secondary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  padding-left: var(--space-lg);
+}
+
+.executive-info .position::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: var(--gradient-accent);
+  border-radius: var(--border-radius-full);
+}
+
+.executive-info .description {
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-xl);
+  font-weight: var(--font-weight-normal);
+}
+
+.achievements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.achievements .badge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius-full);
+  border: none;
+  transition: var(--transition-normal);
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.achievements .badge:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Premium badge colors */
+.badge.bg-primary {
+  background: var(--gradient-primary) !important;
+  color: var(--text-on-dark);
+}
+
+.badge.bg-success {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  color: var(--text-light);
+}
+
+.badge.bg-info {
+  background: linear-gradient(135deg, #06b6d4, #0891b2) !important;
+  color: var(--text-light);
+}
+
+.badge.bg-warning {
+  background: var(--gradient-accent) !important;
+  color: var(--text-on-accent);
+}
+
+.badge.bg-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  color: var(--text-light);
+}
+
+.badge.bg-secondary {
+  background: linear-gradient(135deg, #6b7280, #4b5563) !important;
+  color: var(--text-light);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .cards {
+    width: 250px;
+    height: 450px;
   }
 
-  /* LEFT DIV — full width with 20% margin equally */
+  #executive-content {
+    padding: var(--space-xl);
+  }
+
+  .executive-info {
+    padding: var(--space-xl);
+  }
+
+  .executive-info h3 {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    width: 220px;
+    height: 400px;
+  }
+
+  #executive-content {
+    padding: var(--space-lg);
+  }
+
+  .executive-info {
+    padding: var(--space-lg);
+  }
+
+  .executive-info h3 {
+    font-size: var(--font-size-xl);
+  }
+
+  .executive-info .position {
+    font-size: var(--font-size-base);
+  }
+
+  .executive-info .description {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 576px) {
+
+  /* Mobile layout adjustments */
+  .mobile-80 {
+    width: 85% !important;
+    margin: 0 auto !important;
+  }
+
   .mobile-full {
     width: 100%;
     margin: 0 auto;
+  }
+
+  .cards {
+    width: 200px;
+    height: 350px;
+  }
+
+  #executive-content {
+    padding: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  .executive-info {
+    padding: var(--space-md);
+  }
+
+  .executive-info h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .executive-info .position {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-md);
+  }
+
+  .executive-info .position::before {
+    width: 3px;
+    height: 15px;
+  }
+
+  .executive-info .description {
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--space-lg);
+  }
+
+  .achievements .badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+/* Premium hover effects */
+.cards:hover {
+  transform: translateY(-8px);
+  transition: var(--transition-normal);
+}
+
+#executive-content:hover {
+  box-shadow: var(--shadow-2xl);
+  transition: var(--transition-normal);
+}
+
+/* Loading animation for smooth transitions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.executive-info.active {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Mobile Executive Info Fix */
+@media (max-width: 576px) {
+
+  /* Mobile layout adjustments */
+  .mobile-80 {
+    width: 90% !important;
+    margin: 0 auto !important;
+    order: 1;
+  }
+
+  .mobile-full {
+    width: 100%;
+    margin: 0 auto;
+    order: 2;
+    margin-top: var(--space-lg);
+  }
+
+  .cards {
+    width: 200px;
+    height: 350px;
+    margin: 0 auto;
+  }
+
+  #executive-content {
+    padding: var(--space-md);
+    margin-top: var(--space-lg);
+    min-height: 300px;
+    background: var(--background-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    position: relative;
+  }
+
+  .executive-info {
+    padding: var(--space-md) !important;
+    position: static !important;
+    opacity: 1 !important;
+    transform: none !important;
+    margin-bottom: var(--space-md);
+    display: block !important;
+    background: var(--background-card);
+  }
+
+  .executive-info:not(.active) {
+    display: none !important;
+  }
+
+  .executive-info.active {
+    display: block !important;
+    opacity: 1 !important;
+    position: static !important;
+  }
+
+  .executive-info h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .executive-info .position {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-md);
+  }
+
+  .executive-info .position::before {
+    width: 3px;
+    height: 15px;
+  }
+
+  .executive-info .description {
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+  }
+
+  .achievements .badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  /* Ensure mobile flex direction is column */
+  .mx-5.row {
+    flex-direction: column !important;
   }
 }

@@ -2,12 +2,13 @@
             height: min-content;
         }
 
+        .container-fluid {
+            padding: 1rem;
+        }
 
         table {
             width: 100%;
             table-layout: auto;
-
-
         }
 
         th,
@@ -15,9 +16,8 @@
             overflow: hidden;
             text-overflow: ellipsis;
             word-wrap: break-word;
-
+            padding: 0.5rem;
         }
-
 
         .cprofile {
             width: auto;
@@ -27,16 +27,12 @@
         .filter-bar {
             gap: 0.75rem;
         }
+
         .t_nav {
-
-
-
-
             button {
                 all: unset;
                 display: inline;
                 cursor: pointer;
-                /* background: blue; */
                 border-radius: 20px;
                 padding: 0.3rem .8rem;
                 margin: 0 0.3rem;
@@ -50,16 +46,19 @@
             }
         }
 
+        /* Enhanced mobile responsiveness */
         @media (max-width: 768px) {
             .filter-bar {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 0.5rem;
             }
 
             .filter-bar .form-control,
             .filter-bar .btn,
             .filter-bar .dropdown {
                 width: 100%;
+                margin-bottom: 0.5rem;
             }
 
             #selectedSearchBy {
@@ -67,7 +66,93 @@
             }
 
             #searchInput {
-                width: 85vw;
+                width: 100%;
+            }
+
+            /* Make table responsive */
+            .table-responsive {
+                border: none;
+            }
+
+            table {
+                font-size: 0.875rem;
+            }
+
+            th,
+            td {
+                padding: 0.25rem;
+                min-width: 80px;
+            }
+
+            .cprofile {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container-fluid {
+                padding: 0.5rem;
+            }
+
+            .filter-bar {
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th,
+            td {
+                padding: 0.2rem;
+                min-width: 60px;
+            }
+
+            .cprofile {
+                height: 35px;
+            }
+
+            /* Stack table cells vertically on very small screens */
+            .table-responsive table,
+            .table-responsive thead,
+            .table-responsive tbody,
+            .table-responsive th,
+            .table-responsive td,
+            .table-responsive tr {
+                display: block;
+            }
+
+            .table-responsive thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            .table-responsive tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 8px;
+                background: white;
+            }
+
+            .table-responsive td {
+                border: none;
+                position: relative;
+                padding-left: 50% !important;
+                text-align: left;
+                min-width: auto;
+            }
+
+            .table-responsive td:before {
+                content: attr(data-label) ": ";
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #333;
             }
         }
 
@@ -97,4 +182,3 @@
         .suggestion-item:hover {
             background-color: #f8f9fa;
         }
-        

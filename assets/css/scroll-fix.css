@@ -1,0 +1,111 @@
+/* ============================================= */
+/*              SCROLL FIX CSS                   */
+/*   Ensures proper scrolling on all pages      */
+/* ============================================= */
+
+/* Global scroll fixes */
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+    overflow-y: auto;
+    /* Allow vertical scroll */
+}
+
+body {
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+    overflow-y: auto;
+    /* Allow vertical scroll */
+    min-height: 100vh;
+    height: auto;
+}
+
+/* Remove any scroll-snap that might interfere */
+* {
+    scroll-snap-type: none !important;
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+}
+
+/* Ensure main content can scroll */
+main {
+    overflow: visible;
+    height: auto;
+    min-height: calc(100vh - 4rem);
+}
+
+/* Fix for containers that might block scrolling */
+.container,
+.container-fluid {
+    overflow: visible;
+    height: auto;
+}
+
+/* Ensure sections don't block scrolling */
+section {
+    overflow: visible;
+    height: auto;
+}
+
+/* Fix for any fixed height elements */
+.hero-slider,
+.club-section {
+    overflow: visible;
+}
+
+/* Custom scrollbar for better UX */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--background-light, #f5f5f5);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--accent-color, #D98324);
+    border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover, #e69538);
+}
+
+/* Mobile scroll improvements */
+@media (max-width: 768px) {
+    body {
+        -webkit-overflow-scrolling: touch;
+        /* Smooth scrolling on iOS */
+    }
+
+    /* Ensure mobile viewports can scroll */
+    .hero-slider {
+        overflow: visible;
+        height: auto;
+        min-height: 300px;
+    }
+}
+
+/* Fix for any remaining scroll issues */
+.overflow-fix {
+    overflow: visible !important;
+    height: auto !important;
+}
+
+/* Utility classes */
+.scroll-auto {
+    overflow: auto !important;
+}
+
+.scroll-hidden {
+    overflow: hidden !important;
+}
+
+.scroll-x-hidden {
+    overflow-x: hidden !important;
+}
+
+.scroll-y-auto {
+    overflow-y: auto !important;
+}

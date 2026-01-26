@@ -12,9 +12,17 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: scroll;
+  /* Changed from fixed for mobile compatibility */
   overflow-x: hidden;
   color: var(--text-on-dark);
+}
+
+/* Only use parallax on larger screens */
+@media (min-width: 768px) {
+  .club-section {
+    background-attachment: fixed;
+  }
 }
 
 /* Executives Cards */
@@ -66,7 +74,7 @@
   display: none;
 }
 
-.members-container > div {
+.members-container>div {
   flex: 0 0 auto;
   text-align: center;
   min-width: 120px;
@@ -113,8 +121,13 @@
   color: var(--accent-color);
 }
 
-.left-arrow  { left: 0; }
-.right-arrow { right: 0; }
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
 
 /* Join Button */
 .join-btn {
@@ -142,7 +155,7 @@
     padding: 1rem;
   }
 
-  .members-container.collapsed > div:nth-of-type(n+10) {
+  .members-container.collapsed>div:nth-of-type(n+10) {
     display: none;
   }
 
@@ -213,6 +226,7 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);

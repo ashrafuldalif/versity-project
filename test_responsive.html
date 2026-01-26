@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Test - RPSU Club</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .viewport-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .test-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .test-link {
+            display: block;
+            padding: 15px;
+            background: #4caf50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .test-link:hover {
+            background: #45a049;
+        }
+
+        .breakpoint-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3e0;
+            border-radius: 5px;
+            border-left: 4px solid #ff9800;
+        }
+
+        @media (max-width: 576px) {
+            .viewport-info::after {
+                content: " - MOBILE VIEW";
+                color: #f44336;
+                font-weight: bold;
+            }
+        }
+
+        @media (min-width: 577px) and (max-width: 768px) {
+            .viewport-info::after {
+                content: " - TABLET VIEW";
+                color: #ff9800;
+                font-weight: bold;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .viewport-info::after {
+                content: " - DESKTOP VIEW";
+                color: #4caf50;
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>🔧 RPSU Club - Responsive Design Test</h1>
+
+        <div class="viewport-info">
+            <strong>Current Viewport:</strong> <span id="viewport-size"></span>
+        </div>
+
+        <div class="breakpoint-info">
+            <h3>📱 Responsive Breakpoints:</h3>
+            <ul>
+                <li><strong>Mobile:</strong> ≤ 576px</li>
+                <li><strong>Tablet:</strong> 577px - 768px</li>
+                <li><strong>Desktop:</strong> ≥ 769px</li>
+            </ul>
+        </div>
+
+        <h2>🧪 Test Pages</h2>
+        <div class="test-links">
+            <a href="index.php" class="test-link">🏠 Home Page</a>
+            <a href="login.php" class="test-link">🔐 Login Page</a>
+            <a href="register.php" class="test-link">📝 Register Page</a>
+            <a href="admin/index.php" class="test-link">👨‍💼 Admin Members</a>
+            <a href="clubs.php" class="test-link">🎭 Clubs Page</a>
+            <a href="gallery.php" class="test-link">📸 Gallery Page</a>
+            <a href="executives.php" class="test-link">👥 Executives Page</a>
+        </div>
+
+        <div style="margin-top: 30px; padding: 15px; background: #e8f5e8; border-radius: 5px;">
+            <h3>✅ Fixed Issues:</h3>
+            <ul>
+                <li>✅ <strong>SCROLLING FIXED</strong> - All pages now scroll properly</li>
+                <li>✅ Navbar responsive design and mobile menu</li>
+                <li>✅ Hero slider mobile optimization</li>
+                <li>✅ Admin table responsive with mobile cards</li>
+                <li>✅ Form layouts optimized for all screen sizes</li>
+                <li>✅ Fixed parallax background for mobile compatibility</li>
+                <li>✅ Club filter logic (AND instead of OR)</li>
+                <li>✅ Search suggestions sorting</li>
+                <li>✅ Database connection error handling</li>
+                <li>✅ File upload security improvements</li>
+                <li>✅ CSS variable consistency</li>
+                <li>✅ Removed scroll-snap interference</li>
+                <li>✅ Fixed overflow: hidden issues</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 5px;">
+            <h3>🧪 Additional Test Pages:</h3>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px;">
+                <a href="scroll_test.html"
+                    style="display: block; padding: 10px; background: #2196f3; color: white; text-decoration: none; border-radius: 5px; text-align: center;">📜
+                    Scroll Test</a>
+                <a href="test_responsive.html"
+                    style="display: block; padding: 10px; background: #4caf50; color: white; text-decoration: none; border-radius: 5px; text-align: center;">📱
+                    Responsive Test</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            document.getElementById('viewport-size').textContent = `${width}px × ${height}px`;
+        }
+
+        updateViewportInfo();
+        window.addEventListener('resize', updateViewportInfo);
+    </script>
+</body>
+
+</html>
+<div style="margin-top: 20px; padding: 15px; background: #e1f5fe; border-radius: 5px;">
+    <h3>🔧 New Layout Test:</h3>
+    <div style="margin-top: 10px;">
+        <a href="layout_test.html"
+            style="display: block; padding: 15px; background: #9c27b0; color: white; text-decoration: none; border-radius: 5px; text-align: center; font-weight: bold;">📐
+            Layout Test - Check Footer & Navbar Gaps</a>
+    </div>
+</div>

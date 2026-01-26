@@ -28,7 +28,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
   // === VALIDATION ===
   if (!$mail) {
     $error = 'Invalid email address.';
-  } elseif ($email && !str_ends_with($mail, '@rpsu.edu.bd')) {
+  } elseif ($mail && !str_ends_with($mail, '@rpsu.edu.bd')) {
     $error = "must use student email address.";
   } elseif (
     empty($inputs['name']) || $stdId <= 0 || $batch < 1 || $batch > 31 ||
@@ -116,6 +116,7 @@ while ($row = $clubsResult->fetch_assoc()) {
   <title>Student Registration</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/root.css">
+  <link rel="stylesheet" href="assets/css/scroll-fix.css">
   <link rel="stylesheet" href="assets/css/register.css">
 
 </head>

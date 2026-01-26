@@ -1,0 +1,100 @@
+/* ============================================= */
+/*              LAYOUT FIX CSS                   */
+/*   Fixes footer gaps, navbar spacing, etc     */
+/* ============================================= */
+
+/* Ensure no gaps in layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* Flexbox layout for sticky footer */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content grows to fill space - NO GAPS */
+main {
+    flex: 1;
+    margin-top: 0;
+    /* Remove margin that causes gap */
+    margin-bottom: 0;
+    padding-top: 4rem;
+    /* Use padding instead of margin */
+}
+
+@media (max-width: 576px) {
+    main {
+        padding-top: 3.5rem;
+    }
+}
+
+/* Remove ALL gaps from sections */
+section {
+    margin: 0;
+    padding: 0;
+}
+
+/* Hero section should start immediately after navbar */
+.hero-slider {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Footer sticks to bottom - NO GAPS */
+.footer-section {
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    margin: 0;
+    padding: 2rem 0;
+}
+
+/* Remove gaps from void-bg elements */
+.void-bg {
+    margin: 0 !important;
+    padding: 0;
+    display: block;
+}
+
+/* Navbar fixes - NO GAPS */
+.navbar {
+    margin: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Container fixes - NO GAPS */
+.container,
+.container-fluid {
+    margin: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Section spacing fixes */
+.py-5 {
+    margin: 0 !important;
+    padding: 3rem 0 !important;
+}
+
+.clubs-section,
+.imgCont {
+    margin: 0;
+}

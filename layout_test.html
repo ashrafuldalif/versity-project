@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Test - RPSU Club</title>
+    <link rel="stylesheet" href="assets/css/root.css">
+    <link rel="stylesheet" href="assets/css/scroll-fix.css">
+    <link rel="stylesheet" href="assets/css/layout-fix.css">
+    <style>
+        .test-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4rem;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1030;
+            color: white;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .test-main {
+            flex: 1;
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--background-light);
+        }
+
+        .test-footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .test-section {
+            min-height: 300px;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .swiper-demo {
+            width: 200px;
+            height: 300px;
+            background: var(--accent-color);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 0 auto;
+        }
+
+        .text-demo {
+            padding: 2rem;
+            background: var(--background-card);
+            border-radius: 10px;
+            margin-left: 2rem;
+        }
+
+        .demo-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .demo-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .text-demo {
+                margin-left: 0;
+            }
+        }
+
+        .status-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 12px;
+            z-index: 1040;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-navbar">
+        🔧 Layout Test - Check Footer & Navbar Gaps
+    </div>
+
+    <main class="test-main">
+        <div class="test-section">
+            <div>
+                <h2>✅ Layout Fixes Applied</h2>
+                <ul style="text-align: left; margin-top: 1rem;">
+                    <li>✅ Footer should stick to bottom (no gap)</li>
+                    <li>✅ Navbar should have no gaps</li>
+                    <li>✅ Swiper cards sync with text content</li>
+                    <li>✅ Proper flexbox layout</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <div class="demo-container">
+                <div class="swiper-demo">
+                    Card Demo<br>
+                    (Swiper Effect)
+                </div>
+                <div class="text-demo">
+                    <h3>Dynamic Text Content</h3>
+                    <p>This text should change when swiper cards change on the actual site.</p>
+                    <div>
+                        <span class="badge"
+                            style="background: var(--accent-color); color: white; padding: 0.5rem 1rem; border-radius: 20px; margin-right: 0.5rem;">Feature
+                            1</span>
+                        <span class="badge"
+                            style="background: var(--primary-color); color: var(--text-dark); padding: 0.5rem 1rem; border-radius: 20px;">Feature
+                            2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <div>
+                <h2>🧪 Test Instructions</h2>
+                <ol style="text-align: left; margin-top: 1rem;">
+                    <li>Check if footer touches bottom edge (no gap)</li>
+                    <li>Check if navbar has proper spacing</li>
+                    <li>Go to <a href="index.php" style="color: var(--accent-color);">index.php</a> to test swiper sync
+                    </li>
+                    <li>Test on mobile devices</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <footer class="test-footer">
+        <div>
+            <h3>Footer Test</h3>
+            <p>This footer should stick to the bottom with no gap!</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">
+                <a href="index.php" style="color: white; text-decoration: underline;">← Back to Home</a>
+            </p>
+        </div>
+    </footer>
+
+    <div class="status-indicator">
+        Layout: Fixed ✅
+    </div>
+</body>
+
+</html>
