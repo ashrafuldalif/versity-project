@@ -49,7 +49,7 @@ while ($row = $rowsResult->fetch_assoc()) {
 <body>
     <?php include 'components/navbar.php'; ?>
 
-    <main>
+    <main style="margin-top: 5rem; padding-top: 1rem;">
 
         <div class="container-fluid py-4">
             <?php if (!empty($galleryRows)): ?>

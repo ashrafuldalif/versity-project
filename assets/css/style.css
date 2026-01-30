@@ -200,7 +200,7 @@ main {
 /* ============================================= */
 
 .hero-slider {
-  height: 100vh;
+  height: calc(100vh - 4rem); /* Subtract navbar height */
   min-height: 600px;
   position: relative;
   overflow: hidden;
@@ -209,6 +209,7 @@ main {
 
 @media (max-width: 768px) {
   .hero-slider {
+    height: calc(100vh - 3.5rem); /* Subtract mobile navbar height */
     min-height: 500px;
     margin-top: 3.5rem !important;
   }
@@ -216,6 +217,7 @@ main {
 
 @media (max-width: 480px) {
   .hero-slider {
+    height: calc(100vh - 3.5rem); /* Subtract mobile navbar height */
     min-height: 400px;
     margin-top: 3.5rem !important;
   }

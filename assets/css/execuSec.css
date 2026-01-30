@@ -381,3 +381,99 @@
     flex-direction: column !important;
   }
 }
+
+/* ============================================= */
+/*              EXECUTIVES SECTION FIXES         */
+/* ============================================= */
+
+/* Center the executives section */
+.executives-section {
+  background: var(--background-section) !important;
+}
+
+.executives-section .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.executives-section .imgCont {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Executive info text visibility */
+.executive-info {
+  background: var(--background-card) !important;
+  color: var(--text-primary) !important;
+  padding: var(--space-2xl);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--glass-border);
+}
+
+.executive-info h3 {
+  color: var(--text-primary) !important;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-sm);
+}
+
+.executive-info .position {
+  color: var(--accent-color) !important;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-md);
+}
+
+.executive-info .description {
+  color: var(--text-secondary) !important;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-lg);
+}
+
+.executive-info .achievements .badge {
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-sm);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+/* Ensure badges have proper contrast */
+.badge.bg-primary {
+  background-color: var(--primary-color) !important;
+  color: var(--text-on-dark) !important;
+}
+
+.badge.bg-success {
+  background-color: var(--color-success) !important;
+  color: var(--text-on-dark) !important;
+}
+
+.badge.bg-info {
+  background-color: var(--color-info) !important;
+  color: var(--text-on-dark) !important;
+}
+
+.badge.bg-warning {
+  background-color: var(--color-warning) !important;
+  color: var(--text-dark) !important;
+}
+
+.badge.bg-danger {
+  background-color: var(--color-danger) !important;
+  color: var(--text-on-dark) !important;
+}
+
+.badge.bg-secondary {
+  background-color: var(--secondary-color) !important;
+  color: var(--text-on-dark) !important;
+}
+
+/* Mobile responsiveness for executives */
+@media (max-width: 991px) {
+  .executives-section .row {
+    justify-content: center !important;
+  }
+
+  .executive-info {
+    margin-bottom: var(--space-xl);
+  }
+}

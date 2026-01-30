@@ -39,17 +39,6 @@
 }
 
 /* Premium Club Cards */
-.club-card-link {
-  display: block;
-  text-decoration: none;
-  border-radius: var(--border-radius-2xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  transition: var(--transition-normal);
-  height: 100%;
-  position: relative;
-  background: var(--background-card);
-}
 
 .club-card-link:hover {
   transform: translateY(-12px);
@@ -181,23 +170,88 @@
   transform: translateX(4px);
 }
 
-/* Grid Layout */
+/* Grid Layout - FORCE WIDE CARDS ON PC */
 .clubs-section .row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: var(--space-xl);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3xl);
   justify-content: center;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
+/* Force minimum card width on all desktop screens */
+.club-card-link {
+  display: block;
+  text-decoration: none;
+  border-radius: var(--border-radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition-normal);
+  height: 100%;
+  position: relative;
+  background: var(--background-card);
+  width: 100%;
+  min-width: 500px;
+}
+
+/* Responsive Design - DESKTOP FIRST APPROACH */
+/* Large Desktop (1400px+) - 2 wide cards */
+@media (min-width: 1400px) {
+  .clubs-section .container {
+    max-width: 1600px;
+  }
+
   .clubs-section .row {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--space-lg);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3xl);
+  }
+
+  .club-card-link {
+    min-width: 600px;
   }
 }
 
-@media (max-width: 768px) {
+/* Desktop (1200px-1399px) - 2 wide cards */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .clubs-section .row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  .club-card-link {
+    min-width: 500px;
+  }
+}
+
+/* Medium Desktop (992px-1199px) - 2 cards */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .clubs-section .row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .club-card-link {
+    min-width: 400px;
+  }
+}
+
+/* Tablet (768px-991px) - 1 card per row */
+@media (min-width: 768px) and (max-width: 991px) {
+  .clubs-section .row {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .club-card-link {
+    min-width: 400px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile (max-767px) - 1 card per row */
+@media (max-width: 767px) {
   .clubs-section {
     padding: var(--space-2xl) 0;
   }
@@ -209,6 +263,11 @@
   .clubs-section .row {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
+  }
+
+  .club-card-link {
+    min-width: unset;
+    width: 100%;
   }
 
   .club-card-img {
@@ -224,6 +283,7 @@
   }
 }
 
+/* Small Mobile (max-576px) */
 @media (max-width: 576px) {
   .clubs-section .container {
     padding: 0 var(--space-sm);
@@ -277,4 +337,69 @@
   font-size: var(--font-size-xl);
   color: var(--text-secondary);
   font-weight: var(--font-weight-medium);
+}
+
+/* Ultra-wide Desktop (1600px+) - Even wider cards */
+@media (min-width: 1600px) {
+  .clubs-section .container {
+    max-width: 1800px;
+  }
+
+  .clubs-section .row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3xl);
+  }
+
+  .club-card-link {
+    min-width: 700px;
+  }
+
+  .club-card-img {
+    height: 360px;
+  }
+}
+
+/* 4K and Ultra-wide (2000px+) - 3 cards */
+@media (min-width: 2000px) {
+  .clubs-section .container {
+    max-width: 2200px;
+  }
+
+  .clubs-section .row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3xl);
+  }
+
+  .club-card-link {
+    min-width: 600px;
+  }
+}
+
+/* FORCE WIDE CARDS - Override Bootstrap if needed */
+.clubs-section .col-lg-4,
+.clubs-section .col-md-6,
+.clubs-section .col-sm-8 {
+  width: 100% !important;
+  max-width: none !important;
+  flex: none !important;
+}
+
+/* New club card container */
+.club-card-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensure cards fill their grid area */
+.club-card,
+.club-card-link {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Override Bootstrap row for clubs */
+.clubs-grid {
+  display: grid !important;
+  grid-template-columns: inherit !important;
+  gap: inherit !important;
 }

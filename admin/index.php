@@ -25,7 +25,7 @@ include '../funcs/connect.php';
     include '../components/admin_t_nav.php'
     ?>
 
-    <div class="filter-bar d-flex  justify-content-around align-items-center bg-white p-3 rounded shadow-sm">
+    <div class="filter-bar d-flex flex-wrap justify-content-around align-items-center bg-white p-3 rounded shadow-sm">
 
 
         <!-- Department Dropdown -->
@@ -124,25 +124,25 @@ include '../funcs/connect.php';
                     <label class="form-check-label" for="clubCodeforce">Drama</label>
                 </li>
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" value="Photography" id="clubHacking">
-                    <label class="form-check-label" for="clubHacking">Photography</label>
+                    <input class="form-check-input" type="checkbox" value="Photography" id="clubPhotography">
+                    <label class="form-check-label" for="clubPhotography">Photography</label>
                 </li>
 
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" value="Programming" id="clubHacking">
-                    <label class="form-check-label" for="clubHacking">Programming</label>
+                    <input class="form-check-input" type="checkbox" value="Programming" id="clubProgramming">
+                    <label class="form-check-label" for="clubProgramming">Programming</label>
                 </li>
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" value="Robotics" id="clubHacking">
-                    <label class="form-check-label" for="clubHacking">Robotics</label>
+                    <input class="form-check-input" type="checkbox" value="Robotics" id="clubRobotics">
+                    <label class="form-check-label" for="clubRobotics">Robotics</label>
                 </li>
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" value="Debate" id="clubHacking">
-                    <label class="form-check-label" for="clubHacking">Debate</label>
+                    <input class="form-check-input" type="checkbox" value="Debate" id="clubDebate">
+                    <label class="form-check-label" for="clubDebate">Debate</label>
                 </li>
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" value="Volunteer" id="clubHacking">
-                    <label class="form-check-label" for="clubHacking">Volunteer</label>
+                    <input class="form-check-input" type="checkbox" value="Volunteer" id="clubVolunteer">
+                    <label class="form-check-label" for="clubVolunteer">Volunteer</label>
                 </li>
             </ul>
         </div>
@@ -166,7 +166,7 @@ include '../funcs/connect.php';
         <!-- Search Input (now with autocomplete) -->
         <div class="position-relative flex-grow-1">
             <input type="search" id="searchInput" class="form-control "
-                placeholder="SEEKING WHO?" autocomplete="off">
+                placeholder="Seeking who?" autocomplete="off">
             <!-- suggestions dropdown -->
             <ul id="suggestions" class="dropdown-menu w-100" style="display:none;"></ul>
         </div>
@@ -248,57 +248,45 @@ include '../funcs/connect.php';
             <tbody id="outputdata">
 
 
-            <?php
-            $sql = "SELECT `id`, `name`, `batch`, `mail`, `img`, `bloodGroup`, `department`, `phone` FROM `club_members` ORDER BY `name` ASC";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $i = 1;
-            $storage = [];
-            while ($row = $result->fetch_assoc()) {
+                <?php
+                // Optimized query to get members with their clubs in one go
+                $sql = "SELECT cm.id, cm.name, cm.batch, cm.mail, cm.img, cm.bloodGroup, cm.department, cm.phone,
+                           GROUP_CONCAT(c.name SEPARATOR ', ') as club_names
+                    FROM club_members cm
+                    LEFT JOIN member_clubs mc ON cm.id = mc.member_id
+                    LEFT JOIN clubs c ON mc.club_id = c.id
+                    GROUP BY cm.id, cm.name, cm.batch, cm.mail, cm.img, cm.bloodGroup, cm.department, cm.phone
+                    ORDER BY cm.name ASC";
 
-                $name = $row['name'];
-                $id = $row['id'];
-                $batch = $row['batch'];
-                $mail = $row['mail'];
-                $imgl = $row['img'];
-                $imgl = "./assets/members/" . $imgl;
-                $row['img'] = $imgl;
-                $bgroup = $row['bloodGroup'];
-                $phone = $row['phone'];
-                $department = $row['department'];
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $i = 1;
+                $storage = [];
 
+                while ($row = $result->fetch_assoc()) {
+                    $name = $row['name'];
+                    $id = $row['id'];
+                    $batch = $row['batch'];
+                    $mail = $row['mail'];
+                    $imgl = $row['img'];
+                    $imgl = "./assets/members/" . $imgl;
+                    $row['img'] = $imgl;
+                    $bgroup = $row['bloodGroup'];
+                    $phone = $row['phone'];
+                    $department = $row['department'];
 
+                    // Parse club names from GROUP_CONCAT
+                    $clubs = $row['club_names'] ? explode(', ', $row['club_names']) : [];
+                    $row['clubs'] = $clubs;
+                    $storage[] = $row;
 
-                // Fetch clubs for this member
-                $clubSql = "
-                                SELECT c.name 
-                                FROM member_clubs mc
-                                JOIN clubs c ON mc.club_id = c.id
-                                WHERE mc.member_id = ?
-                            ";
-                $clubStmt = $conn->prepare($clubSql);
-                $clubStmt->bind_param('i', $id);
-                $clubStmt->execute();
-                $clubResult = $clubStmt->get_result();
+                    $joinClbs = $row['club_names'] ?: '';
 
-                $clubs = [];
-                while ($clubRow = $clubResult->fetch_assoc()) {
-                    $clubs[] = $clubRow['name'];
-                }
-
-                $row['clubs'] = $clubs; // attach clubs array to the member
-                $storage[] = $row;
-                $joinClbs = '';
-                foreach ($clubs as $club) {
-
-                    $joinClbs .= $club . ' , ';
-                }
-
-                echo "
-                              <tr>            
-                              <td data-label='No'>$i</td>
-                        <td data-label='Image' class=\"d-flex justify-content-center\"><img src=\"${imgl}\" class=\"img-thumbnail cprofile\"></td>
+                    echo "
+                    <tr>
+                        <td data-label='No'>$i</td>
+                        <td data-label='Image' class=\"d-flex justify-content-center\"><img src=\"${imgl}\" class=\"img-thumbnail cprofile\" alt=\"Profile of $name\"></td>
                         <td data-label='ID'>$id</td>
                         <td data-label='Name'>$name</td>
                         <td data-label='Batch'>$batch</td>
@@ -308,16 +296,13 @@ include '../funcs/connect.php';
                         <td data-label='Phone'>$phone</td>
                         <td data-label='Blood'>$bgroup</td>
                     </tr>
-                        ";
-                $i++;
-            }
+                ";
+                    $i++;
+                }
 
-
-
-            $stmt->close();
-            $conn->close();
-
-            ?>
+                $stmt->close();
+                $conn->close();
+                ?>
 
             </tbody>
         </table>
@@ -612,11 +597,11 @@ include '../funcs/connect.php';
             filteredData = allData.filter(row => {
                 row.batch = parseInt(row.batch);
                 data.batch = parseInt(data.batch);
-                
-                // Check if all selected clubs are present (AND logic instead of OR)
-                const clubsMatch = data.clubs.length === 0 || 
+
+                // Check if all selected clubs are present (AND logic)
+                const clubsMatch = data.clubs.length === 0 ||
                     data.clubs.every(selectedClub => row.clubs.includes(selectedClub));
-                
+
                 return (!data.department || row.department === data.department) &&
                     (!data.batch || row.batch === data.batch) &&
                     (!data.bloodG || row.bloodGroup === data.bloodG) &&

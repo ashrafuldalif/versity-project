@@ -11,7 +11,7 @@ $entered = $_POST['verifypass'] ?? '';
 $id      = $_SESSION['id'];
 
 $stmt = $conn->prepare("SELECT pass FROM club_members WHERE id = ?");
-$stmt->bind_param('s', $id);
+$stmt->bind_param('i', $id);
 $stmt->execute();
 $res = $stmt->get_result();
 $row = $res->fetch_assoc();

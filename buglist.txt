@@ -1,6 +1,6 @@
-1. the suggestions is not sorted 
+1. the suggestions is not sorted - FIXED: Suggestions are now sorted alphabetically in the search functionality.
 
-2. adminHome isnt responsive 
+2. adminHome isnt responsive - FIXED: Added flex-wrap to the filter-bar for better responsiveness on smaller screens.
 
-3. filter by club is using union(means : they dont find a person with both the clubs) i cant filter out the person who is joined both x & y clubs 
+3. filter by club is using union(means : they dont find a person with both the clubs) i cant filter out the person who is joined both x & y clubs - FIXED: Changed club filter logic from OR (some) to AND (every) to show only members in all selected clubs.
 

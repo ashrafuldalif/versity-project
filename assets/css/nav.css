@@ -295,3 +295,106 @@
     height: 150px;
   }
 }
+
+/* ============================================= */
+/*              OFFCANVAS SIDEBAR FIXES          */
+/* ============================================= */
+
+/* Offcanvas background and text */
+.offcanvas {
+  background: var(--background-card) !important;
+  color: var(--text-primary) !important;
+  border-left: 1px solid var(--glass-border);
+}
+
+.offcanvas-header {
+  background: var(--background-primary);
+  color: var(--text-on-dark) !important;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.offcanvas-title {
+  color: var(--text-on-dark) !important;
+  font-weight: var(--font-weight-semibold);
+}
+
+.btn-close {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+/* Accordion styling */
+.accordion-item {
+  background: transparent !important;
+  border: 1px solid var(--glass-border) !important;
+  margin-bottom: var(--space-sm);
+  border-radius: var(--border-radius-md) !important;
+}
+
+.accordion-button {
+  background: var(--background-secondary) !important;
+  color: var(--text-on-dark) !important;
+  border: none !important;
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.accordion-button:not(.collapsed) {
+  background: var(--accent-color) !important;
+  color: var(--text-on-accent) !important;
+  box-shadow: none !important;
+}
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(225, 217, 188, 0.25) !important;
+}
+
+.accordion-button::after {
+  filter: invert(1);
+}
+
+.accordion-button:not(.collapsed)::after {
+  filter: invert(0);
+}
+
+.accordion-body {
+  background: var(--background-light) !important;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.accordion-body a {
+  display: block;
+  color: var(--text-primary) !important;
+  text-decoration: none;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--glass-border);
+  transition: var(--transition-normal);
+}
+
+.accordion-body a:hover {
+  color: var(--accent-color) !important;
+  padding-left: var(--space-sm);
+}
+
+.accordion-body a:last-child {
+  border-bottom: none;
+}
+
+/* Direct nav links in offcanvas */
+.offcanvas-body>.nav-link {
+  color: var(--text-primary) !important;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--glass-border);
+  text-decoration: none;
+  display: block;
+  transition: var(--transition-normal);
+}
+
+.offcanvas-body>.nav-link:hover {
+  background: var(--accent-color);
+  color: var(--text-on-accent) !important;
+}

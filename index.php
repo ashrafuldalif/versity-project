@@ -60,7 +60,7 @@ if ($conn) {
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/clubsec.css">
   <link rel="stylesheet" href="assets/css/nav.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="assets/css/execuSec.css?v=<?php echo time(); ?>">>
+  <link rel="stylesheet" href="assets/css/execuSec.css?v=<?php echo time(); ?>">
   <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet"> -->
 
 </head>
@@ -119,10 +119,10 @@ if ($conn) {
         <h1 class="section-title">Our Clubs</h1>
         <p class="text-center text-muted mb-5 lead">Discover communities that inspire growth, passion, and impact</p>
 
-        <div class="row g-4 g-xl-5 justify-content-center">
+        <div class="row g-4 g-xl-5 justify-content-center clubs-grid">
           <?php if (!empty($clubs)): ?>
             <?php foreach ($clubs as $club): ?>
-              <div class="col-lg-4 col-md-6 col-sm-8">
+              <div class="club-card-container">
                 <a href="clubs.php?club=<?php echo $club['id']; ?>" class="club-card-link">
                   <div class="club-card">
                     <div class="club-card-img">
@@ -155,14 +155,16 @@ if ($conn) {
       </div>
     </section>
 
-    <section class="py-5 container-fluid" style="margin: 0; padding: 3rem 0;">
-      <h1 class="section-title">Executives</h1>
-      <p class="text-center text-muted mb-5 lead">Meet our dedicated leadership team driving positive change</p>
-      <div class="imgCont ">
-        <div class="mx-5 row g-4 flex-column-reverse flex-lg-row">
+    <section class="py-5 container-fluid executives-section" style="margin: 0; padding: 3rem 0; background: var(--background-section);">
+      <div class="container">
+        <h1 class="section-title text-center" style="color: var(--text-primary) !important;">Executives</h1>
+        <p class="text-center mb-5 lead" style="color: var(--text-secondary) !important;">Meet our dedicated leadership team driving positive change</p>
+      </div>
+      <div class="imgCont">
+        <div class="mx-5 row g-4 flex-column-reverse flex-lg-row justify-content-center">
 
           <!-- LEFT (comes bottom on phone) -->
-          <div class="col-12 col-lg-7 bg-danger mobile-full text-white">
+          <div class="col-12 col-lg-7 mobile-full" style="background: var(--background-card); color: var(--text-primary); padding: 2rem; border-radius: var(--border-radius-xl); box-shadow: var(--shadow-lg);">
             <div id="executive-content">
               <div class="executive-info active" data-slide="0">
                 <h3>Monkey D. Luffy</h3>

@@ -1,5 +1,6 @@
 <?php
 include 'funcs/connect.php';
+include 'funcs/user_functions.php';
 session_start();
 ?>
 

@@ -273,10 +273,10 @@ if ($clubId) {
         <h1 class="section-title">Our Clubs</h1>
         <p class="text-center text-muted my-5 lead ">Discover communities that inspire growth, passion, and impact</p>
 
-        <div class="row g-4 g-xl-5 justify-content-center">
+        <div class="row g-4 g-xl-5 justify-content-center clubs-grid">
           <?php if (!empty($clubs)): ?>
             <?php foreach ($clubs as $club): ?>
-              <div class="col-lg-4 col-md-6 col-sm-8">
+              <div class="club-card-container">
                 <a href="clubs.php?club=<?php echo $club['id']; ?>" class="club-card-link">
                   <div class="club-card">
                     <div class="club-card-img">
